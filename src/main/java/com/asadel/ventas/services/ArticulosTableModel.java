@@ -16,9 +16,10 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class ArticulosTableModel extends AbstractTableModel
 {
+
     @Autowired
     private Control control;
-    
+
     private Connection conexion;
     private Statement instruccion;
     private ResultSet result;
@@ -29,7 +30,7 @@ public class ArticulosTableModel extends AbstractTableModel
     public ArticulosTableModel()
     {
     }
-    
+
     public void init(String consulta) throws SQLException
     {
         conexion = control.getConnectionControl();
@@ -51,7 +52,8 @@ public class ArticulosTableModel extends AbstractTableModel
             String nameClase = metaData.getColumnClassName(columna + 1);
 
             return Class.forName(nameClase);
-        } catch (SQLException | ClassNotFoundException ex)
+        }
+        catch (SQLException | ClassNotFoundException ex)
         {
         }
 
@@ -69,7 +71,8 @@ public class ArticulosTableModel extends AbstractTableModel
         try
         {
             return metaData.getColumnCount();
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
         }
 
@@ -89,11 +92,13 @@ public class ArticulosTableModel extends AbstractTableModel
             if (columna == 0)
             {
                 return "ID";
-            } else
+            }
+            else
             {
                 return metaData.getColumnName(columna + 1);
             }
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
         }
 
@@ -124,7 +129,8 @@ public class ArticulosTableModel extends AbstractTableModel
             result.absolute(fila + 1);
 
             return result.getObject(columna + 1);
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
         }
 
@@ -137,7 +143,8 @@ public class ArticulosTableModel extends AbstractTableModel
         {
             result.absolute(rowIndex + 1);
             result.deleteRow();
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
         }
 
@@ -168,7 +175,8 @@ public class ArticulosTableModel extends AbstractTableModel
         if (consulta.isEmpty())
         {
             JOptionPane.showMessageDialog(null, "No se ha realizado ninguna consulta", "Error en la Consulta ", 2);
-        } else
+        }
+        else
         {
             result = instruccion.executeQuery(consulta);
             metaData = result.getMetaData();
@@ -187,10 +195,12 @@ public class ArticulosTableModel extends AbstractTableModel
                 instruccion.close();
                 conexion.close();
                 System.gc();
-            } catch (SQLException sqlex)
+            }
+            catch (SQLException sqlex)
             {
                 JOptionPane.showMessageDialog(null, "No se cerro la conexion con la base de datos", "Error al Salir de la aplicacion ", 2);
-            } finally
+            }
+            finally
             {
                 estado = false;
             }

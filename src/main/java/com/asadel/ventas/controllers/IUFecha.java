@@ -195,7 +195,6 @@ public class IUFecha extends javax.swing.JDialog
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // Cerrar Ventana
-        //IUDesktop.reportes.fecha = null;
     }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -212,7 +211,8 @@ public class IUFecha extends javax.swing.JDialog
         if (jDate1.getDate() == null || jDate2.getDate() == null)
         {
             dispose();
-        } else
+        }
+        else
         {
             SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
             inicio = fecha.format(jDate1.getDate());
@@ -232,7 +232,8 @@ public class IUFecha extends javax.swing.JDialog
         if (jDate1.getDate() == null || jDate2.getDate() == null)
         {
             dispose();
-        } else
+        }
+        else
         {
             SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
             inicio = fecha.format(jDate1.getDate());

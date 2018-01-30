@@ -5,16 +5,19 @@ import com.asadel.ventas.services.ControlCaja;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
+import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 @Component
 public class IUDesktop extends javax.swing.JFrame
 {
+
     @Autowired
     private Control control;
     @Autowired
@@ -81,10 +84,10 @@ public class IUDesktop extends javax.swing.JFrame
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Ventas - ");
+        setTitle("Papeleria");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/Asadel.png")).getImage());
         setMinimumSize(new java.awt.Dimension(710, 730));
-        setPreferredSize(new java.awt.Dimension(1340, 800));
+        setPreferredSize(new java.awt.Dimension(1350, 870));
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowActivated(java.awt.event.WindowEvent evt)
@@ -372,7 +375,7 @@ public class IUDesktop extends javax.swing.JFrame
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Main - Cargar Ventana de showArticulos
         showArticulos();
-        setTitle("Ventas - " + control.getNameSystem("Nombre"));
+        setTitle(control.getNameSystem("Nombre"));
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -450,7 +453,6 @@ public class IUDesktop extends javax.swing.JFrame
         }
     }//GEN-LAST:event_formWindowActivated
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -483,11 +485,10 @@ public class IUDesktop extends javax.swing.JFrame
     {
         if (estado == JOptionPane.YES_OPTION)
         {
-//            IUArticulos.tablabase.closeBD();
             control.closeControl();
-            System.gc();
             System.exit(0);
-        } else
+        }
+        else
         {
             estado = -1;
         }
@@ -503,11 +504,13 @@ public class IUDesktop extends javax.swing.JFrame
             if (fact != null)
             {
                 Long.parseLong(fact);
-            } else if (fact == null)
+            }
+            else if (fact == null)
             {
                 return;
             }
-        } catch (NumberFormatException e)
+        }
+        catch (NumberFormatException e)
         {
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "El ID es incorrecto", "Error", 2);
             fact = JOptionPane.showInternalInputDialog(jDesktopPane1, "ID de la Lista: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
@@ -515,7 +518,8 @@ public class IUDesktop extends javax.swing.JFrame
             if (fact != null)
             {
                 Long.parseLong(fact);
-            } else if (fact == null)
+            }
+            else if (fact == null)
             {
                 return;
             }
@@ -529,7 +533,8 @@ public class IUDesktop extends javax.swing.JFrame
             jDesktopPane1.add(cancelar);
             cancelar.show();
             cancelar.toFront();
-        } else
+        }
+        else
         {
             cancelar.dispose();
         }
@@ -540,16 +545,18 @@ public class IUDesktop extends javax.swing.JFrame
         if (!(articulos.isShowing() || articulos.isIcon()))
         {
             jDesktopPane1.add(articulos);
-            articulos.setBounds(0, 0, 690, 640);
+            articulos.setBounds(0, 0, 690, 760);
             articulos.show();
             articulos.toFront();
             try
             {
                 articulos.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             articulos.show();
             articulos.toFront();
@@ -557,7 +564,8 @@ public class IUDesktop extends javax.swing.JFrame
             {
                 articulos.setIcon(false);
                 articulos.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -574,10 +582,12 @@ public class IUDesktop extends javax.swing.JFrame
             try
             {
                 agregar.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             agregar.show();
             agregar.toFront();
@@ -585,7 +595,8 @@ public class IUDesktop extends javax.swing.JFrame
             {
                 agregar.setIcon(false);
                 agregar.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -602,17 +613,20 @@ public class IUDesktop extends javax.swing.JFrame
             try
             {
                 editar.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             editar.show();
             editar.toFront();
             try
             {
                 editar.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -623,11 +637,11 @@ public class IUDesktop extends javax.swing.JFrame
         if (!(ventas.isShowing() || ventas.isIcon()))
         {
             jDesktopPane1.add(ventas);
-            ventas.setBounds(jDesktopPane1.getWidth() / 2 + 20, 0, 640, 640);
-            ventas.setBounds(690, 0, 640, 640);
+            ventas.setBounds(691, 0, 640, 760);
             ventas.show();
             ventas.toFront();
-        } else
+        }
+        else
         {
             ventas.show();
             ventas.toFront();
@@ -637,11 +651,13 @@ public class IUDesktop extends javax.swing.JFrame
                 {
                     ventas.setSelected(selected);
                     ventas.setIcon(false);
-                } else
+                }
+                else
                 {
                     ventas.setIcon(false);
                 }
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -657,10 +673,12 @@ public class IUDesktop extends javax.swing.JFrame
             try
             {
                 notepad.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             notepad.show();
             notepad.toFront();
@@ -668,7 +686,8 @@ public class IUDesktop extends javax.swing.JFrame
             {
                 notepad.setSelected(true);
                 notepad.setIcon(false);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -685,17 +704,20 @@ public class IUDesktop extends javax.swing.JFrame
             try
             {
                 configuracion.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             configuracion.show();
             configuracion.toFront();
             try
             {
                 configuracion.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -704,7 +726,7 @@ public class IUDesktop extends javax.swing.JFrame
     public void showReportes(boolean estado)
     {
         reportes.init(estado);
-        
+
         if (!reportes.isShowing())
         {
             reportes.setVisible(true);
@@ -714,17 +736,20 @@ public class IUDesktop extends javax.swing.JFrame
             try
             {
                 reportes.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
-        } else
+        }
+        else
         {
             reportes.show();
             reportes.toFront();
             try
             {
                 reportes.setSelected(true);
-            } catch (PropertyVetoException e)
+            }
+            catch (PropertyVetoException e)
             {
             }
         }
@@ -741,7 +766,8 @@ class Escritorio extends JDesktopPane
         try
         {
             wall = new ImageIcon(getClass().getResource("/icons/wallpaper.jpg")).getImage();
-        } catch (NullPointerException ex)
+        }
+        catch (NullPointerException ex)
         {
             wall = null;
         }
@@ -752,7 +778,8 @@ class Escritorio extends JDesktopPane
         if (path != null)
         {
             wall = new ImageIcon(getClass().getResource(path)).getImage();
-        } else
+        }
+        else
         {
             wall = new ImageIcon(getClass().getResource("/icons/wallpaper.jpg")).getImage();
         }
@@ -773,7 +800,8 @@ class Escritorio extends JDesktopPane
         {
             g.drawImage(wall, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
-        } else
+        }
+        else
         {
             setOpaque(true);
         }

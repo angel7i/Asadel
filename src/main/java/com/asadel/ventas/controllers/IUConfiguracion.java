@@ -1,7 +1,9 @@
 package com.asadel.ventas.controllers;
 
+import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.ArticulosTableModel;
 import com.asadel.ventas.services.Control;
+import com.asadel.ventas.services.PropiedadesService;
 import com.asadel.ventas.services.Reporte;
 import java.awt.Color;
 import java.awt.Component;
@@ -39,25 +41,31 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Component
-public class IUConfiguracion extends javax.swing.JInternalFrame 
+public class IUConfiguracion extends javax.swing.JInternalFrame
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(IUConfiguracion.class);
+
     @Autowired
     private Control control;
     @Autowired
     private ArticulosTableModel descuento;
     @Autowired
     private Reporte reporte;
-    
-    private TableRowSorter< TableModel > sorter;
+    @Autowired
+    private PropiedadesService propiedades;
+
+    private TableRowSorter< TableModel> sorter;
     private String path;
-    
-    public IUConfiguracion() 
+
+    public IUConfiguracion()
     {
     }
-    
+
     @PostConstruct
     public void init()
     {
@@ -67,15 +75,14 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
             sorter = new TableRowSorter<>(descuento);
             initComponents();
             setColumnas();
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
             JOptionPane.showMessageDialog(null, "Error 4\n" + sqlex.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        
-        
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -448,7 +455,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -460,7 +467,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -584,10 +591,9 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField5))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5)
+                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -602,7 +608,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Respaldo", jPanel3);
@@ -623,7 +629,6 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // Cerrar Ventana
-        //IUDesktop.configuracion = null;
         jButton2.setEnabled(false);
         jButton1.setText("Activar");
     }//GEN-LAST:event_formInternalFrameClosed
@@ -634,7 +639,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         {
             jButton2.setEnabled(true);
             jTextField1.setEditable(true);
-            jButton1.setText("Bloquear");            
+            jButton1.setText("Bloquear");
         }
         else
         {
@@ -698,23 +703,23 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         // Cambio de Paneles
         if (control != null)
         {
-            if (jTabbedPane1.getSelectedIndex() == 0)
+            switch (jTabbedPane1.getSelectedIndex())
             {
-                jTextField1.setText(control.getPreciosVar(jList1.getSelectedValue().toString()).toString());
-                jTextField4.setText(control.getNameSystem("Nombre"));
-            }
-            else if (jTabbedPane1.getSelectedIndex() == 1)
-            {
-                jTextField3.requestFocus();
-                jTextField2.setText(new BigDecimal("100.00").subtract(control.getDescuentoGlobal()).setScale(0) + "");
-            }
-            else
-            {
-                jTextField6.setText(control.getDirBackup());
-                jTextField7.setText(control.getDirectorioReportes());
+                case 0:
+                    jTextField1.setText(control.getPreciosVar(jList1.getSelectedValue().toString()).toString());
+                    jTextField4.setText(control.getNameSystem("Nombre"));
+                    break;
+                case 1:
+                    jTextField3.requestFocus();
+                    jTextField2.setText(new BigDecimal("100.00").subtract(control.getDescuentoGlobal()).setScale(0) + "");
+                    break;
+                default:
+                    jTextField6.setText(propiedades.getDirectorioBackup());
+                    jTextField7.setText(propiedades.getDirectorioNotas());
+                    break;
             }
         }
-        
+
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -752,9 +757,9 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel1.setBackground(new Color(255,153,0));//[51,102,255]
-        jPanel2.setBackground(new Color(255,153,0));//[51,102,255]
-        jPanel3.setBackground(new Color(255,153,0));//[51,102,255]
+        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+        jPanel2.setBackground(Asadel.ACTIVE_COLOR);
+        jPanel3.setBackground(Asadel.ACTIVE_COLOR);
         jTextField1.setText(control.getPreciosVar(jList1.getSelectedValue().toString()).toString());
         jTextField4.setText(control.getNameSystem("Nombre"));
     }//GEN-LAST:event_formInternalFrameActivated
@@ -772,7 +777,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         {
             jButton7.setEnabled(true);
             jTextField4.setEditable(true);
-            jButton6.setText("Bloquear");            
+            jButton6.setText("Bloquear");
         }
         else
         {
@@ -809,11 +814,13 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         int resultado = selector.showOpenDialog(this);
 
         if (resultado == JFileChooser.CANCEL_OPTION)
+        {
             selector.cancelSelection();
+        }
         else
         {
             path = selector.getSelectedFile() + "";
-            jTextField5.setText(path);            
+            jTextField5.setText(path);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -833,10 +840,12 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         int resultado = selector.showOpenDialog(this);
 
         if (resultado == JFileChooser.CANCEL_OPTION)
+        {
             selector.cancelSelection();
+        }
         else
         {
-            jTextField6.setText(selector.getSelectedFile().getAbsolutePath());            
+            jTextField6.setText(selector.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -845,7 +854,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         // Guardar destino automatico
         if (!jTextField6.getText().isEmpty())
         {
-            if (control.setDirBackup(jTextField6.getText()))
+            if (propiedades.updateDirectorioBackup(jTextField6.getText()))
             {
                 JOptionPane.showInternalMessageDialog(rootPane, "Directorio actualizado");
             }
@@ -855,8 +864,8 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton12ActionPerformed
     {//GEN-HEADEREND:event_jButton12ActionPerformed
         // Cambiar tema
-        SubstanceLookAndFeel.setSkin("org.pushingpixels.substance.api.skin." + jComboBox1.getSelectedItem());
-        control.setTheme(jComboBox1.getSelectedItem().toString());
+        SubstanceLookAndFeel.setSkin("org.pushingpixels.substance.api.skin." + jComboBox1.getSelectedItem());        
+        propiedades.updateTheme(jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton13ActionPerformed
@@ -869,19 +878,21 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
         int resultado = selector.showOpenDialog(this);
 
         if (resultado == JFileChooser.CANCEL_OPTION)
+        {
             selector.cancelSelection();
+        }
         else
         {
-            jTextField7.setText(selector.getSelectedFile().getAbsolutePath());            
+            jTextField7.setText(selector.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton14ActionPerformed
     {//GEN-HEADEREND:event_jButton14ActionPerformed
-        // Guardar destino automatico
+        // Update directorio notas
         if (!jTextField7.getText().isEmpty())
         {
-            if (control.setDirectorioReportes(jTextField7.getText()))
+            if (propiedades.updateDirectorioNotas(jTextField7.getText()))
             {
                 reporte.updateDirectorio(jTextField7.getText());
                 JOptionPane.showInternalMessageDialog(rootPane, "Directorio actualizado");
@@ -932,20 +943,20 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
 
     private void backup()
     {
-        if ((path == null ) || (path.isEmpty()))
+        if ((path == null) || (path.isEmpty()))
         {
-            JOptionPane.showInternalMessageDialog( this, "Rutal invalida","Ruta invalida", JOptionPane.ERROR_MESSAGE );
+            JOptionPane.showInternalMessageDialog(this, "Rutal invalida", "Ruta invalida", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         Calendar c = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");
         String fecha = date.format(c.getTime());
-        
+
         path = path.replace("\\", File.separator);
         String command = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe -u root -padmin papeleria --databases ";
         String file = path + File.separator + "PapeleriaBackup_" + fecha + ".sql";
-        
+
         new Thread(() ->
         {
             try
@@ -954,16 +965,16 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                 String line;
-                
-                while((line=reader.readLine()) != null)
+
+                while ((line = reader.readLine()) != null)
                 {
                     writer.write(line);
                     writer.newLine();
                 }
-                
+
                 reader.close();
                 writer.close();
-                
+
                 SwingUtilities.invokeLater(() ->
                 {
                     try
@@ -988,22 +999,22 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                 JOptionPane.showInternalMessageDialog(rootPane, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
                 System.exit(-1);
             }
-        }).start();        
+        }).start();
     }
-    
+
     private void filtro()
     {
         String texto = jTextField3.getText();
         Pattern p = Pattern.compile("^[+*-/¡!¿?()]");
         Matcher m = p.matcher(texto);
-        
+
         if (m.find())
         {
             jTextField3.setText(null);
         }
         else
         {
-            RowFilter<Object,Object> wordFilter = RowFilter.regexFilter(Pattern.compile("(?i)"+texto).toString());
+            RowFilter<Object, Object> wordFilter = RowFilter.regexFilter(Pattern.compile("(?i)" + texto).toString());
 
             if (texto.isEmpty())
             {
@@ -1016,32 +1027,36 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                     sorter.setRowFilter(wordFilter);
                     setColumnas();
                 }
-                catch(PatternSyntaxException ex)
+                catch (PatternSyntaxException ex)
                 {
                     JOptionPane.showInternalMessageDialog(this, "Busqueda Incorrecta");
                 }
             }
         }
     }
-    
+
     public CellEditorListener Cell()
     {
-        CellEditorListener celda = new CellEditorListener() 
+        CellEditorListener celda = new CellEditorListener()
         {
             @Override
-            public void editingStopped(ChangeEvent e) 
+            public void editingStopped(ChangeEvent e)
             {
                 int fila = jTable1.getSelectedRow();
 
                 if (fila >= 0)
                 {
                     String num;
-                    
+
                     if (jTable1.getCellEditor(fila, 4).getCellEditorValue().toString().isEmpty())
+                    {
                         return;
+                    }
                     else
+                    {
                         num = jTable1.getCellEditor(fila, 4).getCellEditorValue().toString();
-                    
+                    }
+
                     int porciento = Integer.parseInt(num);
                     String id = jTable1.getValueAt(fila, 0).toString();
                     setDescuento(true, id, porciento);
@@ -1049,43 +1064,49 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
             }
 
             @Override
-            public void editingCanceled(ChangeEvent e) 
+            public void editingCanceled(ChangeEvent e)
             {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
-        
+
         return celda;
     }
-    
+
     public void setDescuento(boolean estado, String id, int porciento)
     {
         if (estado)
         {
             if (porciento > 0 && porciento <= 100)
+            {
                 control.setDescuentoArticulo(id, true, porciento);
+            }
             else if (porciento == 0)
+            {
                 control.setDescuentoArticulo(id, false, porciento);
+            }
         }
         else
         {
             control.removeDescuentoArticulo(id);
         }
-        
+
         refresh();
     }
-    
-    private void setColumnas() 
+
+    private void setColumnas()
     {
         int anchoColumna = 0;
         TableColumnModel modeloColumna = jTable1.getColumnModel();
         TableColumn columnaTabla;
-        
-        for (int i=0; i<jTable1.getColumnCount(); i++) 
+
+        for (int i = 0;
+                i < jTable1.getColumnCount();
+                i++)
         {
             columnaTabla = modeloColumna.getColumn(i);
-            
-            switch (i) 
+
+            switch (i)
             {
                 case 0:
                     anchoColumna = 50;
@@ -1107,7 +1128,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                     columnaTabla.setMinWidth(75);
                     break;
                 case 4:
-                    anchoColumna =75;
+                    anchoColumna = 75;
                     columnaTabla.setMaxWidth(80);
                     columnaTabla.setMinWidth(75);
                     jTable1.getColumnModel().getColumn(4).setCellEditor(new EditorText());
@@ -1119,14 +1140,14 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
                     columnaTabla.setMinWidth(95);
                     columnaTabla.setCellEditor(new EditorBox());
                     columnaTabla.setCellRenderer(new RenderBox());
-                    JCheckBox box = (JCheckBox)columnaTabla.getCellEditor();
+                    JCheckBox box = (JCheckBox) columnaTabla.getCellEditor();
                     box.addItemListener((ItemEvent e) ->
                     {
                         int fila = jTable1.getSelectedRow();
 
                         if (fila >= 0)
                         {
-                            boolean estado = ((JCheckBox)e.getItem()).isSelected();
+                            boolean estado = ((JCheckBox) e.getItem()).isSelected();
                             String id = jTable1.getValueAt(fila, 0).toString();
                             int porcentaje = Integer.parseInt(jTable1.getValueAt(fila, 4).toString());
                             setDescuento(estado, id, porcentaje);
@@ -1137,7 +1158,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
             columnaTabla.setPreferredWidth(anchoColumna);
         }
     }
-    
+
     public void refreshData()
     {
         try
@@ -1146,12 +1167,12 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
             descuento.fireTableDataChanged();
             setColumnas();
         }
-        catch(SQLException sqlex2)
+        catch (SQLException sqlex2)
         {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void refresh()
     {
         try
@@ -1161,7 +1182,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
             descuento.fireTableStructureChanged();
             setColumnas();
         }
-        catch(SQLException sqlex2)
+        catch (SQLException sqlex2)
         {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
@@ -1170,71 +1191,75 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
 
 class EditorBox extends JCheckBox implements TableCellEditor
 {
-    public EditorBox() 
+
+    public EditorBox()
     {
         //super("Descuento");
         setEnabled(true);
     }
 
     @Override
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) 
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
     {
         boolean estado = false;
-        
+
         if ("1".equals(value.toString()))
-              estado = true;
-        
+        {
+            estado = true;
+        }
+
         setSelected(estado);
-        
+
         return this;
     }
 
     @Override
-    public Object getCellEditorValue() 
+    public Object getCellEditorValue()
     {
         return isSelected();
     }
 
     @Override
-    public boolean isCellEditable(EventObject anEvent) 
+    public boolean isCellEditable(EventObject anEvent)
     {
         return true;
     }
 
     @Override
-    public boolean shouldSelectCell(EventObject anEvent) 
+    public boolean shouldSelectCell(EventObject anEvent)
     {
         return true;
     }
 
     @Override
-    public boolean stopCellEditing() 
+    public boolean stopCellEditing()
     {
         return true;
     }
 
     @Override
-    public void cancelCellEditing() 
+    public void cancelCellEditing()
     {
         //cancelCellEditing();
     }
 
     @Override
-    public void addCellEditorListener(CellEditorListener l) 
+    public void addCellEditorListener(CellEditorListener l)
     {
-       //this.addCellEditorListener(l);
+        //this.addCellEditorListener(l);
     }
 
     @Override
-    public void removeCellEditorListener(CellEditorListener l) 
+    public void removeCellEditorListener(CellEditorListener l)
     {
         //
     }
 }
 
-class RenderBox extends JCheckBox implements TableCellRenderer 
+class RenderBox extends JCheckBox implements TableCellRenderer
 {
-    public RenderBox() 
+
+    public RenderBox()
     {
         //super("Descuento");
         setOpaque(false);
@@ -1243,27 +1268,29 @@ class RenderBox extends JCheckBox implements TableCellRenderer
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) 
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {
-          boolean estado = false;
+        boolean estado = false;
 
-          if ("1".equals(value.toString()))
-              estado = true;
+        if ("1".equals(value.toString()))
+        {
+            estado = true;
+        }
 
-          setSelected(estado);
-          setEnabled(true);
-          super.setForeground(Color.gray);
+        setSelected(estado);
+        setEnabled(true);
+        super.setForeground(Color.gray);
 
-          if (isSelected)
-          {
-              super.setBackground(SystemColor.textHighlight.darker());
-              super.setForeground(Color.white);
-          }
-          else
-          {
-              super.setBackground((row % 2 == 0) ? Color.white : Color.getColor("Table.light"));
-          }
+        if (isSelected)
+        {
+            super.setBackground(SystemColor.textHighlight.darker());
+            super.setForeground(Color.white);
+        }
+        else
+        {
+            super.setBackground((row % 2 == 0) ? Color.white : Color.getColor("Table.light"));
+        }
 
-          return this;
+        return this;
     }
 }

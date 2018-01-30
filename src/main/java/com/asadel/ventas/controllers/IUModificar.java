@@ -1,5 +1,6 @@
 package com.asadel.ventas.controllers;
 
+import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Articulo;
 import com.asadel.ventas.services.Control;
 import java.awt.Color;
@@ -12,30 +13,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUModificar extends javax.swing.JInternalFrame 
+public class IUModificar extends javax.swing.JInternalFrame
 {
+
     @Autowired
-    public  IUModificar editar;
+    public IUModificar editar;
     @Autowired
     private Control control;
-    
+
     private Articulo newArticulo;
     private Articulo oldArticulo;
     private static IUModificar ventana = null;
-    
+
     private IUModificar()
     {
         initComponents();
     }
-    
+
     public static IUModificar getInstance()
     {
         if (ventana == null)
+        {
             return ventana = new IUModificar();
+        }
         else
+        {
             return ventana;
+        }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -311,7 +317,6 @@ public class IUModificar extends javax.swing.JInternalFrame
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // Ventana Cerrada
         oldArticulo = newArticulo = null;
-        editar = null;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
@@ -344,7 +349,9 @@ public class IUModificar extends javax.swing.JInternalFrame
     private void jButton5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton5KeyPressed
         // Aceptar
         if (evt.getKeyChar() == KeyEvent.VK_ENTER)
+        {
             editarArticulo();
+        }
     }//GEN-LAST:event_jButton5KeyPressed
 
     private void jButton6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton6KeyPressed
@@ -354,13 +361,13 @@ public class IUModificar extends javax.swing.JInternalFrame
             System.gc();
             doDefaultCloseAction();
         }
-       
+
     }//GEN-LAST:event_jButton6KeyPressed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel2.setBackground(new Color(255,153,0));//[51,102,255]
-        
+        jPanel2.setBackground(Asadel.ACTIVE_COLOR);
+
         if (jComboBox2.getSelectedIndex() == 0)
         {
             jTextField5.setEnabled(false);
@@ -391,17 +398,19 @@ public class IUModificar extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
-    
+
     public void editarArticulo()
     {
         if (jComboBox2.getSelectedIndex() == 0)
+        {
             JOptionPane.showInternalMessageDialog(this, "Seleccionte un Tipo", "Error", 2);
+        }
         else
         {
-            if (jComboBox2.getSelectedItem() == "Monografia" || jComboBox2.getSelectedItem() == "Biografia" ||
-                jComboBox2.getSelectedItem() == "Mapa Carta" || jComboBox2.getSelectedItem() == "Mapa Mural" ||
-                jComboBox2.getSelectedItem() == "Mapa MediaCartulina" || jComboBox2.getSelectedItem() == "MiniMapa" ||
-                jComboBox2.getSelectedItem() == "Relieve")
+            if (jComboBox2.getSelectedItem() == "Monografia" || jComboBox2.getSelectedItem() == "Biografia"
+                    || jComboBox2.getSelectedItem() == "Mapa Carta" || jComboBox2.getSelectedItem() == "Mapa Mural"
+                    || jComboBox2.getSelectedItem() == "Mapa MediaCartulina" || jComboBox2.getSelectedItem() == "MiniMapa"
+                    || jComboBox2.getSelectedItem() == "Relieve")
 
             {
                 if (!(jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty()))
@@ -410,15 +419,17 @@ public class IUModificar extends javax.swing.JInternalFrame
                     String nombre = jTextField6.getText();
                     BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField7.getText()));
                     String info = jTextArea1.getText();
-                    String tipo = (String)jComboBox2.getSelectedItem();
+                    String tipo = (String) jComboBox2.getSelectedItem();
 
                     newArticulo = new Articulo(id, nombre, precio, info, tipo);
                     updateArticulo();
-                    
+
                     this.doDefaultCloseAction();
                 }
                 else
+                {
                     JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
+                }
             }
             else
             {
@@ -428,7 +439,7 @@ public class IUModificar extends javax.swing.JInternalFrame
                     String nombre = jTextField6.getText();
                     BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField7.getText()));
                     String info = jTextArea1.getText();
-                    String tipo = (String)jComboBox2.getSelectedItem();
+                    String tipo = (String) jComboBox2.getSelectedItem();
                     BigDecimal descuento = precio.multiply(control.getDescuentoGlobal().divide(new BigDecimal("100.00"))).setScale(2);
 
                     newArticulo = new Articulo(id, nombre, precio, info, tipo);
@@ -437,11 +448,13 @@ public class IUModificar extends javax.swing.JInternalFrame
                     this.doDefaultCloseAction();
                 }
                 else
+                {
                     JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
+                }
             }
         }
     }
-    
+
     public void setUpdatePane(Articulo articulo)
     {
         oldArticulo = articulo;
@@ -451,34 +464,34 @@ public class IUModificar extends javax.swing.JInternalFrame
         jTextArea1.setText(articulo.getInfo());
         jComboBox2.setSelectedItem(articulo.getTipo());
     }
-    
+
     public void updateArticulo()
     {
-        switch(newArticulo.getTipo())
+        switch (newArticulo.getTipo())
         {
             case "Biografia":
                 control.updateBiografia(oldArticulo, newArticulo);
                 break;
-                
+
             case "Esquema":
                 control.updateEsquema(oldArticulo, newArticulo);
                 break;
-                
+
             case "Mapa Cartulina":
             case "Mapa MediaCartulina":
             case "Mapa Mural":
             case "MiniMapa":
                 control.updateMapa(oldArticulo, newArticulo);
                 break;
-                
+
             case "Monografia":
                 control.updateMonografia(oldArticulo, newArticulo);
                 break;
-                
+
             case "Relieve":
                 control.updateRelieve(oldArticulo, newArticulo);
                 break;
-                
+
             default:
                 control.deleteArticulo(oldArticulo);
                 control.updatePrecioArt(oldArticulo, newArticulo);

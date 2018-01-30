@@ -2,8 +2,9 @@ package com.asadel.ventas.services;
 
 import java.math.BigDecimal;
 
-public class Caja 
+public class Caja
 {
+
     private int idCajaDia;
     private boolean estado;
     private String abierta;
@@ -11,12 +12,12 @@ public class Caja
     private BigDecimal inicio;
     private BigDecimal recaudado;
 
-    public Caja() 
+    public Caja()
     {
         this(false, null, null, null, null);
     }
-       
-    public Caja(boolean estado, String abierta, String cierre, BigDecimal inicio, BigDecimal recaudado) 
+
+    public Caja(boolean estado, String abierta, String cierre, BigDecimal inicio, BigDecimal recaudado)
     {
         this.estado = estado;
         this.abierta = abierta;
@@ -24,62 +25,63 @@ public class Caja
         this.inicio = inicio;
         this.recaudado = recaudado;
     }
-    
-    public int getIdCajaDia() 
+
+    public int getIdCajaDia()
     {
         return idCajaDia;
     }
 
-    public void setIdCajaDia(int idCajaDia) 
+    public void setIdCajaDia(int idCajaDia)
     {
         this.idCajaDia = idCajaDia;
     }
 
-    public boolean getEstado() 
+    public boolean getEstado()
     {
         return estado;
     }
 
-    public void setEstado(boolean estado) 
+    public void setEstado(boolean estado)
     {
         this.estado = estado;
     }
 
-    public String getAbierta() {
+    public String getAbierta()
+    {
         return abierta;
     }
 
-    public void setAbierta(String abierta) 
+    public void setAbierta(String abierta)
     {
         this.abierta = abierta;
     }
 
-    public String getCierre() 
+    public String getCierre()
     {
         return cierre;
     }
 
-    public void setCierre(String cierre) 
+    public void setCierre(String cierre)
     {
         this.cierre = cierre;
     }
 
-    public BigDecimal getInicio() 
+    public BigDecimal getInicio()
     {
         return inicio;
     }
 
-    public void setInicio(BigDecimal inicio) 
+    public void setInicio(BigDecimal inicio)
     {
         this.inicio = inicio;
     }
 
-    public BigDecimal getRecaudado() 
+    public BigDecimal getRecaudado()
     {
         return recaudado;
     }
 
-    public void setRecaudado(BigDecimal recaudado) 
+    public void setRecaudado(BigDecimal recaudado)
     {
         this.recaudado = recaudado;
     }

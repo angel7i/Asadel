@@ -10,24 +10,25 @@ import javax.swing.KeyStroke;
 
 public class IUAcerca extends javax.swing.JDialog
 {
-    public IUAcerca(java.awt.Frame parent, boolean modal) 
+
+    public IUAcerca(java.awt.Frame parent, boolean modal)
     {
-        super(parent, modal);       
+        super(parent, modal);
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
-        actionMap.put(cancelName, new AbstractAction() 
+        actionMap.put(cancelName, new AbstractAction()
         {
             @Override
-            public void actionPerformed(ActionEvent e) 
+            public void actionPerformed(ActionEvent e)
             {
                 System.gc();
                 dispose();
             }
         });
-        
+
         setDefaultLookAndFeelDecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -55,7 +56,7 @@ public class IUAcerca extends javax.swing.JDialog
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ASADEL Logo.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel2.setText("Version del Producto: Asadel 0.9.1 (2018.01)");
+        jLabel2.setText("Version: 0.9.5 (2018.01)");
 
         jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton1.setText("Cerrar");
@@ -71,19 +72,18 @@ public class IUAcerca extends javax.swing.JDialog
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jLabel2)
-                .addContainerGap(204, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(287, 287, 287))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))))
+                .addContainerGap(99, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(277, 277, 277)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,25 +105,25 @@ public class IUAcerca extends javax.swing.JDialog
         System.gc();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     public void invoke()
     {
-        java.awt.EventQueue.invokeLater(() -> 
+        java.awt.EventQueue.invokeLater(() ->
         {
             IUAcerca dialog = new IUAcerca(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() 
+            dialog.addWindowListener(new java.awt.event.WindowAdapter()
             {
                 @Override
-                public void windowClosing(java.awt.event.WindowEvent e) 
+                public void windowClosing(java.awt.event.WindowEvent e)
                 {
                     dispose();
                 }
             });
-            
+
             dialog.setVisible(true);
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

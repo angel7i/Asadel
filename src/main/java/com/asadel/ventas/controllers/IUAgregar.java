@@ -1,5 +1,6 @@
 package com.asadel.ventas.controllers;
 
+import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Articulo;
 import com.asadel.ventas.services.Control;
 import java.awt.Color;
@@ -13,27 +14,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class IUAgregar extends JInternalFrame
 {
+
     @Autowired
-    public  IUAgregar agregar;
+    public IUAgregar agregar;
     @Autowired
     private Control control;
-    
+
     private static IUAgregar ventana;
     private Articulo articulo;
-    
-    private IUAgregar() 
+
+    private IUAgregar()
     {
         initComponents();
     }
-    
+
     public static IUAgregar getInstance()
     {
         if (ventana == null)
+        {
             return ventana = new IUAgregar();
+        }
         else
+        {
             return ventana;
+        }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -309,15 +315,13 @@ public class IUAgregar extends JInternalFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-       // Cerrar Ventana 
-       articulo = null;
-       agregar = null;
+        // Cerrar Ventana 
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activada
-        jPanel1.setBackground(new Color(255,153,0));//[51,102,255]
-        
+        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+
         if (jComboBox1.getSelectedIndex() == 0)
         {
             jTextField1.setEnabled(false);
@@ -342,10 +346,10 @@ public class IUAgregar extends JInternalFrame
             jTextField3.setEnabled(false);
             jTextArea1.setEnabled(false);
         }
-        else if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia" ||
-            jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural" ||
-            jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa" ||
-            jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
+        else if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
+                || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
+                || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
+                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
         {
             jTextField1.setEnabled(true);
             jTextField2.setEnabled(true);
@@ -367,7 +371,9 @@ public class IUAgregar extends JInternalFrame
         if (evt.getKeyChar() == KeyEvent.VK_ENTER)
         {
             if (articulo == null)
+            {
                 this.doDefaultCloseAction();
+            }
 
             jTextArea2.setText(null);
             articulo = null;
@@ -379,7 +385,9 @@ public class IUAgregar extends JInternalFrame
     {//GEN-HEADEREND:event_jButton4ActionPerformed
         // Cancelar Insertar a la BD
         if (articulo == null)
+        {
             this.doDefaultCloseAction();
+        }
 
         jTextArea2.setText(null);
         articulo = null;
@@ -447,7 +455,9 @@ public class IUAgregar extends JInternalFrame
     {//GEN-HEADEREND:event_jButton1KeyPressed
         // Crear item
         if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        createItem();
+        {
+            createItem();
+        }
     }//GEN-LAST:event_jButton1KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
@@ -456,7 +466,7 @@ public class IUAgregar extends JInternalFrame
         jTextArea2.setText("");
         createItem();
     }//GEN-LAST:event_jButton1ActionPerformed
-        
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -487,7 +497,7 @@ public class IUAgregar extends JInternalFrame
         }
         else
         {
-            switch((String)jComboBox1.getSelectedItem())
+            switch ((String) jComboBox1.getSelectedItem())
             {
                 case "Biografia":
                     control.insertBiografia(articulo);
@@ -516,29 +526,31 @@ public class IUAgregar extends JInternalFrame
                     control.insertPrecioArt(articulo);
             }
         }
-        
+
         return true;
     }
-    
+
     public void createItem()
     {
-        if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia" ||
-            jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural" ||
-            jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa" ||
-            jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
+        if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
+                || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
+                || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
+                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
         {
             if (!(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()))
             {
                 String id = jTextField1.getText();
                 String nombre = jTextField2.getText();
                 BigDecimal precio = null;
-                
+
                 String info = jTextField2.getText();
                 if (!jTextArea1.getText().isEmpty())
+                {
                     info = jTextArea1.getText();
-                
-                String tipo = (String)jComboBox1.getSelectedItem();
-                
+                }
+
+                String tipo = (String) jComboBox1.getSelectedItem();
+
                 switch (tipo)
                 {
                     case "Monografia":
@@ -548,19 +560,19 @@ public class IUAgregar extends JInternalFrame
                     case "Biografia":
                         precio = control.getPreciosVar(tipo);
                         break;
-                        
+
                     case "Mapa Carta":
                         precio = control.getPreciosVar(tipo);
                         break;
-                        
+
                     case "MiniMapa":
                         precio = control.getPreciosVar(tipo);
                         break;
-                        
+
                     case "Relieve":
                         precio = control.getPreciosVar(tipo);
                         break;
-                        
+
                     case "Esquema":
                         precio = control.getPreciosVar(tipo);
                         break;
@@ -573,17 +585,18 @@ public class IUAgregar extends JInternalFrame
                         precio = control.getPreciosVar(tipo);
                         break;
                 }
-                
-                
+
                 articulo = new Articulo(id, nombre, precio, info, tipo);
-                jTextArea2.append("Articulo\nID: "+articulo.getId());
-                jTextArea2.append("\nNombre: "+articulo.getNombre());
-                jTextArea2.append("\nPrecio: "+articulo.getPrecio());
-                jTextArea2.append("\nInformacion: "+articulo.getInfo());
-                jTextArea2.append("\nTipo: "+articulo.getTipo());
+                jTextArea2.append("Articulo\nID: " + articulo.getId());
+                jTextArea2.append("\nNombre: " + articulo.getNombre());
+                jTextArea2.append("\nPrecio: " + articulo.getPrecio());
+                jTextArea2.append("\nInformacion: " + articulo.getInfo());
+                jTextArea2.append("\nTipo: " + articulo.getTipo());
             }
             else
+            {
                 JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
+            }
         }
         else
         {
@@ -593,9 +606,9 @@ public class IUAgregar extends JInternalFrame
                 String nombre = jTextField2.getText();
                 BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField3.getText()));
                 String info = jTextArea1.getText();
-                String tipo = (String)jComboBox1.getSelectedItem();
+                String tipo = (String) jComboBox1.getSelectedItem();
                 BigDecimal descuento = precio.multiply(control.getDescuentoGlobal().divide(new BigDecimal("100.00"))).setScale(2);
-                
+
                 if (precio.signum() == -1)
                 {
                     JOptionPane.showInternalMessageDialog(this, "Solo Dinero Real");
@@ -607,15 +620,17 @@ public class IUAgregar extends JInternalFrame
                     articulo.setDescuento(descuento);
                     jTextArea2.append("Articulo\n");
                     jTextArea2.append("ID: " + (!id.isEmpty() ? articulo.getId() : "Default"));
-                    jTextArea2.append("\nNombre: "+articulo.getNombre());
-                    jTextArea2.append("\nPrecio: "+articulo.getPrecio());
+                    jTextArea2.append("\nNombre: " + articulo.getNombre());
+                    jTextArea2.append("\nPrecio: " + articulo.getPrecio());
                     jTextArea2.append("\nDescuento: " + articulo.getDescuento());
-                    jTextArea2.append("\nInformacion: "+articulo.getInfo());
-                    jTextArea2.append("\nTipo: "+articulo.getTipo());
+                    jTextArea2.append("\nInformacion: " + articulo.getInfo());
+                    jTextArea2.append("\nTipo: " + articulo.getTipo());
                 }
             }
             else
+            {
                 JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
+            }
         }
     }
 }

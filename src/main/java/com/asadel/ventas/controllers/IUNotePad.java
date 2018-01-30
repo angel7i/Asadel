@@ -11,27 +11,32 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUNotePad extends javax.swing.JInternalFrame 
+public class IUNotePad extends javax.swing.JInternalFrame
 {
+
     private static IUNotePad ventana = null;
     private JFileChooser selector;
     private File archivo;
-    
+
     public static IUNotePad getInstance()
     {
         if (ventana == null)
+        {
             return ventana = new IUNotePad();
+        }
         else
+        {
             return ventana;
+        }
     }
-    
-    private IUNotePad() 
+
+    private IUNotePad()
     {
         initComponents();
         selector = new JFileChooser();
         archivo = null;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -244,21 +249,23 @@ public class IUNotePad extends javax.swing.JInternalFrame
         {
             closeFile();
         }
-        
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.txt","txt"); 
-        selector.setFileFilter(filtro); 
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.txt", "txt");
+        selector.setFileFilter(filtro);
         selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int resultado = selector.showOpenDialog(this);
 
-        if ( resultado == JFileChooser.CANCEL_OPTION )
+        if (resultado == JFileChooser.CANCEL_OPTION)
+        {
             selector.cancelSelection();
+        }
         else
         {
             archivo = selector.getSelectedFile();
 
-            if ((archivo == null ) || (archivo.getName().equals( "" ) ) )
+            if ((archivo == null) || (archivo.getName().equals("")))
             {
-                JOptionPane.showInternalMessageDialog( this, "Nombre de archivo inválido","Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE );
+                JOptionPane.showInternalMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido", JOptionPane.ERROR_MESSAGE);
                 selector.cancelSelection();
             }
 
@@ -274,7 +281,6 @@ public class IUNotePad extends javax.swing.JInternalFrame
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // Cerrar Bloc de Notas
         closeFile();
-        System.gc();
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -313,7 +319,9 @@ public class IUNotePad extends javax.swing.JInternalFrame
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Guardar
         if (archivo != null)
+        {
             savequickFile();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,15 +340,17 @@ public class IUNotePad extends javax.swing.JInternalFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
-    
+
     public void saveFile()
     {
         if (jEditorPane1.getText().isEmpty())
+        {
             JOptionPane.showInternalMessageDialog(this, "Documento Vacio");
+        }
         else
         {
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.txt","txt"); 
-            selector.setFileFilter(filtro); 
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.txt", "txt");
+            selector.setFileFilter(filtro);
             selector.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             int resultado = selector.showSaveDialog(this);
 
@@ -351,13 +361,13 @@ public class IUNotePad extends javax.swing.JInternalFrame
             }
         }
     }
-    
+
     public void savequickFile()
     {
         String ruta = archivo.getAbsolutePath();
         setFile(ruta);
     }
-    
+
     public void closeFile()
     {
         if (jEditorPane1.getText().isEmpty())
@@ -369,7 +379,7 @@ public class IUNotePad extends javax.swing.JInternalFrame
         else
         {
             int opc = JOptionPane.showInternalConfirmDialog(this, "Guardar Documento?", "Nuevo Documento", JOptionPane.YES_NO_CANCEL_OPTION);
-            
+
             if (opc == JOptionPane.YES_OPTION)
             {
                 saveFile();
@@ -385,71 +395,71 @@ public class IUNotePad extends javax.swing.JInternalFrame
                 selector.cancelSelection();
                 //IUDesktop.notepad = null;
             }
-            
+
             this.setTitle("Bloc de Notas");
         }
     }
-    
+
     public void getFile(File file)
     {
         String linea;
         String nota = "";
         FileReader read = null;
         BufferedReader buffer = null;
-        
-         String nombre = file.getName();
-         this.setTitle("Bloc de Notas: "+nombre);
-        
+
+        String nombre = file.getName();
+        this.setTitle("Bloc de Notas: " + nombre);
+
         try
         {
             read = new FileReader(file);
             buffer = new BufferedReader(read);
-            
+
             while ((linea = buffer.readLine()) != null)
             {
                 nota += (linea + "\n");
             }
-            
+
             jEditorPane1.setText(nota);
         }
         catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(this, "No se puede abrir archivo");
         }
-        finally 
+        finally
         {
             try
             {
-                if (read != null && buffer != null) 
+                if (read != null && buffer != null)
                 {
                     read.close();
                     buffer.close();
                 }
-            } 
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 JOptionPane.showInternalMessageDialog(this, "Error");
             }
         }
     }
-    
+
     public void setFile(String ruta)
     {
         File nota = new File(ruta);
-        
-        try 
+
+        try
         {
             PrintWriter writer = new PrintWriter(nota);
             writer.println(jEditorPane1.getText());
             writer.close();
-            
-            if(!(ruta.endsWith(".txt")))
+
+            if (!(ruta.endsWith(".txt")))
             {
-                File temp = new File(ruta+".txt");
+                File temp = new File(ruta + ".txt");
                 nota.renameTo(temp);
             }
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(this, "Error Escribir");
         }

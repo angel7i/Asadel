@@ -1,5 +1,6 @@
 package com.asadel.ventas.controllers;
 
+import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Articulo;
 import com.asadel.ventas.services.ArticulosTableModel;
 import com.asadel.ventas.services.Control;
@@ -82,7 +83,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
             initComponents();
             showTotal();
             setColumnas();
-        } catch (SQLException sqlex)
+        }
+        catch (SQLException sqlex)
         {
             JOptionPane.showMessageDialog(null, "Error 4\n" + sqlex.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
@@ -231,8 +233,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo2.png"))); // NOI18N
         setMaximumSize(new java.awt.Dimension(800, 2147483647));
         setMinimumSize(new java.awt.Dimension(670, 340));
-        setNormalBounds(new java.awt.Rectangle(0, 0, 690, 690));
-        setPreferredSize(new java.awt.Dimension(690, 690));
+        setNormalBounds(new java.awt.Rectangle(0, 0, 690, 760));
+        setPreferredSize(new java.awt.Dimension(690, 760));
         try
         {
             setSelected(true);
@@ -269,8 +271,9 @@ public class IUArticulos extends javax.swing.JInternalFrame
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 0));
+        jPanel3.setBackground(new java.awt.Color(0, 153, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel3.setPreferredSize(new java.awt.Dimension(674, 760));
 
         jTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTable.setModel(tablabase);
@@ -508,10 +511,11 @@ public class IUArticulos extends javax.swing.JInternalFrame
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jToggleButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -532,7 +536,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -553,10 +557,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -574,26 +575,26 @@ public class IUArticulos extends javax.swing.JInternalFrame
                             .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addComponent(jToggleButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addComponent(jToggleButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                                .addComponent(jToggleButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)))))
+                                .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jToggleButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jToggleButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jToggleButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jToggleButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                        .addComponent(jToggleButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jToggleButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -601,11 +602,11 @@ public class IUArticulos extends javax.swing.JInternalFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
         );
 
         pack();
@@ -654,9 +655,10 @@ public class IUArticulos extends javax.swing.JInternalFrame
             if (filaSeleccionada >= 0)
             {
                 item = getItem(filaSeleccionada);
-                //IUDesktop.showVentas(false);
+                desktop.showVentas(false);
                 ventas.addItem(item);
-            } else
+            }
+            else
             {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
@@ -757,7 +759,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel3.setBackground(new Color(255, 153, 0));//[255,153,0]
+        jPanel3.setBackground(Asadel.ACTIVE_COLOR);//[0,153,255]
         refresh();
         jTextField2.requestFocus();
         jTextField2.getCaret().moveDot(0);
@@ -1289,7 +1291,9 @@ public class IUArticulos extends javax.swing.JInternalFrame
         TableColumnModel modeloColumna = jTable.getColumnModel();
         TableColumn columnaTabla;
 
-        for (int i = 0; i < jTable.getColumnCount(); i++)
+        for (int i = 0;
+                i < jTable.getColumnCount();
+                i++)
         {
             columnaTabla = modeloColumna.getColumn(i);
 
@@ -1330,7 +1334,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
         if (control.getEstadoCajaDia())
         {
             jLabel1.setText("Caja:$ " + control.getRecaudadoCajaDia());
-        } else
+        }
+        else
         {
             jLabel1.setText("Caja Cerrada");
         }
@@ -1345,7 +1350,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
         if (m.find())
         {
             jTextField2.setText(null);
-        } else
+        }
+        else
         {
             ArrayList<RowFilter<Object, Object>> andFilters = new ArrayList<>();
             RowFilter<Object, Object> columnFilter = RowFilter.regexFilter(tipo, 4);
@@ -1357,33 +1363,39 @@ public class IUArticulos extends javax.swing.JInternalFrame
             if (texto.isEmpty() && tipo.equals(TIPO[0].toString()))
             {
                 sorter.setRowFilter(null);
-            } else if (texto.isEmpty() && !tipo.equals(TIPO[0].toString()))
+            }
+            else if (texto.isEmpty() && !tipo.equals(TIPO[0].toString()))
             {
                 try
                 {
                     sorter.setRowFilter(columnFilter);
                     setColumnas();
-                } catch (PatternSyntaxException ex)
+                }
+                catch (PatternSyntaxException ex)
                 {
                     JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                 }
-            } else if (texto.length() != 0 && tipo.equals(TIPO[0].toString()))
+            }
+            else if (texto.length() != 0 && tipo.equals(TIPO[0].toString()))
             {
                 try
                 {
                     sorter.setRowFilter(wordFilter);
                     setColumnas();
-                } catch (PatternSyntaxException ex)
+                }
+                catch (PatternSyntaxException ex)
                 {
                     JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                 }
-            } else if (texto.length() != 0 && !tipo.equals(TIPO[0].toString()))
+            }
+            else if (texto.length() != 0 && !tipo.equals(TIPO[0].toString()))
             {
                 try
                 {
                     sorter.setRowFilter(RowFilter.andFilter(andFilters));
                     setColumnas();
-                } catch (PatternSyntaxException ex)
+                }
+                catch (PatternSyntaxException ex)
                 {
                     JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                 }
@@ -1399,7 +1411,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
             tablabase.fireTableDataChanged();
             tablabase.fireTableStructureChanged();
             setColumnas();
-        } catch (SQLException sqlex2)
+        }
+        catch (SQLException sqlex2)
         {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
@@ -1412,7 +1425,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
             tablabase.Consulta(Control.SELECTALLARTICULOS);
             tablabase.fireTableDataChanged();
             setColumnas();
-        } catch (SQLException sqlex2)
+        }
+        catch (SQLException sqlex2)
         {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
@@ -1422,7 +1436,9 @@ public class IUArticulos extends javax.swing.JInternalFrame
     {
         Object[] values = new Object[tablabase.getColumnCount()];
 
-        for (int i = 0; i < values.length; i++)
+        for (int i = 0;
+                i < values.length;
+                i++)
         {
             values[i] = jTable.getValueAt(row, i);
         }
@@ -1531,11 +1547,13 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
                 filaSeleccionada = -1;
                 refreshData();
-            } else
+            }
+            else
             {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
-        } else
+        }
+        else
         {
             refreshData();
         }

@@ -91,7 +91,8 @@ public class Control
         try
         {
             conexion = conexionFactory.getConnection();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error 3\n" + e.getMessage(), "Error de Conexion", 2);
         }
@@ -109,7 +110,8 @@ public class Control
         try
         {
             conexion.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se Cerro la Conexion en la BD \nError BD" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -128,7 +130,8 @@ public class Control
                 ps.setString(1, a.getId());
                 ps.setBigDecimal(2, a.getPrecio());
                 ps.setBigDecimal(3, a.getDescuento());
-            } else
+            }
+            else
             {
                 insert = "INSERT INTO preciosArt (Precio, Descuento) VALUES(?,?)";
                 ps = conexion.prepareStatement(insert);
@@ -139,11 +142,13 @@ public class Control
             ps.executeUpdate();
             ps.close();
             insertArticulo(a);
-        } catch (MySQLIntegrityConstraintViolationException e)
+        }
+        catch (MySQLIntegrityConstraintViolationException e)
         {
             changeID(a.getId());
             updateID(a);
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego el precioArt \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -174,7 +179,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego el Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -200,7 +206,8 @@ public class Control
             insertPrecioArt(a);
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se realizo el cambio de ID\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -228,7 +235,8 @@ public class Control
             ps.setString(4, a.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se realizo la actualización de ID\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -249,7 +257,8 @@ public class Control
             ps.executeUpdate();
             ps.close();
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agregro la Monografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -270,7 +279,8 @@ public class Control
             ps.executeUpdate();
             ps.close();
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego la Biografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -290,7 +300,8 @@ public class Control
             ps.setString(5, articulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego el Relieve \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -310,7 +321,8 @@ public class Control
             ps.setString(5, articulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego el Mapa \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -330,7 +342,8 @@ public class Control
             ps.setString(5, articulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se agrego el Esquema \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -351,14 +364,16 @@ public class Control
             ps.executeUpdate();
             ps.close();
             updateArticulo(newArticulo);
-        } catch (MySQLIntegrityConstraintViolationException e)
+        }
+        catch (MySQLIntegrityConstraintViolationException e)
         {
             changeID(newArticulo.getId());
             deletePrecioArt(oldArticulo);
             deleteArticulo(newArticulo);
             deletePrecioArt(newArticulo);
             insertPrecioArt(newArticulo);
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "No se actualizo el precioArt \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -378,7 +393,8 @@ public class Control
             ps.setString(4, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "No se actualizo el Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -397,7 +413,8 @@ public class Control
             ps.setBigDecimal(2, precio);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el precioVar \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -418,7 +435,8 @@ public class Control
             ps.setString(5, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo la Biografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -439,7 +457,8 @@ public class Control
             ps.setString(5, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el Esquema \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -460,7 +479,8 @@ public class Control
             ps.setString(5, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el Mapa \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -481,7 +501,8 @@ public class Control
             ps.setString(5, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo la Monografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -502,7 +523,8 @@ public class Control
             ps.setString(5, newArticulo.getTipo());
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el Relieve \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -517,7 +539,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el precioArt\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -532,7 +555,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -547,7 +571,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar la Biografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -562,7 +587,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el Esquema \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -577,7 +603,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el Mapa \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -592,7 +619,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar la Monografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -607,7 +635,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el Relieve \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -631,7 +660,8 @@ public class Control
             ps.close();
 
             JOptionPane.showMessageDialog(null, "Se ABRIO una nueva Caja Mensual", "Caja", 1);
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede ABRIR una CajaMes \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -651,7 +681,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idCajaMes");
-            } else
+            }
+            else
             {
                 statement.close();
                 rs.close();
@@ -689,7 +720,8 @@ public class Control
                 rs.close();
                 ps.close();
             }
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede CERRAR la CajaMes \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -719,7 +751,8 @@ public class Control
             if (rs.last())
             {
                 idCajaMes = rs.getInt("idCajaMes");
-            } else
+            }
+            else
             {
                 openCajaMes();
                 select = "SELECT idCajaMes FROM CajaMes "
@@ -744,7 +777,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede ABRIR la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -788,7 +822,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede CERRAR la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -808,7 +843,8 @@ public class Control
             if (rs.last())
             {
                 total = rs.getBigDecimal("Recaudado");
-            } else
+            }
+            else
             {
                 statement.close();
                 rs.close();
@@ -819,7 +855,8 @@ public class Control
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encontro el valor Recaudado\n de la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -842,7 +879,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idCajaDia");
-            } else
+            }
+            else
             {
                 statement.close();
                 rs.close();
@@ -857,7 +895,8 @@ public class Control
             estado = rs.getBoolean("Estado");
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encontro el Estado de la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -876,7 +915,8 @@ public class Control
             ps.setBoolean(1, estado);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede actualizar el Estado de la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -906,7 +946,8 @@ public class Control
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el Total de la Venta \n" + ex.getMessage(), "Error", 2);
         }
@@ -937,7 +978,8 @@ public class Control
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el Total de la Venta \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -968,7 +1010,8 @@ public class Control
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el Total de la Listas \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1000,7 +1043,8 @@ public class Control
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el Total de la CajaDia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1027,7 +1071,8 @@ public class Control
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el ID de la Lista \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1050,7 +1095,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idLista");
-            } else
+            }
+            else
             {
                 statement.close();
                 rs.close();
@@ -1086,12 +1132,14 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             if (ex instanceof MySQLIntegrityConstraintViolationException)
             {
                 updateArticuloLista(articulo, 1);
-            } else
+            }
+            else
             {
                 JOptionPane.showMessageDialog(null, "No se agrego el Articulo a la Lista de Ventas \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -1115,10 +1163,12 @@ public class Control
             if (opc == 1)
             {
                 cantidad = rs.getInt("Cantidad") + 1;
-            } else if (opc == 2)
+            }
+            else if (opc == 2)
             {
                 cantidad = articulo.getCantidad();
-            } else
+            }
+            else
             {
                 cantidad = rs.getInt("Cantidad") - 1;
 
@@ -1150,7 +1200,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el Articulo de la Lista de Ventas \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1175,7 +1226,8 @@ public class Control
             ps = conexion.prepareStatement(delete);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede borrar el Articulo de la Lista de Ventas \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1208,7 +1260,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idLista");
-            } else
+            }
+            else
             {
                 ps.close();
 
@@ -1220,7 +1273,8 @@ public class Control
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se pueden borrar los Articulos de la Lista de Ventas  \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1241,7 +1295,8 @@ public class Control
             precio = rs.getBigDecimal("Precio");
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encontro el precioVar del Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1260,7 +1315,8 @@ public class Control
             ps.setBigDecimal(1, precio);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el precioVar del Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1281,7 +1337,8 @@ public class Control
             precio = rs.getBigDecimal("Descuento");
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encontro el descuento del Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1300,7 +1357,8 @@ public class Control
             ps.setInt(1, porcentaje);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el Descuento Global \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1321,7 +1379,8 @@ public class Control
             descuento = new BigDecimal("100.00").subtract(descuento);
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encuentra el Descuento Global \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1345,7 +1404,8 @@ public class Control
             ps = conexion.prepareStatement(update);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se Actualizo el Descuento del Articulo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1372,7 +1432,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se removio el Descuento del Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1399,7 +1460,8 @@ public class Control
             ps = conexion.prepareStatement(update);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se pueden establecer los \nDescuentos de los Articulos \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1426,7 +1488,8 @@ public class Control
             ps = conexion.prepareStatement(update);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede establecer los \nPrecios de los Articulos \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1445,7 +1508,8 @@ public class Control
             ps = conexion.prepareStatement(update);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizaron los\nDescuentos de los Articulos \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1495,7 +1559,8 @@ public class Control
             statement.close();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se creo la Lista \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1546,7 +1611,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idCajaDia");
-            } else
+            }
+            else
             {
                 id = 1;
             }
@@ -1560,7 +1626,8 @@ public class Control
             ps.executeUpdate();
             rs.close();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se cerro el Total de la Lista \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1581,7 +1648,8 @@ public class Control
             if (rs.last())
             {
                 id = rs.getInt("idLista");
-            } else
+            }
+            else
             {
                 statement.close();
                 rs.close();
@@ -1596,7 +1664,8 @@ public class Control
             estado = rs.getBoolean("Estado");
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se encontro el Estado de la Lista \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1620,14 +1689,16 @@ public class Control
             if (rs.first())
             {
                 total = rs.getBigDecimal("Total");
-            } else
+            }
+            else
             {
                 return total;
             }
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede conseguir el Total de las Cajas \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1650,14 +1721,16 @@ public class Control
             if (rs.first())
             {
                 name = rs.getString("Nombre");
-            } else
+            }
+            else
             {
                 return name;
             }
 
             statement.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede obtener el Nombre del Sistema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1676,7 +1749,8 @@ public class Control
             ps.setString(1, name);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el Nombre del Sistema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1712,7 +1786,8 @@ public class Control
             ps.executeUpdate();
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede cancelar la lista \n" + ex.getMessage(), "Error", 2);
         }
@@ -1749,7 +1824,8 @@ public class Control
                 ps = conexion.prepareStatement(delete);
                 ps.setString(1, id);
                 ps.executeUpdate();
-            } else
+            }
+            else
             {
                 update = "UPDATE Lista SET Total=? "
                         + "WHERE idLista = ?";
@@ -1777,7 +1853,8 @@ public class Control
             ps.executeUpdate();
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede eliminar el item \n" + ex.getMessage(), "Error", 2);
         }
@@ -1808,13 +1885,15 @@ public class Control
             {
                 cantidad = rs.getInt("Cantidad") + 1;
                 subtotal = getRecaudadoCajaDia().add(item.getPrecio());
-            } else if (opc == 2)
+            }
+            else if (opc == 2)
             {
                 cantidad = rs.getInt("Cantidad");
                 subtotal = item.getPrecio().multiply(new BigDecimal(item.getCantidad() - cantidad));
                 subtotal = getRecaudadoCajaDia().add(subtotal);
                 cantidad = item.getCantidad();
-            } else
+            }
+            else
             {
                 cantidad = rs.getInt("Cantidad") - 1;
                 subtotal = getRecaudadoCajaDia().subtract(item.getPrecio());
@@ -1865,7 +1944,8 @@ public class Control
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede modificar el item \n" + ex.getMessage(), "Error cancelacion", 2);
         }
@@ -1882,7 +1962,8 @@ public class Control
             ps.setString(1, dir);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo la ruta de respaldo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -1906,14 +1987,16 @@ public class Control
             if (rs.first())
             {
                 dir = rs.getString("Nombre");
-            } else
+            }
+            else
             {
                 return dir;
             }
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede obtener la ruta de respaldo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1932,7 +2015,8 @@ public class Control
             ps.setString(1, theme);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el tema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -1956,14 +2040,16 @@ public class Control
             if (rs.first())
             {
                 theme = rs.getString("Nombre");
-            } else
+            }
+            else
             {
                 return theme;
             }
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede obtener el tema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1982,7 +2068,8 @@ public class Control
             ps.setString(1, directorio);
             ps.executeUpdate();
             ps.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se actualizo el directorio de reportes\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -2006,14 +2093,16 @@ public class Control
             if (rs.first())
             {
                 directorio = rs.getString("Nombre");
-            } else
+            }
+            else
             {
                 return directorio;
             }
 
             ps.close();
             rs.close();
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, "No se puede obtener el directorio de reportes\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

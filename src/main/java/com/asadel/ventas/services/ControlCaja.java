@@ -7,30 +7,40 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ControlCaja 
+public class ControlCaja
 {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ControlCaja.class);
+
     @Autowired
     private IUDesktop desktop;
     @Autowired
-    public  IUArticulos articulos;
+    public IUArticulos articulos;
     @Autowired
     private Control control;
-    
+    @Autowired
+    private PropiedadesService propiedades;
+
     public boolean openCaja()
     {
         boolean estado = false;
-        
+
         if (!control.getEstadoCajaDia())
         {
             Calendar c = Calendar.getInstance(Locale.getDefault());
@@ -44,18 +54,18 @@ public class ControlCaja
         {
             JOptionPane.showMessageDialog(null, "La Caja ya esta ABIERTA");
         }
-        
+
         return estado;
     }
-    
+
     public boolean closeCaja()
     {
         boolean estado = false;
-                       
+
         if (control.getEstadoCajaDia())
         {
             int opt = JOptionPane.showConfirmDialog(null, "Desea CERRAR la Caja?", "Confirmar Cierre de la Caja", JOptionPane.YES_NO_OPTION, 2);
-            
+
             if (opt == JOptionPane.YES_OPTION)
             {
                 Calendar c = Calendar.getInstance(Locale.getDefault());
@@ -82,49 +92,63 @@ public class ControlCaja
         {
             JOptionPane.showMessageDialog(null, "La Caja ya esta CERRADA");
         }
-        
+
         return estado;
     }
-    
+
     private void backup()
     {
-        File backup = new File(control.getDirBackup() + File.separator + "AsadelBackup");
-                
-        if (!backup.exists())
-            backup.mkdir();
-        
+        Path directorio = Paths.get(propiedades.getDirectorioBackup(), "AsadelBackup");
+        File directorioBackup = directorio.toFile();
+
+        if (!directorioBackup.exists())
+        {
+            directorioBackup.mkdir();
+        }
+
         Calendar c = Calendar.getInstance(Locale.getDefault());
-        SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");//dd-MM-yyyy'_'HH-mm-a");
+        SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");
         String fecha = date.format(c.getTime());
-        String command = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe -u admin -padmin papeleria --databases ";
-        String file = backup + File.separator + "PapeleriaBackup_" + fecha + ".sql";
-        
-        new Thread(() ->
+        String command = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump -u admin -padmin papeleria --databases ";
+        Path backup = directorio.resolve("PapeleriaBackup_" + fecha + ".sql");
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+        try
+        {
+            Process runtimeProcess = Runtime.getRuntime().exec(command);
+            reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
+            writer = new BufferedWriter(new FileWriter(backup.toFile()));
+            String line;
+
+            while ((line = reader.readLine()) != null)
+            {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+        catch (IOException ex)
+        {
+            LOGGER.error("No se puede crear backup de la caja: {}", ex.getMessage());
+        }
+        finally
         {
             try
             {
-                Process runtimeProcess = Runtime.getRuntime().exec(command);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                String line;
-                
-                while((line=reader.readLine()) != null)
+                if (reader != null)
                 {
-                    writer.write(line);
-                    writer.newLine();
+                    reader.close();
                 }
-                
-                reader.close();
-                writer.close();
-            }
-            catch (Exception ex)
-            {
-                SwingUtilities.invokeLater(() ->
+                if (writer != null)
                 {
-                    JOptionPane.showInternalMessageDialog(null, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
-                    System.exit(-1);
-                });
+                    writer.close();
+                }
             }
-        }).start();
+            catch (IOException ex)
+            {
+                
+            }
+            
+        }
     }
 }

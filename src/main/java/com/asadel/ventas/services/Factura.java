@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class Factura
 {
+
     private BigDecimal anticipo;
     private String telefono;
     private String nombreCliente;
@@ -23,5 +24,5 @@ public class Factura
         telefono = "";
         nombreCliente = "";
         observaciones = "";
-    }  
+    }
 }

@@ -1,9 +1,9 @@
 package com.asadel.ventas.controllers;
 
+import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Reporte;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import javax.annotation.PostConstruct;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.swing.JRViewer;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class IUReportes extends javax.swing.JInternalFrame
 {
+
     @Autowired
     private IUFecha dialog;
     @Autowired
@@ -21,13 +22,13 @@ public class IUReportes extends javax.swing.JInternalFrame
     public IUFecha fecha;
     @Autowired
     public IUFechaMes fechaMes;
-    
+
     public JRViewer visor;
 
     public IUReportes()
     {
     }
-    
+
     @PostConstruct
     public void config()
     {
@@ -36,14 +37,20 @@ public class IUReportes extends javax.swing.JInternalFrame
         visor.setVisible(true);
         jPanel2.add(visor, BorderLayout.CENTER);
     }
-            
+
     public void init(boolean fin)
     {
+        visor.clear();
+        visor = new JRViewer(reporte.generarReporteDiaVentas(), null);
+        visor.setVisible(true);
+        jPanel2.add(visor, BorderLayout.CENTER);
+        
         if (fin)
         {
             visor.setZoomRatio(1.0f);
             jSplitPane1.setDividerLocation(1);
-        } else
+        }
+        else
         {
             visor.setZoomRatio(0.70f);
         }
@@ -162,10 +169,7 @@ public class IUReportes extends javax.swing.JInternalFrame
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // Ventana Cerrada
-        visor.clear();
-        visor = null;
-        reporte = null;
-        //IUDesktop.reportes = null;
+        //visor.clear();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -206,22 +210,18 @@ public class IUReportes extends javax.swing.JInternalFrame
                     //fechaMes.invoke();
                     fechaMes.init(true);
 
-                    java.awt.EventQueue.invokeLater(new Runnable()
+                    java.awt.EventQueue.invokeLater(() ->
                     {
-                        @Override
-                        public void run()
+                        fechaMes.addWindowListener(new java.awt.event.WindowAdapter()
                         {
-                            fechaMes.addWindowListener(new java.awt.event.WindowAdapter()
+                            @Override
+                            public void windowClosing(java.awt.event.WindowEvent e)
                             {
-                                @Override
-                                public void windowClosing(java.awt.event.WindowEvent e)
-                                {
-                                    //IUDesktop.reportes.fechaMes = null;
-                                }
-                            });
+                                //IUDesktop.reportes.fechaMes = null;
+                            }
+                        });
 
-                            fechaMes.setVisible(true);
-                        }
+                        fechaMes.setVisible(true);
                     });
                 }
                 break;
@@ -231,23 +231,19 @@ public class IUReportes extends javax.swing.JInternalFrame
 //                    fecha = new IUFecha((Frame) IUDesktop.desktop.getParent().getParent().getParent().getParent(), true, 0);
 //                    fecha.invoke(0);
 
-                    java.awt.EventQueue.invokeLater(new Runnable()
+                    java.awt.EventQueue.invokeLater(() ->
                     {
-                        @Override
-                        public void run()
+                        dialog.init(true, 0);
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter()
                         {
-                            dialog.init(true, 0);
-                            dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                            @Override
+                            public void windowClosing(java.awt.event.WindowEvent e)
                             {
-                                @Override
-                                public void windowClosing(java.awt.event.WindowEvent e)
-                                {
-                                    //IUDesktop.reportes.fecha = null;
-                                }
-                            });
+                                //IUDesktop.reportes.fecha = null;
+                            }
+                        });
 
-                            dialog.setVisible(true);
-                        }
+                        dialog.setVisible(true);
                     });
                 }
                 break;
@@ -256,23 +252,19 @@ public class IUReportes extends javax.swing.JInternalFrame
                 {
 //                    fecha = new IUFecha((Frame) IUDesktop.desktop.getParent().getParent().getParent().getParent(), true, 1);
 //                    fecha.invoke(1);
-                    java.awt.EventQueue.invokeLater(new Runnable()
+                    java.awt.EventQueue.invokeLater(() ->
                     {
-                        @Override
-                        public void run()
+                        dialog.init(true, 1);
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter()
                         {
-                            dialog.init(true, 1);
-                            dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                            @Override
+                            public void windowClosing(java.awt.event.WindowEvent e)
                             {
-                                @Override
-                                public void windowClosing(java.awt.event.WindowEvent e)
-                                {
-                                    //IUDesktop.reportes.fecha = null;
-                                }
-                            });
+                                //IUDesktop.reportes.fecha = null;
+                            }
+                        });
 
-                            dialog.setVisible(true);
-                        }
+                        dialog.setVisible(true);
                     });
                 }
                 break;
@@ -297,8 +289,8 @@ public class IUReportes extends javax.swing.JInternalFrame
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel1.setBackground(new Color(0, 102, 153));//[51,102,255]
-        jPanel2.setBackground(new Color(0, 102, 153));//[51,102,255]
+        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+        jPanel2.setBackground(Asadel.ACTIVE_COLOR);
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated

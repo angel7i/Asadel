@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.asadel</groupId>
     <artifactId>Asadel</artifactId>
-    <version>0.9.1</version>
+    <version>0.9.5</version>
     <name>Asadel</name>
     <packaging>jar</packaging>
     
@@ -12,11 +12,22 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <version.mvn.compiler>3.6.0</version.mvn.compiler>
-        <maven-jar.version>3.0.2</maven-jar.version>
+        <maven.compiler.target>1.8</maven.compiler.target>        
+        <maven.jar.version>3.0.2</maven.jar.version>
+        <version.mvn.compiler>3.7.0</version.mvn.compiler>
         
-        <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
+        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <apache-maven.version>3.2.0</apache-maven.version>
+        <jcalendar.version>1.4</jcalendar.version>
+        <substance.version>7.3</substance.version>
+        <mysql.version>5.1.45</mysql.version>
+        <jasper.version>6.4.0</jasper.version>
+        <jasper.font.version>6.0.0</jasper.font.version>
+        <apache.collections.version>4.1</apache.collections.version>
+        <apache.digester.version>3.2</apache.digester.version>
+        <apache.logging.version>1.2</apache.logging.version>
+        <itext.version>5.5.11</itext.version>
+        <apache.poi.version>3.17</apache.poi.version>
     </properties>
     
     <dependencyManagement>
@@ -25,7 +36,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -34,109 +45,116 @@
     
     <dependencies>
         
+        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+        <!-- Apache Maven Utils -->
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-shared-utils</artifactId>
+            <version>${apache-maven.version}</version>
+        </dependency>
+        
+        <!-- JCalendar -->
         <dependency>
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
+            <version>${jcalendar.version}</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.github.insubstantial/substance -->
+        <!-- Substance Look & Feel -->
         <dependency>
             <groupId>com.github.insubstantial</groupId>
             <artifactId>substance</artifactId>
-            <version>7.3</version>
+            <version>${substance.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.github.insubstantial/trident -->
+        
+        <!-- Substance Trident -->
         <dependency>
             <groupId>com.github.insubstantial</groupId>
             <artifactId>trident</artifactId>
-            <version>7.3</version>
+            <version>${substance.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!-- MySQL connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.42</version>
+            <version>${mysql.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+        <!-- Jasperreports -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.4.0</version>
+            <version>${jasper.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+        <!-- Jasperreports-fonts -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-fonts</artifactId>
-            <version>6.0.0</version>
+            <version>${jasper.font.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+        <!-- Apache commons-beanutils -->
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <!-- Apache commons-collections4 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
+            <version>${apache.collections.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-digester3 -->
+        <!-- Apache commons-digester3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-digester3</artifactId>
-            <version>3.2</version>
+            <version>${apache.digester.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+        <!-- Apache commons-logging -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
+            <version>${apache.logging.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+        <!-- itextpdf -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.5.11</version>
+            <version>${itext.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.itextpdf/itext-pdfa -->
+        <!-- itext-pdfa -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itext-pdfa</artifactId>
-            <version>5.5.11</version>
+            <version>${itext.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <!-- Apache poi -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.16</version>
+            <version>${apache.poi.version}</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+        <!-- Groovy-all -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.4.11</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -161,7 +179,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <excludeArtifactIds>spring-boot-devtools</excludeArtifactIds>
                 </configuration>

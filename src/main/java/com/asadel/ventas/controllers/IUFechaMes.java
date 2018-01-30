@@ -151,7 +151,7 @@ public class IUFechaMes extends javax.swing.JDialog
 
     private void formWindowClosed(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosed
     {//GEN-HEADEREND:event_formWindowClosed
-        reportes.fechaMes = null;
+        
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
@@ -184,7 +184,8 @@ public class IUFechaMes extends javax.swing.JDialog
         try
         {
             f = date.parse(year + "/" + mes + "/30");
-        } catch (ParseException ex)
+        }
+        catch (ParseException ex)
         {
             return;
         }

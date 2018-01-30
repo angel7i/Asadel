@@ -28,11 +28,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Reporte
 {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(Reporte.class);
 
     @Autowired
     private Control control;
+    @Autowired
+    private PropiedadesService propiedades;
 
     private JasperPrint reporte;
     private Path directorioReportes;
@@ -44,7 +45,7 @@ public class Reporte
     @PostConstruct
     public void init()
     {
-        directorioReportes = Paths.get(control.getDirectorioReportes());
+        directorioReportes = Paths.get(propiedades.getDirectorioNotas());
         datosFactura = new Factura();
         LOGGER.info("Directorio de reportes: {}", directorioReportes);
     }
@@ -64,7 +65,7 @@ public class Reporte
             dir.mkdir();
         }
     }
-    
+
     public void clearFactura()
     {
         datosFactura = new Factura();
@@ -88,7 +89,8 @@ public class Reporte
             if (datosFactura.getAnticipo().equals(BigDecimal.ZERO))
             {
                 parametros.put("resta", BigDecimal.ZERO);
-            } else
+            }
+            else
             {
                 BigDecimal pendiente = total.subtract(datosFactura.getAnticipo());
                 parametros.put("resta", pendiente);
@@ -101,7 +103,8 @@ public class Reporte
             InputStream formato = this.getClass().getResourceAsStream("/reports/Factura.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
             estado = true;
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar la Factura" + "\n" + ex.getMessage());
         }
@@ -126,7 +129,8 @@ public class Reporte
             InputStream formato = this.getClass().getResourceAsStream("/reports/FacturaDescuento.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
             estado = true;
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar la FacturaDescuento" + "\n" + ex.getMessage());
         }
@@ -141,7 +145,8 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteDiaArticulos.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteDiaArt" + "\n" + ex.getMessage());
         }
@@ -155,7 +160,8 @@ public class Reporte
         {
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteDiaVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteDiaVen" + "\n" + ex.getMessage());
         }
@@ -169,7 +175,8 @@ public class Reporte
         {
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteMesVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteMesVen" + "\n" + ex.getMessage());
         }
@@ -189,7 +196,8 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteMensual.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteMensual" + "\n" + ex.getMessage());
         }
@@ -209,7 +217,8 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteFechasVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteFechasVentas \n" + ex.getMessage());
         }
@@ -229,7 +238,8 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteFechasArticulos.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteFechasArticulos \n" + ex.getMessage());
         }
@@ -247,7 +257,8 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/SearchFactura.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        } catch (JRException ex)
+        }
+        catch (JRException ex)
         {
             JOptionPane.showMessageDialog(null, "Error al buscar la Factura \n" + ex.getMessage());
         }
@@ -272,7 +283,8 @@ public class Reporte
             try
             {
                 JasperExportManager.exportReportToPdfFile(reporte, path.toString());
-            } catch (JRException ex)
+            }
+            catch (JRException ex)
             {
                 JOptionPane.showMessageDialog(null, "Error al exportar el reports" + "\n" + ex.getMessage());
             }
