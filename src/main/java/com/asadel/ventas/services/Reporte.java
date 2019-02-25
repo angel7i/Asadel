@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Reporte
 {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Reporte.class);
 
     @Autowired

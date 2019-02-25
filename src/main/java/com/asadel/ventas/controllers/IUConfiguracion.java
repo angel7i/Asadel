@@ -13,10 +13,12 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
-import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,6 +50,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @org.springframework.stereotype.Component
 public class IUConfiguracion extends javax.swing.JInternalFrame
 {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(IUConfiguracion.class);
 
     @Autowired
@@ -864,7 +867,7 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton12ActionPerformed
     {//GEN-HEADEREND:event_jButton12ActionPerformed
         // Cambiar tema
-        SubstanceLookAndFeel.setSkin("org.pushingpixels.substance.api.skin." + jComboBox1.getSelectedItem());        
+        SubstanceLookAndFeel.setSkin("org.pushingpixels.substance.api.skin." + jComboBox1.getSelectedItem());
         propiedades.updateTheme(jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -943,63 +946,90 @@ public class IUConfiguracion extends javax.swing.JInternalFrame
 
     private void backup()
     {
-        if ((path == null) || (path.isEmpty()))
+        if (path == null || path.isEmpty())
         {
             JOptionPane.showInternalMessageDialog(this, "Rutal invalida", "Ruta invalida", JOptionPane.ERROR_MESSAGE);
-            return;
         }
-
-        Calendar c = Calendar.getInstance(Locale.getDefault());
-        SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");
-        String fecha = date.format(c.getTime());
-
-        path = path.replace("\\", File.separator);
-        String command = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe -u root -padmin papeleria --databases ";
-        String file = path + File.separator + "PapeleriaBackup_" + fecha + ".sql";
-
-        new Thread(() ->
+        else
         {
-            try
-            {
-                Process runtimeProcess = Runtime.getRuntime().exec(command);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                String line;
+            Calendar c = Calendar.getInstance(Locale.getDefault());
+            SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");
+            String fecha = date.format(c.getTime());
+            String mysql = propiedades.getMySQLDirectorio();
+            Path dump = Paths.get(mysql, "bin", "mysqldump.exe");
+            String user = propiedades.getMySQLUser();
+            String pwd = propiedades.getMySQLPwd();
+            String command = dump + " -u " + user + " -p" + pwd + " papeleria --databases ";
+            LOGGER.info("Exec: {}", command);
+            Path fileToSave = Paths.get(path, "PapeleriaBackup_" + fecha + ".sql");
+            LOGGER.info("Save backup in: {}", fileToSave);
 
-                while ((line = reader.readLine()) != null)
+            new Thread(() ->
+            {
+                BufferedReader reader = null;
+                BufferedWriter writer = null;
+
+                try
                 {
-                    writer.write(line);
-                    writer.newLine();
+                    Process runtimeProcess = Runtime.getRuntime().exec(command);
+                    reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
+                    writer = new BufferedWriter(new FileWriter(fileToSave.toFile()));
+                    String line = null;
+
+                    while ((line = reader.readLine()) != null)
+                    {
+                        writer.write(line);
+                        writer.newLine();
+                    }
+
+                    SwingUtilities.invokeLater(() ->
+                    {
+                        try
+                        {
+                            if (runtimeProcess.waitFor() == 0)
+                            {
+                                JOptionPane.showInternalMessageDialog(rootPane, "Respaldo guardado");
+                            }
+                            else
+                            {
+                                JOptionPane.showInternalMessageDialog(rootPane, "Error al respaldar la base de datos");
+                            }
+                        }
+                        catch (InterruptedException ex)
+                        {
+                            JOptionPane.showInternalMessageDialog(rootPane, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
+                        }
+                    });
                 }
-
-                reader.close();
-                writer.close();
-
-                SwingUtilities.invokeLater(() ->
+                catch (IOException ex)
                 {
-                    try
+                    JOptionPane.showInternalMessageDialog(rootPane, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
+                }
+                finally
+                {
+                    if (reader != null)
                     {
-                        if (runtimeProcess.waitFor() == 0)
+                        try
                         {
-                            JOptionPane.showInternalMessageDialog(rootPane, "Respaldo guardado");
+                            reader.close();
                         }
-                        else
+                        catch (IOException ex)
                         {
-                            JOptionPane.showInternalMessageDialog(rootPane, "Error al respaldar la base de datos");
                         }
                     }
-                    catch (InterruptedException ex)
+                    if (writer != null)
                     {
-                        JOptionPane.showInternalMessageDialog(rootPane, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
+                        try
+                        {
+                            writer.close();
+                        }
+                        catch (IOException ex)
+                        {
+                        }
                     }
-                });
-            }
-            catch (Exception ex)
-            {
-                JOptionPane.showInternalMessageDialog(rootPane, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
-                System.exit(-1);
-            }
-        }).start();
+                }
+            }).start();
+        }
     }
 
     private void filtro()

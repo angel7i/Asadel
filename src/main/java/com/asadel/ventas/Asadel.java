@@ -13,6 +13,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import org.apache.maven.shared.utils.PropertyUtils;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -21,12 +23,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  *
  * @author Angel
  */
-@SpringBootApplication(scanBasePackages =
-{
-    "com.asadel.ventas"
-})
+@SpringBootApplication(scanBasePackages
+        =
+        {
+            "com.asadel.ventas"
+        })
 public class Asadel
 {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Asadel.class);
 
     public static final Color ACTIVE_COLOR = new Color(0, 153, 255);
 
@@ -36,14 +41,16 @@ public class Asadel
         Properties properties = null;
 
         try
-        {            
-            Path home = Paths.get(System.getenv("ASADEL_HOME"));
-	    Path propertiesPath = home.resolve("asadel.properties").normalize();
-            properties = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-        }
-        catch (IOException ex)
         {
-            JOptionPane.showMessageDialog(null, "No se encuentran las propiedades del sistema \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Path home = Paths.get(System.getenv("ASADEL_HOME"));
+            Path propertiesPath = home.resolve("asadel.properties").normalize();
+            properties = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
+            LOGGER.info("Leer propiedades de: {}", propertiesPath);
+        }
+        catch (IOException | NullPointerException ex)
+        {
+            LOGGER.error("La variable ASADEL_HOME no se encuentra en el sistema");
+            JOptionPane.showMessageDialog(null, "ASADEL_HOME: No se encuentran las propiedades del sistema \n", "Error sistema", JOptionPane.ERROR_MESSAGE);
         }
 
         String theme = properties.getProperty("theme.name");

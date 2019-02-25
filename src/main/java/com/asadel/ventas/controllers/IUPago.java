@@ -558,7 +558,7 @@ public class IUPago extends javax.swing.JDialog
     {
         String observaciones = jTextArea1.getText();
         BigDecimal anticipo = BigDecimal.ZERO;
-        
+
         if (jTextField5.getText() != null && !jTextField5.getText().isEmpty())
         {
             try
@@ -587,6 +587,7 @@ public class IUPago extends javax.swing.JDialog
             control.closeLista();
             control.clearArticulosLista();
             articulos.showTotal();
+            jTextField2.setText(null);
             jTextField3.setText(null);
             jTextField4.setText(null);
             jTextField5.setText(null);

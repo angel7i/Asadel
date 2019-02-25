@@ -98,6 +98,9 @@ public class ControlCaja
 
     private void backup()
     {
+        String user = propiedades.getMySQLUser();
+        String pwd = propiedades.getMySQLPwd();
+        Path exe = Paths.get(propiedades.getMySQLDirectorio()).resolve("bin\\mysqldump");
         Path directorio = Paths.get(propiedades.getDirectorioBackup(), "AsadelBackup");
         File directorioBackup = directorio.toFile();
 
@@ -109,7 +112,7 @@ public class ControlCaja
         Calendar c = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd'_'HH-mm-a");
         String fecha = date.format(c.getTime());
-        String command = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump -u admin -padmin papeleria --databases ";
+        String command = exe.toString() + " -u " + user + " -p" + pwd + " papeleria --databases ";
         Path backup = directorio.resolve("PapeleriaBackup_" + fecha + ".sql");
         BufferedReader reader = null;
         BufferedWriter writer = null;
@@ -146,9 +149,9 @@ public class ControlCaja
             }
             catch (IOException ex)
             {
-                
+
             }
-            
+
         }
     }
 }

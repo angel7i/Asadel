@@ -1,33 +1,45 @@
 package com.asadel.ventas.services;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.annotation.PostConstruct;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Conexion
 {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Conexion.class);
+
+    @Autowired
+    private PropiedadesService propiedades;
+
+    private Connection conn = null;
+
     private final String driver = "com.mysql.jdbc.Driver";
     private final String bd = "Papeleria";
-    private final String login = "admin";
-    private final String password = "admin";
-    private final String properties = "?connectTimeout=0 & socketTimeout=0 & autoReconnect=true";
+    private final String properties = "? useSSL=false & connectTimeout=0 & socketTimeout=0 & autoReconnect=true";
     private final String url = "jdbc:mysql://localhost/" + bd + properties;
 
-    private Conexion()
-    {
-    }
+    private String login;
+    private String password;
+    private Path bdExe;
 
-    public void init()
+    private Conexion()
     {
         try
         {
@@ -45,10 +57,16 @@ public class Conexion
         }
     }
 
+    @PostConstruct
+    public void setConfiguracion()
+    {
+        login = propiedades.getMySQLUser();
+        password = propiedades.getMySQLPwd();
+        bdExe = Paths.get(propiedades.getMySQLDirectorio());
+    }
+
     public Connection getConnection()
     {
-        Connection conn = null;
-
         try
         {
             conn = DriverManager.getConnection(url, login, password);
@@ -102,8 +120,9 @@ public class Conexion
 
     private void setUser()
     {
-        String createUser = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe -u root -proot -e "
-                + "\"GRANT ALL PRIVILEGES ON *.* TO admin@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION\"";
+        Path exe = bdExe.resolve("bin\\mysql.exe");
+        String createUser = exe.toString() + " -u " + "root" + " -p" + login + " -e "
+                + "\"GRANT ALL PRIVILEGES ON *.* TO " + login + "@'%' IDENTIFIED BY '" + login + "' WITH GRANT OPTION\"";
         Process runtimeProcess = null;
 
         try
@@ -122,7 +141,7 @@ public class Conexion
         }
         catch (IOException | InterruptedException ex)
         {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error Usuario", JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
     }
@@ -133,7 +152,7 @@ public class Conexion
 
         if (opt == JOptionPane.YES_OPTION)
         {
-            File backup = new File("H:\\AsadelBackup");
+            File backup = Paths.get(propiedades.getDirectorioBackup()).toFile();
 
             if (backup.exists())
             {
@@ -168,7 +187,7 @@ public class Conexion
 
     private void configDefault()
     {
-        File backups = new File("H:\\AsadelBackup");
+        File backups = Paths.get(propiedades.getDirectorioBackup()).toFile();
 
         for (File f
                 : backups.listFiles())
@@ -191,10 +210,12 @@ public class Conexion
 
         if (opt == JOptionPane.YES_OPTION)
         {
-            String createSchema = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe -u root -proot -e \"CREATE SCHEMA Papeleria\"";
+            Path exe = bdExe.resolve("bin\\mysql.exe");
+
+            String createSchema = exe.toString() + " -u " + login + " -p" + login + " -e \"CREATE SCHEMA Papeleria\"";
             String[] restore = new String[]
             {
-                "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe", "--user=root", "--password=root", "-e", "source " + backup.getAbsolutePath()
+                exe.toString(), "--user=" + login, "--password=" + login, "-e", "source " + backup.getAbsolutePath()
             };
             Process runtimeProcess = null;
 
@@ -222,7 +243,7 @@ public class Conexion
                     System.exit(0);
                 }
             }
-            catch (Exception ex)
+            catch (HeadlessException | IOException | InterruptedException ex)
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
                 System.exit(-1);
@@ -277,10 +298,12 @@ public class Conexion
                 return;
             }
 
-            String createSchema = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe -u root -proot -e \"CREATE SCHEMA Papeleria\"";
+            Path exe = bdExe.resolve("bin\\mysql.exe");
+
+            String createSchema = exe.toString() + " -u " + login + " -p" + login + " -e \"CREATE SCHEMA Papeleria\"";
             String[] restore = new String[]
             {
-                "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe", "--user=root", "--password=root", "-e", "source " + archivo.getAbsolutePath()
+                exe.toString(), "--user=" + login, "--password=" + login, "-e", "source " + archivo.getAbsolutePath()
             };
             Process runtimeProcess = null;
 
@@ -320,9 +343,10 @@ public class Conexion
                     System.exit(0);
                 }
             }
-            catch (Exception ex)
+            catch (HeadlessException | IOException | InterruptedException ex)
             {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
+                LOGGER.warn("Error ConfigManual-> {}: {}", ex.getClass().getSimpleName(), ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error ConfigManual", JOptionPane.ERROR_MESSAGE);
                 System.exit(-1);
             }
         }

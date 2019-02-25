@@ -44,7 +44,7 @@ public class IUReportes extends javax.swing.JInternalFrame
         visor = new JRViewer(reporte.generarReporteDiaVentas(), null);
         visor.setVisible(true);
         jPanel2.add(visor, BorderLayout.CENTER);
-        
+
         if (fin)
         {
             visor.setZoomRatio(1.0f);

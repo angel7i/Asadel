@@ -121,16 +121,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
         jToggleButton5 = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
         jToggleButton7 = new javax.swing.JToggleButton();
-        jToggleButton8 = new javax.swing.JToggleButton();
-        jToggleButton9 = new javax.swing.JToggleButton();
-        jToggleButton10 = new javax.swing.JToggleButton();
-        jToggleButton11 = new javax.swing.JToggleButton();
-        jToggleButton12 = new javax.swing.JToggleButton();
-        jToggleButton13 = new javax.swing.JToggleButton();
-        jToggleButton14 = new javax.swing.JToggleButton();
-        jToggleButton15 = new javax.swing.JToggleButton();
-        jToggleButton16 = new javax.swing.JToggleButton();
-        jToggleButton17 = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jMenuItem8.setText("Agregar");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener()
@@ -297,6 +289,14 @@ public class IUArticulos extends javax.swing.JInternalFrame
             {
                 jTableKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jTableKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jTableKeyTyped(evt);
+            }
         });
         jScrollPane1.setViewportView(jTable);
         String solve = "Solve";
@@ -407,136 +407,21 @@ public class IUArticulos extends javax.swing.JInternalFrame
             }
         });
 
-        jToggleButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/maps.png"))); // NOI18N
-        jToggleButton8.setToolTipText("Esquema");
-        jToggleButton8.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton8ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/maps.png"))); // NOI18N
-        jToggleButton9.setToolTipText("Mapa Media Cartulina");
-        jToggleButton9.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton9ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/maps.png"))); // NOI18N
-        jToggleButton10.setToolTipText("Mapa Mural");
-        jToggleButton10.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton10ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/maps.png"))); // NOI18N
-        jToggleButton11.setToolTipText("Mini Mapa");
-        jToggleButton11.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton11ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/juguete.png"))); // NOI18N
-        jToggleButton12.setToolTipText("Juguetes");
-        jToggleButton12.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton12ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cosme.png"))); // NOI18N
-        jToggleButton13.setToolTipText("Cosmeticos");
-        jToggleButton13.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton13ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/regalo.png"))); // NOI18N
-        jToggleButton14.setToolTipText("Regalos");
-        jToggleButton14.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton14ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/merceria.png"))); // NOI18N
-        jToggleButton15.setToolTipText("Merceria");
-        jToggleButton15.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton15ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dulce.png"))); // NOI18N
-        jToggleButton16.setToolTipText("Dulces");
-        jToggleButton16.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton16ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/otros.png"))); // NOI18N
-        jToggleButton17.setToolTipText("Otros");
-        jToggleButton17.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jToggleButton17ActionPerformed(evt);
-            }
-        });
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jTextArea1.setRows(3);
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jToggleButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -581,20 +466,9 @@ public class IUArticulos extends javax.swing.JInternalFrame
                                 .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jToggleButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jToggleButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jToggleButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jToggleButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -606,7 +480,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
         );
 
         pack();
@@ -620,28 +494,23 @@ public class IUArticulos extends javax.swing.JInternalFrame
         if ((fila > -1) && (columna > -1))
         {
             filaSeleccionada = fila;
+            item = getItem(filaSeleccionada);
+            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+            this.jTextArea1.setText(msg);
 
             if (evt.getButton() == MouseEvent.BUTTON3)
             {
-                item = getItem(filaSeleccionada);
                 jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
                 jTable.setRowSelectionInterval(fila, fila);
             }
             if (evt.getClickCount() == 2 && evt.getButton() != MouseEvent.BUTTON3)
             {
-                item = getItem(filaSeleccionada);
                 desktop.showVentas(false);
                 ventas.addItem(item);
             }
-
-            if (columna == 3 && evt.getButton() != MouseEvent.BUTTON3)
+            if (evt.getClickCount() == 1 && evt.getButton() != MouseEvent.BUTTON3)
             {
-                item = getItem(filaSeleccionada);
-                String msg = "ID: " + item.getId()
-                        + "\nNombre: " + item.getNombre()
-                        + "\nDescripción: " + item.getInfo()
-                        + "\nPrecio: $" + item.getPrecio();
-                JOptionPane.showInternalMessageDialog(this, msg, item.getNombre(), JOptionPane.INFORMATION_MESSAGE);
+
             }
         }
     }//GEN-LAST:event_jTableMouseClicked
@@ -650,34 +519,31 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // Tabla - Teclado
         filaSeleccionada = jTable.getSelectedRow();
 
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
+        if (filaSeleccionada >= 0)
         {
-            if (filaSeleccionada >= 0)
+            item = getItem(filaSeleccionada);
+            //String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+            //this.jTextArea1.setText(msg);
+
+            if (evt.getKeyChar() == KeyEvent.VK_ENTER)
             {
-                item = getItem(filaSeleccionada);
+                // = getItem(filaSeleccionada);
                 desktop.showVentas(false);
                 ventas.addItem(item);
             }
-            else
+            if (evt.getKeyChar() == KeyEvent.VK_ESCAPE)
             {
-                JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
+                jTextField2.requestFocus();
+                jTextField2.setText(null);
             }
-        }
-        if (evt.getKeyChar() == KeyEvent.VK_ESCAPE)
-        {
-            jTextField2.requestFocus();
-            jTextField2.setText(null);
-        }
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE)
-        {
-            if (filaSeleccionada >= 0)
+            if (evt.getKeyChar() == KeyEvent.VK_DELETE)
             {
                 deleteItem();
             }
-        }
-        if (evt.getKeyChar() == KeyEvent.VK_5)
-        {
-            refresh();
+            if (evt.getKeyChar() == KeyEvent.VK_5)
+            {
+                refresh();
+            }
         }
     }//GEN-LAST:event_jTableKeyPressed
 
@@ -785,16 +651,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton5.setSelected(false);
             jToggleButton6.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -813,16 +669,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton5.setSelected(false);
             jToggleButton6.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
@@ -841,16 +687,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton5.setSelected(false);
             jToggleButton6.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
@@ -869,16 +705,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton5.setSelected(false);
             jToggleButton6.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton4ActionPerformed
@@ -897,16 +723,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton4.setSelected(false);
             jToggleButton6.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton5ActionPerformed
@@ -925,16 +741,6 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton4.setSelected(false);
             jToggleButton5.setSelected(false);
             jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton6ActionPerformed
@@ -953,299 +759,34 @@ public class IUArticulos extends javax.swing.JInternalFrame
             jToggleButton4.setSelected(false);
             jToggleButton5.setSelected(false);
             jToggleButton6.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
             filter();
         }
     }//GEN-LAST:event_jToggleButton7ActionPerformed
 
-    private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton8ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton8ActionPerformed
+    private void jTableKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTableKeyReleased
+    {//GEN-HEADEREND:event_jTableKeyReleased
         // TODO add your handling code here:
-        jToggleButton8.setSelected(true);
+        int fila = jTable.getSelectedRow();
 
-        if (jToggleButton8.isSelected())
+        if (fila >= 0)
         {
-            tipo = TIPO[7].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
+            item = getItem(filaSeleccionada);
+            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+            this.jTextArea1.setText(msg);
         }
-    }//GEN-LAST:event_jToggleButton8ActionPerformed
+    }//GEN-LAST:event_jTableKeyReleased
 
-    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton9ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton9ActionPerformed
+    private void jTableKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTableKeyTyped
+    {//GEN-HEADEREND:event_jTableKeyTyped
         // TODO add your handling code here:
-        jToggleButton9.setSelected(true);
-
-        if (jToggleButton9.isSelected())
-        {
-            tipo = TIPO[8].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton9ActionPerformed
-
-    private void jToggleButton10ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton10ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton10ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton10.setSelected(true);
-
-        if (jToggleButton10.isSelected())
-        {
-            tipo = TIPO[9].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton10ActionPerformed
-
-    private void jToggleButton11ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton11ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton11ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton11.setSelected(true);
-
-        if (jToggleButton11.isSelected())
-        {
-            tipo = TIPO[10].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton11ActionPerformed
-
-    private void jToggleButton12ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton12ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton12ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton12.setSelected(true);
-
-        if (jToggleButton12.isSelected())
-        {
-            tipo = TIPO[11].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton12ActionPerformed
-
-    private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton13ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton13ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton13.setSelected(true);
-
-        if (jToggleButton13.isSelected())
-        {
-            tipo = TIPO[12].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton13ActionPerformed
-
-    private void jToggleButton14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton14ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton14ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton14.setSelected(true);
-
-        if (jToggleButton14.isSelected())
-        {
-            tipo = TIPO[13].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton14ActionPerformed
-
-    private void jToggleButton15ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton15ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton15ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton15.setSelected(true);
-
-        if (jToggleButton15.isSelected())
-        {
-            tipo = TIPO[14].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton16.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton15ActionPerformed
-
-    private void jToggleButton16ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton16ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton16ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton16.setSelected(true);
-
-        if (jToggleButton16.isSelected())
-        {
-            tipo = TIPO[15].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton17.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton16ActionPerformed
-
-    private void jToggleButton17ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton17ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton17ActionPerformed
-        // TODO add your handling code here:
-        jToggleButton17.setSelected(true);
-
-        if (jToggleButton17.isSelected())
-        {
-            tipo = TIPO[16].toString();
-            jToggleButton1.setSelected(false);
-            jToggleButton2.setSelected(false);
-            jToggleButton3.setSelected(false);
-            jToggleButton4.setSelected(false);
-            jToggleButton5.setSelected(false);
-            jToggleButton6.setSelected(false);
-            jToggleButton7.setSelected(false);
-            jToggleButton8.setSelected(false);
-            jToggleButton9.setSelected(false);
-            jToggleButton10.setSelected(false);
-            jToggleButton11.setSelected(false);
-            jToggleButton12.setSelected(false);
-            jToggleButton13.setSelected(false);
-            jToggleButton14.setSelected(false);
-            jToggleButton15.setSelected(false);
-            jToggleButton16.setSelected(false);
-            filter();
-        }
-    }//GEN-LAST:event_jToggleButton17ActionPerformed
+//        int fila = jTable.getSelectedRow();
+//
+//        if (fila >= 0)
+//        {
+//            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+//            this.jTextArea1.setText(msg);
+//        }
+    }//GEN-LAST:event_jTableKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Copiar;
@@ -1263,26 +804,18 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTable jTable;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton10;
-    private javax.swing.JToggleButton jToggleButton11;
-    private javax.swing.JToggleButton jToggleButton12;
-    private javax.swing.JToggleButton jToggleButton13;
-    private javax.swing.JToggleButton jToggleButton14;
-    private javax.swing.JToggleButton jToggleButton15;
-    private javax.swing.JToggleButton jToggleButton16;
-    private javax.swing.JToggleButton jToggleButton17;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
     private javax.swing.JToggleButton jToggleButton6;
     private javax.swing.JToggleButton jToggleButton7;
-    private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
     // End of variables declaration//GEN-END:variables
 
     private void setColumnas()
@@ -1300,22 +833,24 @@ public class IUArticulos extends javax.swing.JInternalFrame
             switch (i)
             {
                 case 0:
-                    anchoColumna = 90;
-                    columnaTabla.setMaxWidth(120);
-                    columnaTabla.setMinWidth(90);
+                    anchoColumna = 120;
+                    columnaTabla.setMaxWidth(130);
+                    columnaTabla.setMinWidth(anchoColumna);
                     break;
                 case 1:
                     anchoColumna = 290;
                     columnaTabla.setMinWidth(200);
                     break;
                 case 2:
-                    anchoColumna = 60;
-                    columnaTabla.setMaxWidth(60);
-                    columnaTabla.setMinWidth(55);
+                    anchoColumna = 100;
+                    columnaTabla.setMaxWidth(anchoColumna);
+                    columnaTabla.setMinWidth(90);
                     break;
                 case 3:
-                    anchoColumna = 255;
-                    columnaTabla.setMinWidth(100);
+                    columnaTabla.setMaxWidth(0);
+                    columnaTabla.setMinWidth(0);
+                    jTable.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+                    jTable.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
                     break;
                 case 4:
                     columnaTabla.setMaxWidth(0);

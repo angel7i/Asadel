@@ -194,7 +194,6 @@ public class ArticulosTableModel extends AbstractTableModel
                 result.close();
                 instruccion.close();
                 conexion.close();
-                System.gc();
             }
             catch (SQLException sqlex)
             {

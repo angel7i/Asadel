@@ -5,13 +5,11 @@ import com.asadel.ventas.services.ControlCaja;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
-import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 @Component
