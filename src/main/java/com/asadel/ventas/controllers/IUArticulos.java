@@ -489,13 +489,12 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
         // Tabla - ClickTabla
         int fila = jTable.rowAtPoint(evt.getPoint());
-        int columna = jTable.columnAtPoint(evt.getPoint());
 
-        if ((fila > -1) && (columna > -1))
+        if (fila > -1)
         {
             filaSeleccionada = fila;
             item = getItem(filaSeleccionada);
-            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+            String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
             this.jTextArea1.setText(msg);
 
             if (evt.getButton() == MouseEvent.BUTTON3)
@@ -517,17 +516,14 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     private void jTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableKeyPressed
         // Tabla - Teclado
-        filaSeleccionada = jTable.getSelectedRow();
-
-        if (filaSeleccionada >= 0)
+        if (jTable.getSelectedRow() >= 0)
         {
+            filaSeleccionada = jTable.getSelectedRow();
             item = getItem(filaSeleccionada);
-            //String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
-            //this.jTextArea1.setText(msg);
+            String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
 
             if (evt.getKeyChar() == KeyEvent.VK_ENTER)
             {
-                // = getItem(filaSeleccionada);
                 desktop.showVentas(false);
                 ventas.addItem(item);
             }
@@ -766,12 +762,11 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private void jTableKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTableKeyReleased
     {//GEN-HEADEREND:event_jTableKeyReleased
         // TODO add your handling code here:
-        int fila = jTable.getSelectedRow();
-
-        if (fila >= 0)
+        if (jTable.getSelectedRow() >= 0)
         {
+            filaSeleccionada = jTable.getSelectedRow();
             item = getItem(filaSeleccionada);
-            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
+            String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
             this.jTextArea1.setText(msg);
         }
     }//GEN-LAST:event_jTableKeyReleased
@@ -779,13 +774,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private void jTableKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTableKeyTyped
     {//GEN-HEADEREND:event_jTableKeyTyped
         // TODO add your handling code here:
-//        int fila = jTable.getSelectedRow();
-//
-//        if (fila >= 0)
-//        {
-//            String msg = " Nombre: " + item.getNombre() + "\n Precio: $" + item.getPrecio();
-//            this.jTextArea1.setText(msg);
-//        }
+
     }//GEN-LAST:event_jTableKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -825,8 +814,8 @@ public class IUArticulos extends javax.swing.JInternalFrame
         TableColumn columnaTabla;
 
         for (int i = 0;
-                i < jTable.getColumnCount();
-                i++)
+             i < jTable.getColumnCount();
+             i++)
         {
             columnaTabla = modeloColumna.getColumn(i);
 
@@ -899,40 +888,49 @@ public class IUArticulos extends javax.swing.JInternalFrame
             {
                 sorter.setRowFilter(null);
             }
-            else if (texto.isEmpty() && !tipo.equals(TIPO[0].toString()))
+            else
             {
-                try
+                if (texto.isEmpty() && !tipo.equals(TIPO[0].toString()))
                 {
-                    sorter.setRowFilter(columnFilter);
-                    setColumnas();
+                    try
+                    {
+                        sorter.setRowFilter(columnFilter);
+                        setColumnas();
+                    }
+                    catch (PatternSyntaxException ex)
+                    {
+                        JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
+                    }
                 }
-                catch (PatternSyntaxException ex)
+                else
                 {
-                    JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
-                }
-            }
-            else if (texto.length() != 0 && tipo.equals(TIPO[0].toString()))
-            {
-                try
-                {
-                    sorter.setRowFilter(wordFilter);
-                    setColumnas();
-                }
-                catch (PatternSyntaxException ex)
-                {
-                    JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
-                }
-            }
-            else if (texto.length() != 0 && !tipo.equals(TIPO[0].toString()))
-            {
-                try
-                {
-                    sorter.setRowFilter(RowFilter.andFilter(andFilters));
-                    setColumnas();
-                }
-                catch (PatternSyntaxException ex)
-                {
-                    JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
+                    if (texto.length() != 0 && tipo.equals(TIPO[0].toString()))
+                    {
+                        try
+                        {
+                            sorter.setRowFilter(wordFilter);
+                            setColumnas();
+                        }
+                        catch (PatternSyntaxException ex)
+                        {
+                            JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
+                        }
+                    }
+                    else
+                    {
+                        if (texto.length() != 0 && !tipo.equals(TIPO[0].toString()))
+                        {
+                            try
+                            {
+                                sorter.setRowFilter(RowFilter.andFilter(andFilters));
+                                setColumnas();
+                            }
+                            catch (PatternSyntaxException ex)
+                            {
+                                JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -969,73 +967,47 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     public Articulo getItem(int row)
     {
-        Object[] values = new Object[tablabase.getColumnCount()];
-
-        for (int i = 0;
-                i < values.length;
-                i++)
+        if (row >= 0)
         {
-            values[i] = jTable.getValueAt(row, i);
+            Object[] values = new Object[tablabase.getColumnCount()];
+
+            for (int i = 0;
+                 i < values.length;
+                 i++)
+            {
+                values[i] = jTable.getValueAt(row, i);
+            }
+
+            String id = (String) values[0];
+            String nombre = (String) values[1];
+            String info = (String) values[3];
+            String tipo = (String) values[4];
+            BigDecimal precio = BigDecimal.ZERO;
+
+            switch ((String) values[4])
+            {
+                case "Monografia":
+                case "Biografia":
+                case "Mapa Carta":
+                case "MiniMapa":
+                case "Relieve":
+                case "Mapa Mural":
+                case "Mapa MediaCartulina":
+                    precio = control.getPreciosVar(tipo);
+                    break;
+
+                default:
+                    precio = (BigDecimal) values[2];
+            }
+
+            item = new Articulo(id, nombre, precio, info, tipo, 1, precio);
+        }
+        else
+        {
+            item = new Articulo();
         }
 
-        String id = (String) values[0];
-        String nombre = (String) values[1];
-        String info = (String) values[3];
-        String tipo = (String) values[4];
-        BigDecimal precio = null;
-
-//        if (ventas.jTButton.isSelected())
-//        {
-//            switch ((String) values[4])
-//            {
-//                case "Monografia":
-//                case "Biografia":
-//                case "Mapa Carta":
-//                case "MiniMapa":
-//                case "Relieve":
-//                case "Mapa Mural":
-//                case "Mapa MediaCartulina":
-//                    precio = control.getPreciosVar(tipo);
-//                    break;
-//
-//                default:
-//                    precio = control.getPrecioDescuento(id);
-//            }
-//        } else
-//        {
-//            switch ((String) values[4])
-//            {
-//                case "Monografia":
-//                case "Biografia":
-//                case "Mapa Carta":
-//                case "MiniMapa":
-//                case "Relieve":
-//                case "Mapa Mural":
-//                case "Mapa MediaCartulina":
-//                    precio = control.getPreciosVar(tipo);
-//                    break;
-//
-//                default:
-//                    precio = (BigDecimal) values[2];
-//            }
-//        }
-        switch ((String) values[4])
-        {
-            case "Monografia":
-            case "Biografia":
-            case "Mapa Carta":
-            case "MiniMapa":
-            case "Relieve":
-            case "Mapa Mural":
-            case "Mapa MediaCartulina":
-                precio = control.getPreciosVar(tipo);
-                break;
-
-            default:
-                precio = (BigDecimal) values[2];
-        }
-
-        return item = new Articulo(id, nombre, precio, info, tipo, 1, precio);
+        return item;
     }
 
     public void deleteItem()
