@@ -20,7 +20,7 @@
         <apache-maven.version>3.2.0</apache-maven.version>
         <jcalendar.version>1.4</jcalendar.version>
         <substance.version>7.3</substance.version>
-        <mysql.version>5.1.45</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <jasper.version>6.4.0</jasper.version>
         <jasper.font.version>6.0.0</jasper.font.version>
         <apache.collections.version>4.1</apache.collections.version>
