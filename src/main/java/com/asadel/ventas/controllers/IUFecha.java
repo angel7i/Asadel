@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUFecha extends javax.swing.JDialog
-{
+public class IUFecha extends javax.swing.JDialog {
 
     @Autowired
     public IUReportes reportes;
@@ -30,13 +29,11 @@ public class IUFecha extends javax.swing.JDialog
     private BigDecimal total;
     private int opt;
 
-    public IUFecha(IUDesktop parent)
-    {
+    public IUFecha(IUDesktop parent) {
         super(parent);
     }
 
-    public void init(boolean modal, int opt)
-    {
+    public void init(boolean modal, int opt) {
         setModal(modal);
         setDefaultLookAndFeelDecorated(true);
         initComponents();
@@ -44,11 +41,9 @@ public class IUFecha extends javax.swing.JDialog
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
-        actionMap.put(cancelName, new AbstractAction()
-        {
+        actionMap.put(cancelName, new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 System.gc();
                 dispose();
             }
@@ -175,8 +170,7 @@ public class IUFecha extends javax.swing.JDialog
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Buscar Reporte
-        switch (opt)
-        {
+        switch (opt) {
             case 0:
                 getVentasFechas();
                 break;
@@ -206,14 +200,10 @@ public class IUFecha extends javax.swing.JDialog
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
-    public void getVentasFechas()
-    {
-        if (jDate1.getDate() == null || jDate2.getDate() == null)
-        {
+    public void getVentasFechas() {
+        if (jDate1.getDate() == null || jDate2.getDate() == null) {
             dispose();
-        }
-        else
-        {
+        } else {
             SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
             inicio = fecha.format(jDate1.getDate());
             fin = fecha.format(jDate2.getDate());
@@ -227,14 +217,10 @@ public class IUFecha extends javax.swing.JDialog
         }
     }
 
-    public void getArticulosFechas()
-    {
-        if (jDate1.getDate() == null || jDate2.getDate() == null)
-        {
+    public void getArticulosFechas() {
+        if (jDate1.getDate() == null || jDate2.getDate() == null) {
             dispose();
-        }
-        else
-        {
+        } else {
             SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
             inicio = fecha.format(jDate1.getDate());
             fin = fecha.format(jDate2.getDate());
@@ -248,8 +234,7 @@ public class IUFecha extends javax.swing.JDialog
         }
     }
 
-    public void invoke(final int opt)
-    {
+    public void invoke(final int opt) {
 
     }
 }

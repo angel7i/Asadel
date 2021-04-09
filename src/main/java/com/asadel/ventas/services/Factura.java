@@ -10,16 +10,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Factura
-{
+public class Factura {
 
     private BigDecimal anticipo;
     private String telefono;
     private String nombreCliente;
     private String observaciones;
 
-    public Factura()
-    {
+    public Factura() {
         anticipo = BigDecimal.ZERO;
         telefono = "";
         nombreCliente = "";

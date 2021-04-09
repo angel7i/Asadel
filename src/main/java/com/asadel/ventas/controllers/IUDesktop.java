@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUDesktop extends javax.swing.JFrame
-{
+public class IUDesktop extends javax.swing.JFrame {
 
     @Autowired
     private Control control;
@@ -29,36 +28,30 @@ public class IUDesktop extends javax.swing.JFrame
     @Autowired
     private IUVentas ventas;
     @Autowired
-    private IUNotePad notepad;
-    @Autowired
     private IUConfiguracion configuracion;
     @Autowired
     private IUReportes reportes;
 
     private int estado;
 
-    public IUDesktop()
-    {
+    public IUDesktop() {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         control.closeCajaMes();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jDesktopPane1 = new Escritorio();//new javax.swing.JDesktopPane();
         jToolBar1 = new javax.swing.JToolBar();
         jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -66,8 +59,6 @@ public class IUDesktop extends javax.swing.JFrame
         jMenuItem12 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -86,22 +77,17 @@ public class IUDesktop extends javax.swing.JFrame
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/Asadel.png")).getImage());
         setMinimumSize(new java.awt.Dimension(710, 730));
         setPreferredSize(new java.awt.Dimension(1350, 870));
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowActivated(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt)
-            {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
-            public void windowClosing(java.awt.event.WindowEvent evt)
-            {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -128,37 +114,19 @@ public class IUDesktop extends javax.swing.JFrame
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jToolBar1.add(jButton3);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad1.png"))); // NOI18N
-        jButton2.setToolTipText("Bloc de Notas");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton2);
-
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addarticulo1.png"))); // NOI18N
         jButton5.setToolTipText("Agregar Articulo");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
@@ -169,10 +137,8 @@ public class IUDesktop extends javax.swing.JFrame
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
@@ -187,22 +153,18 @@ public class IUDesktop extends javax.swing.JFrame
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_BACK_SPACE, 0));
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/articulo2.png"))); // NOI18N
         jMenuItem12.setText("Articulos");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem12);
         jMenu1.add(jSeparator2);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem1.setText("Salir                      ");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
@@ -210,29 +172,12 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Edicion    ");
-
-        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad2.png"))); // NOI18N
-        jMenuItem13.setText("Bloc de Notas");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem13);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu2.setText("Ventas    ");
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/opencaja.png"))); // NOI18N
         jMenuItem6.setText("Abrir Caja");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
@@ -240,10 +185,8 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/closecaja.png"))); // NOI18N
         jMenuItem7.setText("Cerrar Caja");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
@@ -251,34 +194,28 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Caja1.png"))); // NOI18N
         jMenuItem9.setText("Modificar venta");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem9);
 
-        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cart2.png"))); // NOI18N
         jMenuItem11.setText("Lista de ventas");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem11);
 
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reportes.png"))); // NOI18N
         jMenuItem8.setText("Consultar reportes");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
             }
         });
@@ -290,10 +227,8 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addarticulo2.png"))); // NOI18N
         jMenuItem2.setText("Agregar articulo");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
@@ -302,10 +237,8 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/config.png"))); // NOI18N
         jMenuItem5.setText("Configuracion");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
@@ -318,10 +251,8 @@ public class IUDesktop extends javax.swing.JFrame
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/help.png"))); // NOI18N
         jMenuItem3.setText("Acerca de");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
@@ -402,16 +333,6 @@ public class IUDesktop extends javax.swing.JFrame
         closeApp();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Barra de Herramientas - Bloc de Notas
-        showNotepad();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // Menu Edicion - Bloc de Notas
-        showNotepad();
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Barra de Herramientas - Articulos
         showArticulos();
@@ -445,28 +366,24 @@ public class IUDesktop extends javax.swing.JFrame
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // Ventana Activa
-        if (ventas != null)
-        {
+        if (ventas != null) {
             ventas.refresh(-1);
         }
     }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
@@ -479,46 +396,32 @@ public class IUDesktop extends javax.swing.JFrame
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 
-    public void closeApp()
-    {
-        if (estado == JOptionPane.YES_OPTION)
-        {
+    public void closeApp() {
+        if (estado == JOptionPane.YES_OPTION) {
             control.closeControl();
             System.exit(0);
-        }
-        else
-        {
+        } else {
             estado = -1;
         }
     }
 
-    private void cancelVenta()
-    {
+    private void cancelVenta() {
         IUCancelar cancelar = null;
         String fact = JOptionPane.showInternalInputDialog(jDesktopPane1, "ID de la Lista: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
 
-        try
-        {
-            if (fact != null)
-            {
+        try {
+            if (fact != null) {
                 Long.parseLong(fact);
-            }
-            else if (fact == null)
-            {
+            } else if (fact == null) {
                 return;
             }
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "El ID es incorrecto", "Error", 2);
             fact = JOptionPane.showInternalInputDialog(jDesktopPane1, "ID de la Lista: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
 
-            if (fact != null)
-            {
+            if (fact != null) {
                 Long.parseLong(fact);
-            }
-            else if (fact == null)
-            {
+            } else if (fact == null) {
                 return;
             }
         }
@@ -526,281 +429,174 @@ public class IUDesktop extends javax.swing.JFrame
         cancelar = new IUCancelar();
         cancelar.init(fact);
 
-        if (cancelar.exist)
-        {
+        if (cancelar.exist) {
             jDesktopPane1.add(cancelar);
             cancelar.show();
             cancelar.toFront();
-        }
-        else
-        {
+        } else {
             cancelar.dispose();
         }
     }
 
-    public void showArticulos()
-    {
-        if (!(articulos.isShowing() || articulos.isIcon()))
-        {
+    public void showArticulos() {
+        if (!(articulos.isShowing() || articulos.isIcon())) {
             jDesktopPane1.add(articulos);
             articulos.setBounds(0, 0, 690, 760);
             articulos.show();
             articulos.toFront();
-            try
-            {
+            try {
                 articulos.setSelected(true);
+            } catch (PropertyVetoException e) {
             }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
+        } else {
             articulos.show();
             articulos.toFront();
-            try
-            {
+            try {
                 articulos.setIcon(false);
                 articulos.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 
-    public void showAgregar()
-    {
-        if (!(agregar.isShowing() || agregar.isIcon()))
-        {
+    public void showAgregar() {
+        if (!(agregar.isShowing() || agregar.isIcon())) {
             jDesktopPane1.add(agregar);
             agregar.setBounds(690, jDesktopPane1.getHeight() / 16, 459, 521);
             agregar.show();
             agregar.toFront();
-            try
-            {
+            try {
                 agregar.setSelected(true);
+            } catch (PropertyVetoException e) {
             }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
+        } else {
             agregar.show();
             agregar.toFront();
-            try
-            {
+            try {
                 agregar.setIcon(false);
                 agregar.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 
-    public void showModificar()
-    {
-        if (!editar.isShowing())
-        {
+    public void showModificar() {
+        if (!editar.isShowing()) {
             jDesktopPane1.add(editar);
             editar.setBounds(690, jDesktopPane1.getHeight() / 4, 413, 420);//[411, 392]
             editar.show();
             editar.toFront();
-            try
-            {
+            try {
                 editar.setSelected(true);
+            } catch (PropertyVetoException e) {
             }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
+        } else {
             editar.show();
             editar.toFront();
-            try
-            {
+            try {
                 editar.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 
-    public void showVentas(boolean selected)
-    {
-        if (!(ventas.isShowing() || ventas.isIcon()))
-        {
+    public void showVentas(boolean selected) {
+        if (!(ventas.isShowing() || ventas.isIcon())) {
             jDesktopPane1.add(ventas);
             ventas.setBounds(691, 0, 640, 760);
             ventas.show();
             ventas.toFront();
-        }
-        else
-        {
+        } else {
             ventas.show();
             ventas.toFront();
-            try
-            {
-                if (selected)
-                {
+            try {
+                if (selected) {
                     ventas.setSelected(selected);
                     ventas.setIcon(false);
-                }
-                else
-                {
+                } else {
                     ventas.setIcon(false);
                 }
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 
-    public void showNotepad()
-    {
-        if (!(notepad.isShowing() || notepad.isIcon()))
-        {
-            jDesktopPane1.add(notepad);
-            notepad.setBounds(jDesktopPane1.getWidth() / 2 + 100, 50, 520, 350);//[520, 350]
-            notepad.show();
-            try
-            {
-                notepad.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
-            notepad.show();
-            notepad.toFront();
-            try
-            {
-                notepad.setSelected(true);
-                notepad.setIcon(false);
-            }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-    }
-
-    public void showConfiguracion()
-    {
-        if (!configuracion.isShowing())
-        {
+    public void showConfiguracion() {
+        if (!configuracion.isShowing()) {
             configuracion.setVisible(true);
             jDesktopPane1.add(configuracion);
             configuracion.setBounds(650, 0, 679, 481);
             configuracion.show();
-            try
-            {
+            try {
                 configuracion.setSelected(true);
+            } catch (PropertyVetoException e) {
             }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
+        } else {
             configuracion.show();
             configuracion.toFront();
-            try
-            {
+            try {
                 configuracion.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 
-    public void showReportes(boolean estado)
-    {
+    public void showReportes(boolean estado) {
         reportes.init(estado);
 
-        if (!reportes.isShowing())
-        {
+        if (!reportes.isShowing()) {
             reportes.setVisible(true);
             jDesktopPane1.add(reportes);
             reportes.setBounds(0, 0, 860, 610);
             reportes.show();
-            try
-            {
+            try {
                 reportes.setSelected(true);
+            } catch (PropertyVetoException e) {
             }
-            catch (PropertyVetoException e)
-            {
-            }
-        }
-        else
-        {
+        } else {
             reportes.show();
             reportes.toFront();
-            try
-            {
+            try {
                 reportes.setSelected(true);
-            }
-            catch (PropertyVetoException e)
-            {
+            } catch (PropertyVetoException e) {
             }
         }
     }
 }
 
-class Escritorio extends JDesktopPane
-{
+class Escritorio extends JDesktopPane {
 
     private Image wall;
 
-    public Escritorio()
-    {
-        try
-        {
+    public Escritorio() {
+        try {
             wall = new ImageIcon(getClass().getResource("/icons/wallpaper.jpg")).getImage();
-        }
-        catch (NullPointerException ex)
-        {
+        } catch (NullPointerException ex) {
             wall = null;
         }
     }
 
-    public void setImagen(String path)
-    {
-        if (path != null)
-        {
+    public void setImagen(String path) {
+        if (path != null) {
             wall = new ImageIcon(getClass().getResource(path)).getImage();
-        }
-        else
-        {
+        } else {
             wall = new ImageIcon(getClass().getResource("/icons/wallpaper.jpg")).getImage();
         }
 
         repaint();
     }
 
-    public void setImagen(Image imagen)
-    {
+    public void setImagen(Image imagen) {
         wall = imagen;
         repaint();
     }
 
     @Override
-    public void paintChildren(Graphics g)
-    {
-        if (wall != null)
-        {
+    public void paintChildren(Graphics g) {
+        if (wall != null) {
             g.drawImage(wall, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
-        }
-        else
-        {
+        } else {
             setOpaque(true);
         }
 

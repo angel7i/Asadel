@@ -15,59 +15,45 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
-public class ControlCaja
-{
+@RequiredArgsConstructor
+public class ControlCaja {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ControlCaja.class);
+    private final IUDesktop desktop;
+    public final IUArticulos articulos;
+    private final Control control;
+    private final PropiedadesService propiedades;
 
-    @Autowired
-    private IUDesktop desktop;
-    @Autowired
-    public IUArticulos articulos;
-    @Autowired
-    private Control control;
-    @Autowired
-    private PropiedadesService propiedades;
-
-    public boolean openCaja()
-    {
+    public boolean openCaja() {
         boolean estado = false;
 
-        if (!control.getEstadoCajaDia())
-        {
+        if (!control.getEstadoCajaDia()) {
             Calendar c = Calendar.getInstance(Locale.getDefault());
             SimpleDateFormat date = new SimpleDateFormat("yy.MM.dd HH.mm.ss");
             String fecha = date.format(c.getTime());
             Caja caja = new Caja(true, fecha, null, BigDecimal.ZERO, BigDecimal.ZERO);
             control.openCajaDia(caja);
             estado = true;
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "La Caja ya esta ABIERTA");
         }
 
         return estado;
     }
 
-    public boolean closeCaja()
-    {
+    public boolean closeCaja() {
         boolean estado = false;
 
-        if (control.getEstadoCajaDia())
-        {
+        if (control.getEstadoCajaDia()) {
             int opt = JOptionPane.showConfirmDialog(null, "Desea CERRAR la Caja?", "Confirmar Cierre de la Caja", JOptionPane.YES_NO_OPTION, 2);
 
-            if (opt == JOptionPane.YES_OPTION)
-            {
+            if (opt == JOptionPane.YES_OPTION) {
                 Calendar c = Calendar.getInstance(Locale.getDefault());
                 SimpleDateFormat date = new SimpleDateFormat("yy.MM.dd HH.mm.ss");
                 String fecha = date.format(c.getTime());
@@ -76,8 +62,7 @@ public class ControlCaja
                 caja.setCierre(fecha);
                 caja.setRecaudado(control.getRecaudadoCajaDia());
 
-                if (control.getEstadoLista())
-                {
+                if (control.getEstadoLista()) {
                     control.clearArticulosLista();
                 }
 
@@ -87,25 +72,21 @@ public class ControlCaja
                 estado = true;
                 backup();
             }
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "La Caja ya esta CERRADA");
         }
 
         return estado;
     }
 
-    private void backup()
-    {
-        String user = propiedades.getMySQLUser();
-        String pwd = propiedades.getMySQLPwd();
-        Path exe = Paths.get(propiedades.getMySQLDirectorio()).resolve("bin\\mysqldump");
-        Path directorio = Paths.get(propiedades.getDirectorioBackup(), "AsadelBackup");
+    private void backup() {
+        String user = propiedades.getDBUser();
+        String pwd = propiedades.getDBSecret();
+        Path exe = Paths.get(propiedades.getDBHome()).resolve("bin\\mysqldump");
+        Path directorio = Paths.get(propiedades.getBackupDirectory(), "AsadelBackup");
         File directorioBackup = directorio.toFile();
 
-        if (!directorioBackup.exists())
-        {
+        if (!directorioBackup.exists()) {
             directorioBackup.mkdir();
         }
 
@@ -117,38 +98,27 @@ public class ControlCaja
         BufferedReader reader = null;
         BufferedWriter writer = null;
 
-        try
-        {
+        try {
             Process runtimeProcess = Runtime.getRuntime().exec(command);
             reader = new BufferedReader(new InputStreamReader(new DataInputStream(runtimeProcess.getInputStream())));
             writer = new BufferedWriter(new FileWriter(backup.toFile()));
             String line;
 
-            while ((line = reader.readLine()) != null)
-            {
+            while ((line = reader.readLine()) != null) {
                 writer.write(line);
                 writer.newLine();
             }
-        }
-        catch (IOException ex)
-        {
-            LOGGER.error("No se puede crear backup de la caja: {}", ex.getMessage());
-        }
-        finally
-        {
-            try
-            {
-                if (reader != null)
-                {
+        } catch (IOException ex) {
+            log.error("No se puede crear backup de la caja: {}", ex.getMessage());
+        } finally {
+            try {
+                if (reader != null) {
                     reader.close();
                 }
-                if (writer != null)
-                {
+                if (writer != null) {
                     writer.close();
                 }
-            }
-            catch (IOException ex)
-            {
+            } catch (IOException ex) {
 
             }
 

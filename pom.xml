@@ -3,31 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.asadel</groupId>
     <artifactId>Asadel</artifactId>
-    <version>0.9.5</version>
+    <version>0.9.6</version>
     <name>Asadel</name>
     <packaging>jar</packaging>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>        
-        <maven.jar.version>3.1.1</maven.jar.version>
-        <version.mvn.compiler>3.8.0</version.mvn.compiler>
+        <java.version>11</java.version>       
+        <maven.jar.version>3.2.0</maven.jar.version>
+        <version.mvn.compiler>3.8.1</version.mvn.compiler>
         
-        <spring.boot.version>1.5.19.RELEASE</spring.boot.version>
-        <apache-maven.version>3.2.0</apache-maven.version>
+        <spring.boot.version>2.4.4</spring.boot.version>
+        <radiance.version>3.5.1</radiance.version>
         <jcalendar.version>1.4</jcalendar.version>
-        <substance.version>7.3</substance.version>
-        <mysql.version>5.1.45</mysql.version>
-        <jasper.version>6.4.0</jasper.version>
-        <jasper.font.version>6.0.0</jasper.font.version>
-        <apache.collections.version>4.1</apache.collections.version>
-        <apache.digester.version>3.2</apache.digester.version>
-        <apache.logging.version>1.2</apache.logging.version>
-        <itext.version>5.5.11</itext.version>
-        <apache.poi.version>3.17</apache.poi.version>
+        <jasper.version>6.16.0</jasper.version>
+        <itext.version>5.5.13.2</itext.version>
+        <groovy.version>3.0.7</groovy.version>
     </properties>
     
     <dependencyManagement>
@@ -49,15 +41,30 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        
-        <!-- Apache Maven Utils -->
         <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-shared-utils</artifactId>
-            <version>${apache-maven.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        
+        <!-- Post/Pre Contruct -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+
         <!-- JCalendar -->
         <dependency>
             <groupId>com.toedter</groupId>
@@ -65,25 +72,17 @@
             <version>${jcalendar.version}</version>
         </dependency>
         
-        <!-- Substance Look & Feel -->
+        <!-- https://mvnrepository.com/artifact/org.pushing-pixels/radiance-substance -->
         <dependency>
-            <groupId>com.github.insubstantial</groupId>
-            <artifactId>substance</artifactId>
-            <version>${substance.version}</version>
-        </dependency>
-        
-        <!-- Substance Trident -->
-        <dependency>
-            <groupId>com.github.insubstantial</groupId>
-            <artifactId>trident</artifactId>
-            <version>${substance.version}</version>
+            <groupId>org.pushing-pixels</groupId>
+            <artifactId>radiance-substance</artifactId>
+            <version>${radiance.version}</version>
         </dependency>
 
         <!-- MySQL connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
         </dependency>
 
         <!-- Jasperreports -->
@@ -97,34 +96,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-fonts</artifactId>
-            <version>${jasper.font.version}</version>
-        </dependency>
-
-        <!-- Apache commons-beanutils -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-
-        <!-- Apache commons-collections4 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${apache.collections.version}</version>
-        </dependency>
-
-        <!-- Apache commons-digester3 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-digester3</artifactId>
-            <version>${apache.digester.version}</version>
-        </dependency>
-
-        <!-- Apache commons-logging -->
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>${apache.logging.version}</version>
+            <version>${jasper.version}</version>
         </dependency>
 
         <!-- itextpdf -->
@@ -140,24 +112,13 @@
             <artifactId>itext-pdfa</artifactId>
             <version>${itext.version}</version>
         </dependency>
-
-        <!-- Apache poi -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${apache.poi.version}</version>
-        </dependency>
         
         <!-- Groovy-all -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-        </dependency>
-        
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <version>${groovy.version}</version>
+            <type>pom</type>
         </dependency>
 
     </dependencies>

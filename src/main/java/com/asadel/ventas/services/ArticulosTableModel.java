@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class ArticulosTableModel extends AbstractTableModel
-{
+public class ArticulosTableModel extends AbstractTableModel {
 
     @Autowired
     private Control control;
@@ -27,12 +26,10 @@ public class ArticulosTableModel extends AbstractTableModel
     private int numFilas;
     private boolean estado = false;
 
-    public ArticulosTableModel()
-    {
+    public ArticulosTableModel() {
     }
 
-    public void init(String consulta) throws SQLException
-    {
+    public void init(String consulta) throws SQLException {
         conexion = control.getConnectionControl();
         instruccion = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         estado = true;
@@ -40,76 +37,56 @@ public class ArticulosTableModel extends AbstractTableModel
     }
 
     @Override
-    public Class getColumnClass(int columna) throws IllegalStateException
-    {
-        if (!estado)
-        {
+    public Class getColumnClass(int columna) throws IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
-        try
-        {
+        try {
             String nameClase = metaData.getColumnClassName(columna + 1);
 
             return Class.forName(nameClase);
-        }
-        catch (SQLException | ClassNotFoundException ex)
-        {
+        } catch (SQLException | ClassNotFoundException ex) {
         }
 
         return Object.class;
     }
 
     @Override
-    public int getColumnCount() throws IllegalStateException
-    {
-        if (!estado)
-        {
+    public int getColumnCount() throws IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
-        try
-        {
+        try {
             return metaData.getColumnCount();
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
         }
 
         return 0;
     }
 
     @Override
-    public String getColumnName(int columna) throws IllegalStateException
-    {
-        if (!estado)
-        {
+    public String getColumnName(int columna) throws IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
-        try
-        {
-            if (columna == 0)
-            {
+        try {
+            if (columna == 0) {
                 return "ID";
-            }
-            else
-            {
+            } else {
                 return metaData.getColumnName(columna + 1);
             }
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
         }
 
         return "";
     }
 
     @Override
-    public int getRowCount() throws IllegalStateException
-    {
-        if (!estado)
-        {
+    public int getRowCount() throws IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
@@ -117,45 +94,34 @@ public class ArticulosTableModel extends AbstractTableModel
     }
 
     @Override
-    public Object getValueAt(int fila, int columna) throws IllegalStateException
-    {
-        if (!estado)
-        {
+    public Object getValueAt(int fila, int columna) throws IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
-        try
-        {
+        try {
             result.absolute(fila + 1);
 
             return result.getObject(columna + 1);
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
         }
 
         return "";
     }
 
-    public void removeValueAt(int rowIndex)
-    {
-        try
-        {
+    public void removeValueAt(int rowIndex) {
+        try {
             result.absolute(rowIndex + 1);
             result.deleteRow();
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
         }
 
         fireTableStructureChanged();
     }
 
     @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex)
-    {
-        switch (getColumnName(columnIndex))
-        {
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        switch (getColumnName(columnIndex)) {
             case "Cantidad":
             case "Porcentaje":
             case "Activar":
@@ -165,19 +131,14 @@ public class ArticulosTableModel extends AbstractTableModel
         }
     }
 
-    public void Consulta(String consulta) throws SQLException, IllegalStateException
-    {
-        if (!estado)
-        {
+    public void Consulta(String consulta) throws SQLException, IllegalStateException {
+        if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }
 
-        if (consulta.isEmpty())
-        {
+        if (consulta.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se ha realizado ninguna consulta", "Error en la Consulta ", 2);
-        }
-        else
-        {
+        } else {
             result = instruccion.executeQuery(consulta);
             metaData = result.getMetaData();
             result.last();
@@ -185,22 +146,15 @@ public class ArticulosTableModel extends AbstractTableModel
         }
     }
 
-    public void closeBD()
-    {
-        if (estado)
-        {
-            try
-            {
+    public void closeBD() {
+        if (estado) {
+            try {
                 result.close();
                 instruccion.close();
                 conexion.close();
-            }
-            catch (SQLException sqlex)
-            {
+            } catch (SQLException sqlex) {
                 JOptionPane.showMessageDialog(null, "No se cerro la conexion con la base de datos", "Error al Salir de la aplicacion ", 2);
-            }
-            finally
-            {
+            } finally {
                 estado = false;
             }
         }

@@ -18,8 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUPago extends javax.swing.JDialog
-{
+public class IUPago extends javax.swing.JDialog {
 
     @Autowired
     public IUVentas ventas;
@@ -34,8 +33,7 @@ public class IUPago extends javax.swing.JDialog
     private BigDecimal cambio;
     private boolean desc;
 
-    public IUPago()
-    {
+    public IUPago() {
         setDefaultLookAndFeelDecorated(true);
         initComponents();
         setBackground(new Color(51, 102, 255));
@@ -43,11 +41,9 @@ public class IUPago extends javax.swing.JDialog
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
-        actionMap.put(cancelName, new AbstractAction()
-        {
+        actionMap.put(cancelName, new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
@@ -55,8 +51,7 @@ public class IUPago extends javax.swing.JDialog
         setLocationRelativeTo(null);
     }
 
-    public void init(boolean modal, BigDecimal total, boolean des)
-    {
+    public void init(boolean modal, BigDecimal total, boolean des) {
         this.total = total;
         this.desc = des;
         jLabel6.setText("$ " + total.toString());
@@ -64,8 +59,7 @@ public class IUPago extends javax.swing.JDialog
         jButton3.setEnabled(false);
     }
 
-    public void clear()
-    {
+    public void clear() {
         total = BigDecimal.ZERO;
         cambio = BigDecimal.ZERO;
         jButton1.setEnabled(true);
@@ -383,36 +377,28 @@ public class IUPago extends javax.swing.JDialog
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
         // Cancelar Venta Teclado
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             this.dispose();
         }
     }//GEN-LAST:event_jButton2KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Cobrar
-        if (desc)
-        {
+        if (desc) {
             cobrarDescuento();
             //ventas.jTButton.doClick();
-        }
-        else
-        {
+        } else {
             cobrar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         // Cobrar Teclado Boton
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
-            if (desc)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (desc) {
                 cobrarDescuento();
                 //ventas.jTButton.doClick();
-            }
-            else
-            {
+            } else {
                 cobrar();
             }
         }
@@ -425,15 +411,11 @@ public class IUPago extends javax.swing.JDialog
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
         // Cobrar Teclado
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
-            if (desc)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (desc) {
                 cobrarDescuento();
                 //ventas.jTButton.doClick();
-            }
-            else
-            {
+            } else {
                 cobrar();
             }
         }
@@ -446,8 +428,7 @@ public class IUPago extends javax.swing.JDialog
 
     private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
         // Mostrar Factura Teclado
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             factura();
         }
     }//GEN-LAST:event_jButton3KeyPressed
@@ -457,14 +438,10 @@ public class IUPago extends javax.swing.JDialog
         String observaciones = jTextArea1.getText();
         BigDecimal anticipo = BigDecimal.ZERO;
 
-        if (jTextField5.getText() != null && !jTextField5.getText().isEmpty())
-        {
-            try
-            {
+        if (jTextField5.getText() != null && !jTextField5.getText().isEmpty()) {
+            try {
                 anticipo = new BigDecimal(jTextField5.getText());
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 JOptionPane.showInternalMessageDialog(this, "Ingresa un precio correcto", "Caracter invalido", JOptionPane.ERROR_MESSAGE);
                 jTextField5.setText("");
                 return;
@@ -480,12 +457,9 @@ public class IUPago extends javax.swing.JDialog
         datos.setObservaciones(observaciones);
         factura.setDatosFactura(datos);
 
-        if (desc)
-        {
+        if (desc) {
             factura.generarFacturaDescuento(control.getIdLista(), total);
-        }
-        else
-        {
+        } else {
             factura.generarFactura(control.getIdLista(), total);
         }
 
@@ -515,58 +489,43 @@ public class IUPago extends javax.swing.JDialog
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
-    public void invoke(final BigDecimal total, final boolean desc)
-    {
+    public void invoke(final BigDecimal total, final boolean desc) {
 
     }
 
-    private void factura()
-    {
+    private void factura() {
         dispose();
         factura.printFactura();
         factura.showFactura();
     }
 
-    private void cambio()
-    {
-        try
-        {
-            if (jTextField2.getText().isEmpty())
-            {
+    private void cambio() {
+        try {
+            if (jTextField2.getText().isEmpty()) {
                 jLabel4.setText("$ 0.00");
-            }
-            else
-            {
+            } else {
                 BigDecimal pago = new BigDecimal(jTextField2.getText());
 
-                if (pago.compareTo(total) == 1)
-                {
+                if (pago.compareTo(total) == 1) {
                     cambio = pago.subtract(total);
                     jLabel4.setText("$ " + cambio.toString());
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             jTextField2.setText(null);
             jTextField2.requestFocus();
         }
     }
 
     @SuppressWarnings("unchecked")
-    private void cobrar()
-    {
+    private void cobrar() {
         String observaciones = jTextArea1.getText();
         BigDecimal anticipo = BigDecimal.ZERO;
 
-        if (jTextField5.getText() != null && !jTextField5.getText().isEmpty())
-        {
-            try
-            {
+        if (jTextField5.getText() != null && !jTextField5.getText().isEmpty()) {
+            try {
                 anticipo = new BigDecimal(jTextField5.getText());
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 JOptionPane.showInternalMessageDialog(this, "Ingresa un precio correcto", "Caracter invalido", JOptionPane.ERROR_MESSAGE);
                 jTextField5.setText("");
                 return;
@@ -582,8 +541,7 @@ public class IUPago extends javax.swing.JDialog
         datos.setObservaciones(observaciones);
         factura.setDatosFactura(datos);
 
-        if (factura.generarFactura(control.getIdLista(), total))
-        {
+        if (factura.generarFactura(control.getIdLista(), total)) {
             control.closeLista();
             control.clearArticulosLista();
             articulos.showTotal();
@@ -603,17 +561,13 @@ public class IUPago extends javax.swing.JDialog
     }
 
     @SuppressWarnings("unchecked")
-    private void cobrarDescuento()
-    {
+    private void cobrarDescuento() {
         String observaciones = jTextArea1.getText();
         BigDecimal anticipo = BigDecimal.ZERO;
 
-        try
-        {
+        try {
             anticipo = new BigDecimal(jTextField5.getText());
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             JOptionPane.showInternalMessageDialog(this, "Ingresa un precio correcto", "Caracter invalido", JOptionPane.ERROR_MESSAGE);
             jTextField5.setText("");
             return;
@@ -628,8 +582,7 @@ public class IUPago extends javax.swing.JDialog
         datos.setObservaciones(observaciones);
         factura.setDatosFactura(datos);
 
-        if (factura.generarFacturaDescuento(control.getIdLista(), total))
-        {
+        if (factura.generarFacturaDescuento(control.getIdLista(), total)) {
             control.closeLista();
             control.clearArticulosLista();
             articulos.showTotal();

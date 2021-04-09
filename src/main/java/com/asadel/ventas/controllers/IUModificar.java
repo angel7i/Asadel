@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUModificar extends javax.swing.JInternalFrame
-{
+public class IUModificar extends javax.swing.JInternalFrame {
 
     @Autowired
     public IUModificar editar;
@@ -25,19 +24,14 @@ public class IUModificar extends javax.swing.JInternalFrame
     private Articulo oldArticulo;
     private static IUModificar ventana = null;
 
-    private IUModificar()
-    {
+    private IUModificar() {
         initComponents();
     }
 
-    public static IUModificar getInstance()
-    {
-        if (ventana == null)
-        {
+    public static IUModificar getInstance() {
+        if (ventana == null) {
             return ventana = new IUModificar();
-        }
-        else
-        {
+        } else {
             return ventana;
         }
     }
@@ -298,15 +292,12 @@ public class IUModificar extends javax.swing.JInternalFrame
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         // Seleccion de Articulo
-        if (jComboBox2.getSelectedIndex() == 0)
-        {
+        if (jComboBox2.getSelectedIndex() == 0) {
             jTextField5.setEnabled(false);
             jTextField6.setEnabled(false);
             jTextField7.setEnabled(false);
             jTextArea1.setEnabled(false);
-        }
-        else
-        {
+        } else {
             jTextField5.setEnabled(true);
             jTextField6.setEnabled(true);
             jTextField7.setEnabled(true);
@@ -321,8 +312,7 @@ public class IUModificar extends javax.swing.JInternalFrame
 
     private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
         // Tabulador
-        if (evt.getKeyChar() == KeyEvent.VK_TAB)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             jTextField6.requestFocus();
             jTextField6.getCaret().moveDot(0);
         }
@@ -330,8 +320,7 @@ public class IUModificar extends javax.swing.JInternalFrame
 
     private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
         // Tabulador
-        if (evt.getKeyChar() == KeyEvent.VK_TAB)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             jTextField7.requestFocus();
             jTextField7.getCaret().moveDot(0);
         }
@@ -339,8 +328,7 @@ public class IUModificar extends javax.swing.JInternalFrame
 
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
         // Tabulador
-        if (evt.getKeyChar() == KeyEvent.VK_TAB)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_TAB) {
             jTextArea1.requestFocus();
             jTextArea1.getCaret().moveDot(0);
         }
@@ -348,16 +336,14 @@ public class IUModificar extends javax.swing.JInternalFrame
 
     private void jButton5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton5KeyPressed
         // Aceptar
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             editarArticulo();
         }
     }//GEN-LAST:event_jButton5KeyPressed
 
     private void jButton6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton6KeyPressed
         // Cancelar
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             System.gc();
             doDefaultCloseAction();
         }
@@ -368,8 +354,7 @@ public class IUModificar extends javax.swing.JInternalFrame
         // Ventana Activa
         jPanel2.setBackground(Asadel.ACTIVE_COLOR);
 
-        if (jComboBox2.getSelectedIndex() == 0)
-        {
+        if (jComboBox2.getSelectedIndex() == 0) {
             jTextField5.setEnabled(false);
             jTextField6.setEnabled(false);
             jTextField7.setEnabled(false);
@@ -399,22 +384,15 @@ public class IUModificar extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
-    public void editarArticulo()
-    {
-        if (jComboBox2.getSelectedIndex() == 0)
-        {
+    public void editarArticulo() {
+        if (jComboBox2.getSelectedIndex() == 0) {
             JOptionPane.showInternalMessageDialog(this, "Seleccionte un Tipo", "Error", 2);
-        }
-        else
-        {
+        } else {
             if (jComboBox2.getSelectedItem() == "Monografia" || jComboBox2.getSelectedItem() == "Biografia"
                     || jComboBox2.getSelectedItem() == "Mapa Carta" || jComboBox2.getSelectedItem() == "Mapa Mural"
                     || jComboBox2.getSelectedItem() == "Mapa MediaCartulina" || jComboBox2.getSelectedItem() == "MiniMapa"
-                    || jComboBox2.getSelectedItem() == "Relieve")
-
-            {
-                if (!(jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty()))
-                {
+                    || jComboBox2.getSelectedItem() == "Relieve") {
+                if (!(jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty())) {
                     String id = jTextField5.getText();
                     String nombre = jTextField6.getText();
                     BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField7.getText()));
@@ -425,16 +403,11 @@ public class IUModificar extends javax.swing.JInternalFrame
                     updateArticulo();
 
                     this.doDefaultCloseAction();
-                }
-                else
-                {
+                } else {
                     JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
                 }
-            }
-            else
-            {
-                if (!(jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty() || jTextArea1.getText().isEmpty()))
-                {
+            } else {
+                if (!(jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty() || jTextArea1.getText().isEmpty())) {
                     String id = jTextField5.getText();
                     String nombre = jTextField6.getText();
                     BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField7.getText()));
@@ -446,17 +419,14 @@ public class IUModificar extends javax.swing.JInternalFrame
                     newArticulo.setDescuento(descuento);
                     updateArticulo();
                     this.doDefaultCloseAction();
-                }
-                else
-                {
+                } else {
                     JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
                 }
             }
         }
     }
 
-    public void setUpdatePane(Articulo articulo)
-    {
+    public void setUpdatePane(Articulo articulo) {
         oldArticulo = articulo;
         jTextField5.setText(articulo.getId());
         jTextField6.setText(articulo.getNombre());
@@ -465,10 +435,8 @@ public class IUModificar extends javax.swing.JInternalFrame
         jComboBox2.setSelectedItem(articulo.getTipo());
     }
 
-    public void updateArticulo()
-    {
-        switch (newArticulo.getTipo())
-        {
+    public void updateArticulo() {
+        switch (newArticulo.getTipo()) {
             case "Biografia":
                 control.updateBiografia(oldArticulo, newArticulo);
                 break;

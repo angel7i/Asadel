@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUCancelar extends javax.swing.JInternalFrame
-{
+public class IUCancelar extends javax.swing.JInternalFrame {
 
     @Autowired
     public IUArticulos articulos;
@@ -32,8 +31,7 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private String select;
     public boolean exist = true;
 
-    public IUCancelar()
-    {
+    public IUCancelar() {
         //id = l;
 
         select = "SELECT av.idArticuloVendido as ID, av.Nombre, av.Cantidad, av.Prec, av.Subtotal "
@@ -64,8 +62,7 @@ public class IUCancelar extends javax.swing.JInternalFrame
 //        }
     }
 
-    public void init(String l)
-    {
+    public void init(String l) {
 
     }
 
@@ -263,12 +260,9 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
     {//GEN-HEADEREND:event_jButton3ActionPerformed
         // Quitar item
-        if (filaSeleccionada >= 0 && lista.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && lista.getRowCount() != 0) {
             removeItem();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un registro", "Error", 2);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -276,12 +270,9 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
     {//GEN-HEADEREND:event_jButton4ActionPerformed
         // Remover item
-        if (filaSeleccionada >= 0 && lista.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && lista.getRowCount() != 0) {
             deleteItem();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un registro", "Error", 2);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -289,14 +280,11 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton5ActionPerformed
     {//GEN-HEADEREND:event_jButton5ActionPerformed
         // Cancelar lista completa
-        if (jTable1.getRowCount() != 0)
-        {
+        if (jTable1.getRowCount() != 0) {
             control.cancelarLista(id);
             refresh(filaSeleccionada);
             articulos.showTotal();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(null, "No hay lista que cancelar", "Error", 2);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -306,37 +294,25 @@ public class IUCancelar extends javax.swing.JInternalFrame
         // Tabla - KeyPressed
         filaSeleccionada = jTable1.getSelectedRow();
 
-        if (evt.getKeyCode() == KeyEvent.VK_PLUS)
-        {
-            if (filaSeleccionada >= 0 && lista.getRowCount() != 0)
-            {
+        if (evt.getKeyCode() == KeyEvent.VK_PLUS) {
+            if (filaSeleccionada >= 0 && lista.getRowCount() != 0) {
                 addItem();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
-        if (evt.getKeyChar() == KeyEvent.VK_MINUS)
-        {
-            if (filaSeleccionada >= 0 && lista.getRowCount() != 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_MINUS) {
+            if (filaSeleccionada >= 0 && lista.getRowCount() != 0) {
                 removeItem();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE && lista.getRowCount() != 0)
-        {
-            if (filaSeleccionada >= 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE && lista.getRowCount() != 0) {
+            if (filaSeleccionada >= 0) {
                 item = getItem(filaSeleccionada);
                 deleteItem();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
@@ -348,8 +324,7 @@ public class IUCancelar extends javax.swing.JInternalFrame
         int fila = jTable1.rowAtPoint(evt.getPoint());
         int columna = jTable1.columnAtPoint(evt.getPoint());
 
-        if ((fila > -1) && (columna > -1))
-        {
+        if ((fila > -1) && (columna > -1)) {
             filaSeleccionada = fila;
             jTable1.setRowSelectionInterval(fila, fila);
         }
@@ -358,12 +333,9 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton6ActionPerformed
     {//GEN-HEADEREND:event_jButton6ActionPerformed
         // Agregar item
-        if (filaSeleccionada >= 0 && lista.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && lista.getRowCount() != 0) {
             addItem();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un registro", "Error", 2);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -379,34 +351,26 @@ public class IUCancelar extends javax.swing.JInternalFrame
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private void showTotal()
-    {
+    private void showTotal() {
         jLabel1.setText("Total= $ " + control.getTotalFactura(id) + "  ");
     }
 
-    public CellEditorListener Cell()
-    {
-        CellEditorListener celda = new CellEditorListener()
-        {
+    public CellEditorListener Cell() {
+        CellEditorListener celda = new CellEditorListener() {
             @Override
-            public void editingStopped(ChangeEvent e)
-            {
+            public void editingStopped(ChangeEvent e) {
                 String num;
 
-                if (jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString().isEmpty())
-                {
+                if (jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString().isEmpty()) {
                     return;
-                }
-                else
-                {
+                } else {
                     num = jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString();
                 }
 
                 item = getItem(filaSeleccionada);
                 int cantidad = Integer.parseInt(num);
 
-                if (cantidad == 0)
-                {
+                if (cantidad == 0) {
                     cantidad = 1;
                 }
 
@@ -417,8 +381,7 @@ public class IUCancelar extends javax.swing.JInternalFrame
             }
 
             @Override
-            public void editingCanceled(ChangeEvent e)
-            {
+            public void editingCanceled(ChangeEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet.");
             }
         };
@@ -426,14 +389,12 @@ public class IUCancelar extends javax.swing.JInternalFrame
         return celda;
     }
 
-    public Articulo getItem(int row)
-    {
+    public Articulo getItem(int row) {
         Object[] values = new Object[lista.getColumnCount()];
 
         for (int i = 0;
                 i < values.length;
-                i++)
-        {
+                i++) {
             values[i] = jTable1.getValueAt(row, i);
         }
 
@@ -446,39 +407,29 @@ public class IUCancelar extends javax.swing.JInternalFrame
         return item = new Articulo(id, nombre, precio, "", "", cantidad, subtotal);
     }
 
-    public void refresh(int fila)
-    {
-        try
-        {
+    public void refresh(int fila) {
+        try {
             lista.Consulta(select);
             lista.fireTableDataChanged();
             lista.fireTableStructureChanged();
             showTotal();
             setColumnas();
 
-            if (fila >= 0)
-            {
-                try
-                {
-                    if (lista.getRowCount() > 0)
-                    {
+            if (fila >= 0) {
+                try {
+                    if (lista.getRowCount() > 0) {
                         jTable1.setRowSelectionInterval(fila, fila);
                     }
-                }
-                catch (IllegalArgumentException e)
-                {
+                } catch (IllegalArgumentException e) {
                 }
             }
 
-        }
-        catch (SQLException sqlex2)
-        {
+        } catch (SQLException sqlex2) {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void setColumnas()
-    {
+    private void setColumnas() {
         int anchoColumna = 0;
         TableColumnModel modeloColumna = jTable1.getColumnModel();
         TableColumn columnaTabla;
@@ -486,12 +437,10 @@ public class IUCancelar extends javax.swing.JInternalFrame
 
         for (int i = 0;
                 i < jTable1.getColumnCount();
-                i++)
-        {
+                i++) {
             columnaTabla = modeloColumna.getColumn(i);
 
-            switch (i)
-            {
+            switch (i) {
                 case 0:
                     anchoColumna = 80;
                     columnaTabla.setMinWidth(80);
@@ -526,24 +475,21 @@ public class IUCancelar extends javax.swing.JInternalFrame
         }
     }
 
-    public void addItem()
-    {
+    public void addItem() {
         item = getItem(filaSeleccionada);
         control.updateItemCancelacion(item, id, 1);
         refresh(filaSeleccionada);
         articulos.showTotal();
     }
 
-    public void removeItem()
-    {
+    public void removeItem() {
         item = getItem(filaSeleccionada);
         control.updateItemCancelacion(item, id, 0);
         refresh(filaSeleccionada);
         articulos.showTotal();
     }
 
-    public void deleteItem()
-    {
+    public void deleteItem() {
         item = getItem(filaSeleccionada);
         control.deleteItemCancelacion(item, id);
         filaSeleccionada = -1;

@@ -31,8 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUVentas extends javax.swing.JInternalFrame
-{
+public class IUVentas extends javax.swing.JInternalFrame {
 
     @Autowired
     private ArticulosTableModel ventas;
@@ -46,23 +45,18 @@ public class IUVentas extends javax.swing.JInternalFrame
     private Articulo item;
     private int filaSeleccionada;
 
-    private IUVentas()
-    {
+    private IUVentas() {
         filaSeleccionada = -1;
     }
 
     @PostConstruct
-    public void init()
-    {
-        try
-        {
+    public void init() {
+        try {
             ventas.init(Control.SELECTLISTA);
             initComponents();
             showTotal();
             setColumnas();
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(null, "Error 4\n" + sqlex.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -70,8 +64,7 @@ public class IUVentas extends javax.swing.JInternalFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -103,40 +96,32 @@ public class IUVentas extends javax.swing.JInternalFrame
         jTextArea1 = new javax.swing.JTextArea();
 
         jMenuItem1.setText("Agregar Item");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jPopupMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Eliminar Item");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jPopupMenu1.add(jMenuItem2);
 
         jMenuItem5.setText("Remover Item");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
         jPopupMenu1.add(jMenuItem5);
 
         jMenuItem3.setText("Cancelar venta");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
@@ -144,10 +129,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jPopupMenu1.add(jSeparator1);
 
         jMenuItem4.setText("Realizar Venta");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
@@ -162,38 +145,28 @@ public class IUVentas extends javax.swing.JInternalFrame
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(540, 550));
         setPreferredSize(new java.awt.Dimension(640, 690));
-        try
-        {
+        try {
             setSelected(true);
-        } catch (java.beans.PropertyVetoException e1)
-        {
+        } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
         setVisible(true);
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
-        {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
-            {
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
             }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameDeactivated(evt);
             }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
             }
         });
@@ -211,17 +184,13 @@ public class IUVentas extends javax.swing.JInternalFrame
         jTable1.setShowHorizontalLines(true);
         jTable1.setShowVerticalLines(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable1KeyPressed(evt);
             }
         });
@@ -235,10 +204,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton1.setText("Item");
         jButton1.setMinimumSize(new java.awt.Dimension(0, 0));
         jButton1.setRequestFocusEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -247,10 +214,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/menos.png"))); // NOI18N
         jButton2.setText("Item");
         jButton2.setMinimumSize(new java.awt.Dimension(0, 0));
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -260,10 +225,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton3.setText("Cancelar venta");
         jButton3.setToolTipText("Cancelar Venta");
         jButton3.setMinimumSize(new java.awt.Dimension(0, 0));
-        jButton3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -276,24 +239,22 @@ public class IUVentas extends javax.swing.JInternalFrame
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 56)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("0.00");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel2.setMinimumSize(new java.awt.Dimension(0, 0));
+        jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButton6.setText("Realizar Venta");
         jButton6.setToolTipText("Realizar Venta");
         jButton6.setMinimumSize(new java.awt.Dimension(0, 0));
         jButton6.setNextFocusableComponent(jTable1);
-        jButton6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jButton6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButton6KeyPressed(evt);
             }
         });
@@ -302,10 +263,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/remove.png"))); // NOI18N
         jButton7.setText("Remover item");
         jButton7.setMinimumSize(new java.awt.Dimension(0, 0));
-        jButton7.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
@@ -333,10 +292,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jSpinner1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         jSpinner1.setNextFocusableComponent(jTextArea1);
-        jSpinner1.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
+        jSpinner1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
                 jSpinner1FocusGained(evt);
             }
         });
@@ -344,17 +301,13 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton4.setText("Agregar");
         jButton4.setNextFocusableComponent(jButton5);
-        jButton4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jButton4.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButton4KeyPressed(evt);
             }
         });
@@ -362,10 +315,8 @@ public class IUVentas extends javax.swing.JInternalFrame
         jButton5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton5.setText("Cancelar");
         jButton5.setNextFocusableComponent(jTable1);
-        jButton5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
@@ -384,17 +335,18 @@ public class IUVentas extends javax.swing.JInternalFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,23 +355,23 @@ public class IUVentas extends javax.swing.JInternalFrame
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -440,27 +392,25 @@ public class IUVentas extends javax.swing.JInternalFrame
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -485,12 +435,9 @@ public class IUVentas extends javax.swing.JInternalFrame
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // Popup - Eliminar Item
-        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
             removeItem();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -504,14 +451,10 @@ public class IUVentas extends javax.swing.JInternalFrame
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // Popup - RealizarVenta
-        if (ventas.getRowCount() != 0)
-        {
-            if (!control.getEstadoCajaDia())
-            {
+        if (ventas.getRowCount() != 0) {
+            if (!control.getEstadoCajaDia()) {
                 JOptionPane.showInternalMessageDialog(this, "Se debe Abrir la Caja para vender", "Caja Cerrada", JOptionPane.WARNING_MESSAGE);
-            }
-            else
-            {
+            } else {
                 BigDecimal total = control.getTotalVenta();
                 pago.init(true, total, false);
 
@@ -527,13 +470,11 @@ public class IUVentas extends javax.swing.JInternalFrame
 //
 //                        pago.init(true, total, false);
 //                    }
-                java.awt.EventQueue.invokeLater(() ->
-                {
-                    pago.addWindowListener(new java.awt.event.WindowAdapter()
-                    {
+                java.awt.EventQueue.invokeLater(()
+                        -> {
+                    pago.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
-                        public void windowClosing(java.awt.event.WindowEvent e)
-                        {
+                        public void windowClosing(java.awt.event.WindowEvent e) {
                             dispose();
                             System.gc();
                         }
@@ -575,8 +516,7 @@ public class IUVentas extends javax.swing.JInternalFrame
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // Popup - Remover Item
-        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
             deleteArticulo();
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -588,8 +528,7 @@ public class IUVentas extends javax.swing.JInternalFrame
 
     private void jButton4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton4KeyPressed
         // Agregar Articulo externo a la Venta
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             sellItemExt();
         }
     }//GEN-LAST:event_jButton4KeyPressed
@@ -614,12 +553,9 @@ public class IUVentas extends javax.swing.JInternalFrame
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton7ActionPerformed
     {//GEN-HEADEREND:event_jButton7ActionPerformed
         // Remover Item
-        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
             deleteArticulo();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un Registro");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -627,20 +563,13 @@ public class IUVentas extends javax.swing.JInternalFrame
     private void jButton6KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton6KeyPressed
     {//GEN-HEADEREND:event_jButton6KeyPressed
         // Realizar Venta Teclado
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
-            if (ventas.getRowCount() == 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (ventas.getRowCount() == 0) {
                 JOptionPane.showInternalMessageDialog(this, "No hay productos que vender");
-            }
-            else
-            {
-                if (!control.getEstadoCajaDia())
-                {
+            } else {
+                if (!control.getEstadoCajaDia()) {
                     JOptionPane.showInternalMessageDialog(this, "Se debe Abrir la Caja para vender", "Caja Cerrada", JOptionPane.WARNING_MESSAGE);
-                }
-                else
-                {
+                } else {
                     BigDecimal total = control.getTotalVenta();
                     pago.init(true, total, false);
 
@@ -655,13 +584,11 @@ public class IUVentas extends javax.swing.JInternalFrame
 //                        //pago.invoke(total, false);
 //                        pago.init(true, total, false);
 //                    }
-                    java.awt.EventQueue.invokeLater(() ->
-                    {
-                        pago.addWindowListener(new java.awt.event.WindowAdapter()
-                        {
+                    java.awt.EventQueue.invokeLater(()
+                            -> {
+                        pago.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
-                            public void windowClosing(java.awt.event.WindowEvent e)
-                            {
+                            public void windowClosing(java.awt.event.WindowEvent e) {
                                 dispose();
                                 System.gc();
                             }
@@ -679,18 +606,12 @@ public class IUVentas extends javax.swing.JInternalFrame
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton6ActionPerformed
     {//GEN-HEADEREND:event_jButton6ActionPerformed
         // Realizar Venta
-        if (ventas.getRowCount() == 0)
-        {
+        if (ventas.getRowCount() == 0) {
             JOptionPane.showInternalMessageDialog(this, "No hay productos que vender");
-        }
-        else
-        {
-            if (!control.getEstadoCajaDia())
-            {
+        } else {
+            if (!control.getEstadoCajaDia()) {
                 JOptionPane.showInternalMessageDialog(this, "Se debe Abrir la Caja para vender", "Caja Cerrada", JOptionPane.WARNING_MESSAGE);
-            }
-            else
-            {
+            } else {
                 pago.clear();
                 BigDecimal total = control.getTotalVenta();
                 pago.init(true, total, false);
@@ -706,13 +627,11 @@ public class IUVentas extends javax.swing.JInternalFrame
 //                    //pago.invoke(total, false);
 //                    pago.init(true, total, false);
 //                }
-                java.awt.EventQueue.invokeLater(() ->
-                {
-                    pago.addWindowListener(new java.awt.event.WindowAdapter()
-                    {
+                java.awt.EventQueue.invokeLater(()
+                        -> {
+                    pago.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
-                        public void windowClosing(java.awt.event.WindowEvent e)
-                        {
+                        public void windowClosing(java.awt.event.WindowEvent e) {
                             dispose();
                         }
                     });
@@ -737,12 +656,9 @@ public class IUVentas extends javax.swing.JInternalFrame
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
         // Eliminar
-        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
             removeItem();
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -750,13 +666,10 @@ public class IUVentas extends javax.swing.JInternalFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
         // Agregar
-        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-        {
+        if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
             item = getItem(filaSeleccionada);
             addItem(item);
-        }
-        else
-        {
+        } else {
             JOptionPane.showInternalMessageDialog(this, "Seleccione un Registro");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -766,20 +679,13 @@ public class IUVentas extends javax.swing.JInternalFrame
         // Tabla - KeyTyped
         filaSeleccionada = jTable1.getSelectedRow();
 
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTable1.isEditing())
-        {
-            if (ventas.getRowCount() == 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTable1.isEditing()) {
+            if (ventas.getRowCount() == 0) {
                 JOptionPane.showInternalMessageDialog(this, "No hay productos que vender");
-            }
-            else
-            {
-                if (!control.getEstadoCajaDia())
-                {
+            } else {
+                if (!control.getEstadoCajaDia()) {
                     JOptionPane.showInternalMessageDialog(this, "Se debe Abrir la Caja para vender", "Caja Cerrada", JOptionPane.WARNING_MESSAGE);
-                }
-                else
-                {
+                } else {
                     BigDecimal total = control.getTotalVenta();
                     pago.init(true, total, false);
 
@@ -794,13 +700,11 @@ public class IUVentas extends javax.swing.JInternalFrame
 //                            //.invoke(total, false);
 //                            pago.init(true, total, false);
 //                        }
-                    java.awt.EventQueue.invokeLater(() ->
-                    {
-                        pago.addWindowListener(new java.awt.event.WindowAdapter()
-                        {
+                    java.awt.EventQueue.invokeLater(()
+                            -> {
+                        pago.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
-                            public void windowClosing(java.awt.event.WindowEvent e)
-                            {
+                            public void windowClosing(java.awt.event.WindowEvent e) {
                                 dispose();
                                 System.gc();
                             }
@@ -813,37 +717,25 @@ public class IUVentas extends javax.swing.JInternalFrame
                 refresh(filaSeleccionada);
             }
         }
-        if (evt.getKeyCode() == KeyEvent.VK_PLUS)
-        {
-            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-            {
+        if (evt.getKeyCode() == KeyEvent.VK_PLUS) {
+            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
                 item = getItem(filaSeleccionada);
                 this.addItem(item);
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
-        if (evt.getKeyChar() == KeyEvent.VK_MINUS)
-        {
-            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_MINUS) {
+            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
                 removeItem();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
-        if (evt.getKeyChar() == KeyEvent.VK_DELETE)
-        {
-            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_DELETE) {
+            if (filaSeleccionada >= 0 && ventas.getRowCount() != 0) {
                 deleteArticulo();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
         }
@@ -855,12 +747,10 @@ public class IUVentas extends javax.swing.JInternalFrame
         int fila = jTable1.rowAtPoint(evt.getPoint());
         int columna = jTable1.columnAtPoint(evt.getPoint());
 
-        if ((fila > -1) && (columna > -1))
-        {
+        if ((fila > -1) && (columna > -1)) {
             filaSeleccionada = fila;
 
-            if (evt.getButton() == MouseEvent.BUTTON3)
-            {
+            if (evt.getButton() == MouseEvent.BUTTON3) {
                 item = getItem(filaSeleccionada);
                 jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
                 jTable1.setRowSelectionInterval(fila, fila);
@@ -899,38 +789,28 @@ public class IUVentas extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
-    public CellEditorListener Cell()
-    {
-        CellEditorListener celda = new CellEditorListener()
-        {
+    public CellEditorListener Cell() {
+        CellEditorListener celda = new CellEditorListener() {
             @Override
-            public void editingStopped(ChangeEvent e)
-            {
+            public void editingStopped(ChangeEvent e) {
                 String num;
 
-                if (jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString().isEmpty())
-                {
+                if (jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString().isEmpty()) {
                     return;
-                }
-                else
-                {
+                } else {
                     num = jTable1.getCellEditor(filaSeleccionada, 2).getCellEditorValue().toString();
                 }
 
                 item = getItem(filaSeleccionada);
                 Integer cantidad = null;
 
-                try
-                {
+                try {
                     cantidad = Integer.parseInt(num);
-                }
-                catch (NumberFormatException ne)
-                {
+                } catch (NumberFormatException ne) {
                     cantidad = item.getCantidad();
                 }
 
-                if (cantidad == 0)
-                {
+                if (cantidad == 0) {
                     cantidad = 1;
                 }
 
@@ -940,8 +820,7 @@ public class IUVentas extends javax.swing.JInternalFrame
             }
 
             @Override
-            public void editingCanceled(ChangeEvent e)
-            {
+            public void editingCanceled(ChangeEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet.");
             }
         };
@@ -949,14 +828,12 @@ public class IUVentas extends javax.swing.JInternalFrame
         return celda;
     }
 
-    public Articulo getItem(int row)
-    {
+    public Articulo getItem(int row) {
         Object[] values = new Object[ventas.getColumnCount()];
 
         for (int i = 0;
                 i < values.length;
-                i++)
-        {
+                i++) {
             values[i] = jTable1.getValueAt(row, i);
         }
 
@@ -969,39 +846,29 @@ public class IUVentas extends javax.swing.JInternalFrame
         return item = new Articulo(id, nombre, precio, "", "", cantidad, subtotal);
     }
 
-    public void refresh(int fila)
-    {
-        try
-        {
+    public void refresh(int fila) {
+        try {
             ventas.Consulta(Control.SELECTLISTA);
             ventas.fireTableDataChanged();
             ventas.fireTableStructureChanged();
             showTotal();
             setColumnas();
 
-            if (fila >= 0)
-            {
-                if (ventas.getRowCount() > 0)
-                {
-                    try
-                    {
+            if (fila >= 0) {
+                if (ventas.getRowCount() > 0) {
+                    try {
                         jTable1.setRowSelectionInterval(fila, fila);
-                    }
-                    catch (IllegalArgumentException e)
-                    {
+                    } catch (IllegalArgumentException e) {
                     }
                 }
             }
 
-        }
-        catch (SQLException sqlex2)
-        {
+        } catch (SQLException sqlex2) {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void setColumnas()
-    {
+    private void setColumnas() {
         int anchoColumna = 0;
         TableColumnModel modeloColumna = jTable1.getColumnModel();
         TableColumn columnaTabla;
@@ -1009,12 +876,10 @@ public class IUVentas extends javax.swing.JInternalFrame
 
         for (int i = 0;
                 i < jTable1.getColumnCount();
-                i++)
-        {
+                i++) {
             columnaTabla = modeloColumna.getColumn(i);
 
-            switch (i)
-            {
+            switch (i) {
                 case 0:
                     anchoColumna = 100;
                     columnaTabla.setMinWidth(100);
@@ -1049,14 +914,10 @@ public class IUVentas extends javax.swing.JInternalFrame
         }
     }
 
-    private void sellItemExt()
-    {
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty())
-        {
+    private void sellItemExt() {
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()) {
             JOptionPane.showInternalMessageDialog(this, "Campos sin Llenar", "Error", 2);
-        }
-        else
-        {
+        } else {
             Random num = new Random();
             int id = num.nextInt(9999);
             String nombre = jTextField1.getText();
@@ -1064,14 +925,11 @@ public class IUVentas extends javax.swing.JInternalFrame
             int cantidad = 1;
             String descripcion = jTextArea1.getText();
 
-            try
-            {
+            try {
                 precio = new BigDecimal(jTextField2.getText());
                 cantidad = Integer.parseInt(jSpinner1.getValue().toString());
 
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 JOptionPane.showInternalMessageDialog(this, "Ingresa un precio correcto", "Caracter invalido", JOptionPane.ERROR_MESSAGE);
                 jTextField2.setText("");
                 return;
@@ -1090,14 +948,10 @@ public class IUVentas extends javax.swing.JInternalFrame
         }
     }
 
-    public void addItem(Articulo item)
-    {
-        if (control.getEstadoLista())
-        {
+    public void addItem(Articulo item) {
+        if (control.getEstadoLista()) {
             control.insertArticuloLista(item);
-        }
-        else
-        {
+        } else {
             control.openLista();
             control.insertArticuloLista(item);
         }
@@ -1105,41 +959,34 @@ public class IUVentas extends javax.swing.JInternalFrame
         refresh(filaSeleccionada);
     }
 
-    public void removeItem()
-    {
+    public void removeItem() {
         item = getItem(filaSeleccionada);
 
-        if (control.updateArticuloLista(item, 0))
-        {
+        if (control.updateArticuloLista(item, 0)) {
             filaSeleccionada = -1;
         }
 
         refresh(filaSeleccionada);
     }
 
-    public void deleteArticulo()
-    {
+    public void deleteArticulo() {
         item = getItem(filaSeleccionada);
         control.deleteArticuloLista(item);
         filaSeleccionada = -1;
         refresh(filaSeleccionada);
     }
 
-    private void showTotal()
-    {
+    private void showTotal() {
         jLabel2.setText(control.getTotalVenta().toString());
     }
 }
 
-class CellRender extends DefaultTableCellRenderer implements TableCellRenderer
-{
+class CellRender extends DefaultTableCellRenderer implements TableCellRenderer {
     //DefaultTableCellRenderer editor = new DefaultTableCellRenderer();
 
     @Override
-    public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-    {
-        if (value != null)
-        {
+    public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        if (value != null) {
             setText(" " + value.toString());
         }
 
@@ -1147,15 +994,12 @@ class CellRender extends DefaultTableCellRenderer implements TableCellRenderer
 //        setForeground(Color.black);
         setOpaque(false);
 
-        if (isSelected)
-        {
+        if (isSelected) {
 
             setFont(new java.awt.Font("Calibri", 1, 19));
             setBackground(Color.getColor(System.getProperty("Table.selectionBackground")));
 //            setForeground(Color.black);
-        }
-        else
-        {
+        } else {
             setFont(new java.awt.Font("Calibri", 0, 18));
             //setBackground(Color.getColor(System.getProperty("Table.backgorund")));    
         }
@@ -1164,49 +1008,39 @@ class CellRender extends DefaultTableCellRenderer implements TableCellRenderer
     }
 }
 
-class EditorText extends DefaultCellEditor
-{
+class EditorText extends DefaultCellEditor {
 
-    public EditorText()
-    {
+    public EditorText() {
         super(new JTextField());
         ((JTextField) editorComponent).setBorder(null);
         ((JTextField) editorComponent).setFont(new java.awt.Font("Calibri", 0, 16));
         ((JTextField) editorComponent).setForeground(Color.black);
-        ((JTextField) editorComponent).addKeyListener(new KeyListener()
-        {
+        ((JTextField) editorComponent).addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e)
-            {
+            public void keyTyped(KeyEvent e) {
             }
 
             @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER)
-                {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     //System.out.println("Ok");
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e)
-            {
+            public void keyReleased(KeyEvent e) {
             }
         });
-        ((JTextField) editorComponent).addFocusListener(new FocusListener()
-        {
+        ((JTextField) editorComponent).addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent e)
-            {
+            public void focusGained(FocusEvent e) {
                 //System.out.println("Ok");
                 ((JTextField) e.getSource()).getCaret().moveDot(0);
                 ((JTextField) e.getSource()).setHorizontalAlignment(JTextField.CENTER);
             }
 
             @Override
-            public void focusLost(FocusEvent e)
-            {
+            public void focusLost(FocusEvent e) {
                 //System.out.println("Out");
             }
         });

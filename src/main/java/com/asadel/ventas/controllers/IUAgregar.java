@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUAgregar extends JInternalFrame
-{
+public class IUAgregar extends JInternalFrame {
 
     @Autowired
     public IUAgregar agregar;
@@ -23,19 +22,14 @@ public class IUAgregar extends JInternalFrame
     private static IUAgregar ventana;
     private Articulo articulo;
 
-    private IUAgregar()
-    {
+    private IUAgregar() {
         initComponents();
     }
 
-    public static IUAgregar getInstance()
-    {
-        if (ventana == null)
-        {
+    public static IUAgregar getInstance() {
+        if (ventana == null) {
             return ventana = new IUAgregar();
-        }
-        else
-        {
+        } else {
             return ventana;
         }
     }
@@ -322,8 +316,7 @@ public class IUAgregar extends JInternalFrame
         // Ventana Activada
         jPanel1.setBackground(Asadel.ACTIVE_COLOR);
 
-        if (jComboBox1.getSelectedIndex() == 0)
-        {
+        if (jComboBox1.getSelectedIndex() == 0) {
             jTextField1.setEnabled(false);
             jTextField2.setEnabled(false);
             jTextField3.setEnabled(false);
@@ -339,25 +332,20 @@ public class IUAgregar extends JInternalFrame
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_jComboBox1ItemStateChanged
     {//GEN-HEADEREND:event_jComboBox1ItemStateChanged
         // Seleccion de Articulo
-        if (jComboBox1.getSelectedIndex() == 0)
-        {
+        if (jComboBox1.getSelectedIndex() == 0) {
             jTextField1.setEnabled(false);
             jTextField2.setEnabled(false);
             jTextField3.setEnabled(false);
             jTextArea1.setEnabled(false);
-        }
-        else if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
+        } else if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
                 || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
                 || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
-                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
-        {
+                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema") {
             jTextField1.setEnabled(true);
             jTextField2.setEnabled(true);
             jTextField3.setEnabled(false);
             jTextArea1.setEnabled(true);
-        }
-        else
-        {
+        } else {
             jTextField1.setEnabled(true);
             jTextField2.setEnabled(true);
             jTextField3.setEnabled(true);
@@ -368,10 +356,8 @@ public class IUAgregar extends JInternalFrame
     private void jButton4KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton4KeyPressed
     {//GEN-HEADEREND:event_jButton4KeyPressed
         // Cancelar Insertar a la BD
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
-            if (articulo == null)
-            {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (articulo == null) {
                 this.doDefaultCloseAction();
             }
 
@@ -384,8 +370,7 @@ public class IUAgregar extends JInternalFrame
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
     {//GEN-HEADEREND:event_jButton4ActionPerformed
         // Cancelar Insertar a la BD
-        if (articulo == null)
-        {
+        if (articulo == null) {
             this.doDefaultCloseAction();
         }
 
@@ -397,8 +382,7 @@ public class IUAgregar extends JInternalFrame
     private void jButton3KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton3KeyPressed
     {//GEN-HEADEREND:event_jButton3KeyPressed
         // Agregar a la BD
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             addItem();
 
             jTextField1.setText(null);
@@ -415,8 +399,7 @@ public class IUAgregar extends JInternalFrame
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
     {//GEN-HEADEREND:event_jButton3ActionPerformed
         // Agregar a la BD
-        if (addItem())
-        {
+        if (addItem()) {
             jTextField1.setText(null);
             jTextField2.setText(null);
             jTextField3.setText(null);
@@ -431,8 +414,7 @@ public class IUAgregar extends JInternalFrame
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton2KeyPressed
     {//GEN-HEADEREND:event_jButton2KeyPressed
         // Cancelar Crear Articulo
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             jTextField1.setText(null);
             jTextField2.setText(null);
             jTextField3.setText(null);
@@ -454,8 +436,7 @@ public class IUAgregar extends JInternalFrame
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton1KeyPressed
     {//GEN-HEADEREND:event_jButton1KeyPressed
         // Crear item
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             createItem();
         }
     }//GEN-LAST:event_jButton1KeyPressed
@@ -488,17 +469,12 @@ public class IUAgregar extends JInternalFrame
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
-    public boolean addItem()
-    {
-        if (articulo == null)
-        {
+    public boolean addItem() {
+        if (articulo == null) {
             JOptionPane.showInternalMessageDialog(this, "No se ha introducido ningun articulo", "Error", 2);
             return false;
-        }
-        else
-        {
-            switch ((String) jComboBox1.getSelectedItem())
-            {
+        } else {
+            switch ((String) jComboBox1.getSelectedItem()) {
                 case "Biografia":
                     control.insertBiografia(articulo);
                     break;
@@ -530,29 +506,24 @@ public class IUAgregar extends JInternalFrame
         return true;
     }
 
-    public void createItem()
-    {
+    public void createItem() {
         if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
                 || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
                 || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
-                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema")
-        {
-            if (!(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()))
-            {
+                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema") {
+            if (!(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty())) {
                 String id = jTextField1.getText();
                 String nombre = jTextField2.getText();
                 BigDecimal precio = null;
 
                 String info = jTextField2.getText();
-                if (!jTextArea1.getText().isEmpty())
-                {
+                if (!jTextArea1.getText().isEmpty()) {
                     info = jTextArea1.getText();
                 }
 
                 String tipo = (String) jComboBox1.getSelectedItem();
 
-                switch (tipo)
-                {
+                switch (tipo) {
                     case "Monografia":
                         precio = control.getPreciosVar(tipo);
                         break;
@@ -592,16 +563,11 @@ public class IUAgregar extends JInternalFrame
                 jTextArea2.append("\nPrecio: " + articulo.getPrecio());
                 jTextArea2.append("\nInformacion: " + articulo.getInfo());
                 jTextArea2.append("\nTipo: " + articulo.getTipo());
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
             }
-        }
-        else
-        {
-            if (!(jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextArea1.getText().isEmpty()))
-            {
+        } else {
+            if (!(jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextArea1.getText().isEmpty())) {
                 String id = jTextField1.getText();
                 String nombre = jTextField2.getText();
                 BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField3.getText()));
@@ -609,13 +575,10 @@ public class IUAgregar extends JInternalFrame
                 String tipo = (String) jComboBox1.getSelectedItem();
                 BigDecimal descuento = precio.multiply(control.getDescuentoGlobal().divide(new BigDecimal("100.00"))).setScale(2);
 
-                if (precio.signum() == -1)
-                {
+                if (precio.signum() == -1) {
                     JOptionPane.showInternalMessageDialog(this, "Solo Dinero Real");
                     jTextField3.setText(null);
-                }
-                else
-                {
+                } else {
                     articulo = new Articulo(id, nombre, precio, info, tipo);
                     articulo.setDescuento(descuento);
                     jTextArea2.append("Articulo\n");
@@ -626,9 +589,7 @@ public class IUAgregar extends JInternalFrame
                     jTextArea2.append("\nInformacion: " + articulo.getInfo());
                     jTextArea2.append("\nTipo: " + articulo.getTipo());
                 }
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
             }
         }

@@ -14,27 +14,23 @@ import java.util.Map;
 import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.swing.JOptionPane;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
-public class Reporte
-{
+@RequiredArgsConstructor
+public class Reporte {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Reporte.class);
-
-    @Autowired
-    private Control control;
-    @Autowired
-    private PropiedadesService propiedades;
+    private final Control control;
+    private final PropiedadesService propiedades;
 
     private JasperPrint reporte;
     private Path directorioReportes;
@@ -44,40 +40,33 @@ public class Reporte
     private Factura datosFactura;
 
     @PostConstruct
-    public void init()
-    {
-        directorioReportes = Paths.get(propiedades.getDirectorioNotas());
+    public void init() {
+        directorioReportes = Paths.get(propiedades.getBillsDirectory());
         datosFactura = new Factura();
-        LOGGER.info("Directorio de reportes: {}", directorioReportes);
+        log.info("Directorio de reportes: {}", directorioReportes);
     }
 
-    public void updateDirectorio(String directorio)
-    {
+    public void updateDirectorio(String directorio) {
         directorioReportes = Paths.get(directorio);
         validateDirectorio();
     }
 
-    private void validateDirectorio()
-    {
+    private void validateDirectorio() {
         File dir = new File(directorioReportes.toString());
 
-        if (!dir.exists())
-        {
+        if (!dir.exists()) {
             dir.mkdir();
         }
     }
 
-    public void clearFactura()
-    {
+    public void clearFactura() {
         datosFactura = new Factura();
     }
 
-    public boolean generarFactura(int id, BigDecimal total)
-    {
+    public boolean generarFactura(int id, BigDecimal total) {
         boolean estado = false;
 
-        try
-        {
+        try {
             Map<String, Object> parametros = new HashMap<>();
             String numFac = randomFac(id);
             path = directorioReportes.resolve("Factura_" + getDatePath() + ".pdf");
@@ -87,12 +76,9 @@ public class Reporte
             parametros.put("fecha", getDateFac());
             parametros.put("obs", datosFactura.getAnticipo());
 
-            if (datosFactura.getAnticipo().equals(BigDecimal.ZERO))
-            {
+            if (datosFactura.getAnticipo().equals(BigDecimal.ZERO)) {
                 parametros.put("resta", BigDecimal.ZERO);
-            }
-            else
-            {
+            } else {
                 BigDecimal pendiente = total.subtract(datosFactura.getAnticipo());
                 parametros.put("resta", pendiente);
             }
@@ -104,21 +90,17 @@ public class Reporte
             InputStream formato = this.getClass().getResourceAsStream("/reports/Factura.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
             estado = true;
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar la Factura" + "\n" + ex.getMessage());
         }
 
         return estado;
     }
 
-    public boolean generarFacturaDescuento(int id, BigDecimal total)
-    {
+    public boolean generarFacturaDescuento(int id, BigDecimal total) {
         boolean estado = false;
 
-        try
-        {
+        try {
             Map<String, Object> parametros = new HashMap<>();
             String numFac = randomFac(id);
             path = directorioReportes.resolve("Factura_" + getDatePath() + ".pdf");
@@ -130,65 +112,49 @@ public class Reporte
             InputStream formato = this.getClass().getResourceAsStream("/reports/FacturaDescuento.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
             estado = true;
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar la FacturaDescuento" + "\n" + ex.getMessage());
         }
 
         return estado;
     }
 
-    public JasperPrint generarReporteDiaArticulos()
-    {
-        try
-        {
+    public JasperPrint generarReporteDiaArticulos() {
+        try {
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteDiaArticulos.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteDiaArt" + "\n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint generarReporteDiaVentas()
-    {
-        try
-        {
+    public JasperPrint generarReporteDiaVentas() {
+        try {
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteDiaVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteDiaVen" + "\n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint generarReporteMesVentas()
-    {
-        try
-        {
+    public JasperPrint generarReporteMesVentas() {
+        try {
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteMesVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, null, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteMesVen" + "\n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint generarReporteMensual(Date fecha, int mes, int year)
-    {
-        try
-        {
+    public JasperPrint generarReporteMensual(Date fecha, int mes, int year) {
+        try {
             Map<String, Object> parametros = new HashMap<>();
 
             parametros.put("Fecha", fecha);
@@ -197,19 +163,15 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteMensual.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteMensual" + "\n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint generarReporteinFechasVentas(String ini, String fin, BigDecimal total)
-    {
-        try
-        {
+    public JasperPrint generarReporteinFechasVentas(String ini, String fin, BigDecimal total) {
+        try {
             Map<String, Object> parametros = new HashMap<>();
 
             parametros.put("FecIni", ini);
@@ -218,19 +180,15 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteFechasVentas.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteFechasVentas \n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint generarReporteinFechasArticulos(String ini, String fin, BigDecimal total)
-    {
-        try
-        {
+    public JasperPrint generarReporteinFechasArticulos(String ini, String fin, BigDecimal total) {
+        try {
             Map<String, Object> parametros = new HashMap<>();
 
             parametros.put("FecIni", ini);
@@ -239,61 +197,47 @@ public class Reporte
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/ReporteFechasArticulos.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al generar el ReporteFechasArticulos \n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public JasperPrint searchFactura(String id)
-    {
-        try
-        {
+    public JasperPrint searchFactura(String id) {
+        try {
             Map<String, Object> parametros = new HashMap<>();
 
             parametros.put("numFac", id);
 
             InputStream formato = this.getClass().getResourceAsStream("/reports/SearchFactura.jasper");
             reporte = JasperFillManager.fillReport(formato, parametros, control.getConnectionControl());
-        }
-        catch (JRException ex)
-        {
+        } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar la Factura \n" + ex.getMessage());
         }
 
         return reporte;
     }
 
-    public void showFactura()
-    {
-        if (reporte != null)
-        {
+    public void showFactura() {
+        if (reporte != null) {
             JasperViewer.viewReport(reporte, false);
         }
     }
 
-    public void printFactura()
-    {
-        if (reporte != null)
-        {
+    public void printFactura() {
+        if (reporte != null) {
             validateDirectorio();
 
-            try
-            {
+            try {
                 JasperExportManager.exportReportToPdfFile(reporte, path.toString());
-            }
-            catch (JRException ex)
-            {
+            } catch (JRException ex) {
                 JOptionPane.showMessageDialog(null, "Error al exportar el reports" + "\n" + ex.getMessage());
             }
         }
     }
 
-    public String getDateFac()
-    {
+    public String getDateFac() {
         Calendar c = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat date = new SimpleDateFormat("dd/MMMMMM/yyyy HH:mm:ss a");
         String fecha = date.format(c.getTime());
@@ -301,8 +245,7 @@ public class Reporte
         return fecha;
     }
 
-    public String getDatePath()
-    {
+    public String getDatePath() {
         Calendar c = Calendar.getInstance(Locale.getDefault());
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy'_'HH-mm-a");
         String fecha = date.format(c.getTime());
@@ -310,22 +253,18 @@ public class Reporte
         return fecha;
     }
 
-    public String randomFac(int id)
-    {
+    public String randomFac(int id) {
         Random num = new Random();
         String serie = "";
         char c;
 
-        while (true)
-        {
+        while (true) {
             c = (char) num.nextInt(122);
 
-            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-            {
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
                 serie += String.valueOf(c).toUpperCase();
 
-                if (serie.length() == 5)
-                {
+                if (serie.length() == 5) {
                     break;
                 }
             }

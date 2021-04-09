@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUReportes extends javax.swing.JInternalFrame
-{
+public class IUReportes extends javax.swing.JInternalFrame {
 
     @Autowired
     private IUFecha dialog;
@@ -25,33 +24,27 @@ public class IUReportes extends javax.swing.JInternalFrame
 
     public JRViewer visor;
 
-    public IUReportes()
-    {
+    public IUReportes() {
     }
 
     @PostConstruct
-    public void config()
-    {
+    public void config() {
         initComponents();
         visor = new JRViewer(reporte.generarReporteDiaVentas(), null);
         visor.setVisible(true);
         jPanel2.add(visor, BorderLayout.CENTER);
     }
 
-    public void init(boolean fin)
-    {
+    public void init(boolean fin) {
         visor.clear();
         visor = new JRViewer(reporte.generarReporteDiaVentas(), null);
         visor.setVisible(true);
         jPanel2.add(visor, BorderLayout.CENTER);
 
-        if (fin)
-        {
+        if (fin) {
             visor.setZoomRatio(1.0f);
             jSplitPane1.setDividerLocation(1);
-        }
-        else
-        {
+        } else {
             visor.setZoomRatio(0.70f);
         }
     }
@@ -174,8 +167,7 @@ public class IUReportes extends javax.swing.JInternalFrame
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // Seleccion Lista
-        switch (jList1.getSelectedIndex())
-        {
+        switch (jList1.getSelectedIndex()) {
             case 0:
                 visor.clear();
                 jPanel2.removeAll();
@@ -204,19 +196,16 @@ public class IUReportes extends javax.swing.JInternalFrame
                 jPanel2.updateUI();
                 break;
             case 3:
-                if (fechaMes == null)
-                {
+                if (fechaMes == null) {
                     //fechaMes = new IUFechaMes((Frame) IUDesktop.jDesktopPane1.getParent().getParent().getParent().getParent(), true);
                     //fechaMes.invoke();
                     fechaMes.init(true);
 
-                    java.awt.EventQueue.invokeLater(() ->
-                    {
-                        fechaMes.addWindowListener(new java.awt.event.WindowAdapter()
-                        {
+                    java.awt.EventQueue.invokeLater(()
+                            -> {
+                        fechaMes.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
-                            public void windowClosing(java.awt.event.WindowEvent e)
-                            {
+                            public void windowClosing(java.awt.event.WindowEvent e) {
                                 //IUDesktop.reportes.fechaMes = null;
                             }
                         });
@@ -226,19 +215,16 @@ public class IUReportes extends javax.swing.JInternalFrame
                 }
                 break;
             case 4:
-                if (fecha == null)
-                {
+                if (fecha == null) {
 //                    fecha = new IUFecha((Frame) IUDesktop.desktop.getParent().getParent().getParent().getParent(), true, 0);
 //                    fecha.invoke(0);
 
-                    java.awt.EventQueue.invokeLater(() ->
-                    {
+                    java.awt.EventQueue.invokeLater(()
+                            -> {
                         dialog.init(true, 0);
-                        dialog.addWindowListener(new java.awt.event.WindowAdapter()
-                        {
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
-                            public void windowClosing(java.awt.event.WindowEvent e)
-                            {
+                            public void windowClosing(java.awt.event.WindowEvent e) {
                                 //IUDesktop.reportes.fecha = null;
                             }
                         });
@@ -248,18 +234,15 @@ public class IUReportes extends javax.swing.JInternalFrame
                 }
                 break;
             case 5:
-                if (fecha == null)
-                {
+                if (fecha == null) {
 //                    fecha = new IUFecha((Frame) IUDesktop.desktop.getParent().getParent().getParent().getParent(), true, 1);
 //                    fecha.invoke(1);
-                    java.awt.EventQueue.invokeLater(() ->
-                    {
+                    java.awt.EventQueue.invokeLater(()
+                            -> {
                         dialog.init(true, 1);
-                        dialog.addWindowListener(new java.awt.event.WindowAdapter()
-                        {
+                        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                             @Override
-                            public void windowClosing(java.awt.event.WindowEvent e)
-                            {
+                            public void windowClosing(java.awt.event.WindowEvent e) {
                                 //IUDesktop.reportes.fecha = null;
                             }
                         });
@@ -271,8 +254,7 @@ public class IUReportes extends javax.swing.JInternalFrame
             case 6:
                 String id = JOptionPane.showInternalInputDialog(this, "ID de la Lista: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
 
-                if (id == null || id.isEmpty())
-                {
+                if (id == null || id.isEmpty()) {
                     return;
                 }
 

@@ -5,202 +5,65 @@
  */
 package com.asadel.ventas.services;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Properties;
-import org.apache.maven.shared.utils.PropertyUtils;
-import org.slf4j.LoggerFactory;
+import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Angel
  */
+@Slf4j
 @Component
-public class PropiedadesService
-{
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PropiedadesService.class);
+@RequiredArgsConstructor
+public class PropiedadesService {
 
-    private final Path propertiesPath;
+    private final Properties appProperties;
 
-    public PropiedadesService()
-    {
-        Path home = Paths.get(System.getenv("ASADEL_HOME"));
-        propertiesPath = home.resolve("asadel.properties").normalize();
+    private Path homePath;
+
+    @PostConstruct
+    public void init() {
+        homePath = Paths.get(System.getenv("ASADEL_HOME"));
     }
 
-    public String getTheme()
-    {
-        String property = null;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("theme.name");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return property;
+    public String getTheme() {
+        return appProperties.getProperty("theme.name");
     }
 
-    public boolean updateTheme(String theme)
-    {
-        boolean complete = false;
+    public String getBillsDirectory() {
+        var dir = homePath.resolve("facturas").toFile();
 
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            propiedades.replace("theme.name", theme);
-            propiedades.store(Files.newBufferedWriter(propertiesPath, StandardCharsets.UTF_8, StandardOpenOption.WRITE),
-                    "Asadel");
-            complete = true;
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
+        if (!dir.exists()) {
+            dir.mkdir();
         }
 
-        return complete;
+        return homePath.resolve("facturas").toString();
     }
 
-    public String getDirectorioNotas()
-    {
-        String property = null;
+    public String getBackupDirectory() {
+        var dir = homePath.resolve("backups").toFile();
 
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("notas.directorio");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
+        if (!dir.exists()) {
+            dir.mkdir();
         }
 
-        return property;
+        return homePath.resolve("backups").toString();
     }
 
-    public boolean updateDirectorioNotas(String directorio)
-    {
-        boolean complete = false;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            propiedades.replace("notas.directorio", directorio);
-            propiedades.store(Files.newBufferedWriter(propertiesPath, StandardCharsets.UTF_8, StandardOpenOption.WRITE),
-                    "Asadel");
-            complete = true;
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return complete;
+    public String getDBHome() {
+        return appProperties.getProperty("mysql.directorio");
     }
 
-    public String getDirectorioBackup()
-    {
-        String property = null;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("backup.directorio");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return property;
+    public String getDBUser() {
+        return appProperties.getProperty("mysql.user");
     }
 
-    public boolean updateDirectorioBackup(String directorio)
-    {
-        boolean complete = false;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            propiedades.replace("backup.directorio", directorio);
-            propiedades.store(Files.newBufferedWriter(propertiesPath, StandardCharsets.UTF_8, StandardOpenOption.WRITE),
-                    "Asadel");
-            complete = true;
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return complete;
-    }
-
-    public String getMySQLDirectorio()
-    {
-        String property = null;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("mysql.directorio");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return property;
-    }
-
-    public String getMySQLUser()
-    {
-        String property = null;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("mysql.user");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return property;
-    }
-
-    public String getMySQLPwd()
-    {
-        String property = null;
-
-        try
-        {
-            Properties propiedades
-                    = PropertyUtils.loadOptionalProperties(Files.newInputStream(propertiesPath, StandardOpenOption.READ));
-            property = propiedades.getProperty("mysql.pwd");
-        }
-        catch (IOException ex)
-        {
-            LOGGER.warn("{}", ex.getMessage());
-        }
-
-        return property;
+    public String getDBSecret() {
+        return appProperties.getProperty("mysql.pwd");
     }
 }

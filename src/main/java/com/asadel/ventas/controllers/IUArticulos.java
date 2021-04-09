@@ -27,8 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IUArticulos extends javax.swing.JInternalFrame
-{
+public class IUArticulos extends javax.swing.JInternalFrame {
 
     @Autowired
     private Control control;
@@ -46,8 +45,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private TableRowSorter<TableModel> sorter;
     private String tipo;
 
-    public final static Object[] TIPO = new Object[]
-    {
+    public final static Object[] TIPO = new Object[]{
         "Todo",
         "Papeleria",
         "Informatica",
@@ -67,25 +65,20 @@ public class IUArticulos extends javax.swing.JInternalFrame
         "Otros"
     };
 
-    private IUArticulos()
-    {
+    private IUArticulos() {
         filaSeleccionada = -1;
         tipo = "";
     }
 
     @PostConstruct
-    public void init()
-    {
-        try
-        {
+    public void init() {
+        try {
             tablabase.init(Control.SELECTALLARTICULOS);
             sorter = new TableRowSorter<>(tablabase);
             initComponents();
             showTotal();
             setColumnas();
-        }
-        catch (SQLException sqlex)
-        {
+        } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(null, "Error 4\n" + sqlex.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -490,25 +483,21 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // Tabla - ClickTabla
         int fila = jTable.rowAtPoint(evt.getPoint());
 
-        if (fila > -1)
-        {
+        if (fila > -1) {
             filaSeleccionada = fila;
             item = getItem(filaSeleccionada);
             String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
             this.jTextArea1.setText(msg);
 
-            if (evt.getButton() == MouseEvent.BUTTON3)
-            {
+            if (evt.getButton() == MouseEvent.BUTTON3) {
                 jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
                 jTable.setRowSelectionInterval(fila, fila);
             }
-            if (evt.getClickCount() == 2 && evt.getButton() != MouseEvent.BUTTON3)
-            {
+            if (evt.getClickCount() == 2 && evt.getButton() != MouseEvent.BUTTON3) {
                 desktop.showVentas(false);
                 ventas.addItem(item);
             }
-            if (evt.getClickCount() == 1 && evt.getButton() != MouseEvent.BUTTON3)
-            {
+            if (evt.getClickCount() == 1 && evt.getButton() != MouseEvent.BUTTON3) {
 
             }
         }
@@ -516,28 +505,23 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     private void jTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableKeyPressed
         // Tabla - Teclado
-        if (jTable.getSelectedRow() >= 0)
-        {
+        if (jTable.getSelectedRow() >= 0) {
             filaSeleccionada = jTable.getSelectedRow();
             item = getItem(filaSeleccionada);
             String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
 
-            if (evt.getKeyChar() == KeyEvent.VK_ENTER)
-            {
+            if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
                 desktop.showVentas(false);
                 ventas.addItem(item);
             }
-            if (evt.getKeyChar() == KeyEvent.VK_ESCAPE)
-            {
+            if (evt.getKeyChar() == KeyEvent.VK_ESCAPE) {
                 jTextField2.requestFocus();
                 jTextField2.setText(null);
             }
-            if (evt.getKeyChar() == KeyEvent.VK_DELETE)
-            {
+            if (evt.getKeyChar() == KeyEvent.VK_DELETE) {
                 deleteItem();
             }
-            if (evt.getKeyChar() == KeyEvent.VK_5)
-            {
+            if (evt.getKeyChar() == KeyEvent.VK_5) {
                 refresh();
             }
         }
@@ -545,8 +529,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         // PopupText
-        if (evt.getButton() == MouseEvent.BUTTON3)
-        {
+        if (evt.getButton() == MouseEvent.BUTTON3) {
             jPopupMenu2.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTextField2MouseClicked
@@ -559,8 +542,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
         // Filtro - Boton ESC
-        if (evt.getKeyChar() == KeyEvent.VK_ESCAPE)
-        {
+        if (evt.getKeyChar() == KeyEvent.VK_ESCAPE) {
             jTextField2.requestFocus();
             jTextField2.setText(null);
         }
@@ -637,8 +619,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton1.setSelected(true);
 
-        if (jToggleButton1.isSelected())
-        {
+        if (jToggleButton1.isSelected()) {
             tipo = TIPO[0].toString();
             jToggleButton1.setSelected(true);
             jToggleButton2.setSelected(false);
@@ -656,8 +637,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton2.setSelected(true);
 
-        if (jToggleButton2.isSelected())
-        {
+        if (jToggleButton2.isSelected()) {
             tipo = TIPO[1].toString();
             jToggleButton1.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -674,8 +654,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton3.setSelected(true);
 
-        if (jToggleButton3.isSelected())
-        {
+        if (jToggleButton3.isSelected()) {
             tipo = TIPO[2].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
@@ -692,8 +671,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton4.setSelected(true);
 
-        if (jToggleButton4.isSelected())
-        {
+        if (jToggleButton4.isSelected()) {
             tipo = TIPO[3].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
@@ -710,8 +688,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton5.setSelected(true);
 
-        if (jToggleButton5.isSelected())
-        {
+        if (jToggleButton5.isSelected()) {
             tipo = TIPO[4].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
@@ -728,8 +705,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton6.setSelected(true);
 
-        if (jToggleButton6.isSelected())
-        {
+        if (jToggleButton6.isSelected()) {
             tipo = TIPO[5].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
@@ -746,8 +722,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
         // TODO add your handling code here:
         jToggleButton7.setSelected(true);
 
-        if (jToggleButton7.isSelected())
-        {
+        if (jToggleButton7.isSelected()) {
             tipo = TIPO[6].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
@@ -762,8 +737,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private void jTableKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTableKeyReleased
     {//GEN-HEADEREND:event_jTableKeyReleased
         // TODO add your handling code here:
-        if (jTable.getSelectedRow() >= 0)
-        {
+        if (jTable.getSelectedRow() >= 0) {
             filaSeleccionada = jTable.getSelectedRow();
             item = getItem(filaSeleccionada);
             String msg = "Precio: $" + item.getPrecio() + "\n Info: " + item.getInfo();
@@ -807,20 +781,17 @@ public class IUArticulos extends javax.swing.JInternalFrame
     private javax.swing.JToggleButton jToggleButton7;
     // End of variables declaration//GEN-END:variables
 
-    private void setColumnas()
-    {
+    private void setColumnas() {
         int anchoColumna = 0;
         TableColumnModel modeloColumna = jTable.getColumnModel();
         TableColumn columnaTabla;
 
         for (int i = 0;
-             i < jTable.getColumnCount();
-             i++)
-        {
+                i < jTable.getColumnCount();
+                i++) {
             columnaTabla = modeloColumna.getColumn(i);
 
-            switch (i)
-            {
+            switch (i) {
                 case 0:
                     anchoColumna = 120;
                     columnaTabla.setMaxWidth(130);
@@ -853,30 +824,22 @@ public class IUArticulos extends javax.swing.JInternalFrame
         }
     }
 
-    public void showTotal()
-    {
-        if (control.getEstadoCajaDia())
-        {
+    public void showTotal() {
+        if (control.getEstadoCajaDia()) {
             jLabel1.setText("Caja:$ " + control.getRecaudadoCajaDia());
-        }
-        else
-        {
+        } else {
             jLabel1.setText("Caja Cerrada");
         }
     }
 
-    private void filter()
-    {
+    private void filter() {
         String texto = jTextField2.getText();
         Pattern p = Pattern.compile("^[+*-/¡!¿?()]");
         Matcher m = p.matcher(texto);
 
-        if (m.find())
-        {
+        if (m.find()) {
             jTextField2.setText(null);
-        }
-        else
-        {
+        } else {
             ArrayList<RowFilter<Object, Object>> andFilters = new ArrayList<>();
             RowFilter<Object, Object> columnFilter = RowFilter.regexFilter(tipo, 4);
             RowFilter<Object, Object> wordFilter = RowFilter.regexFilter(Pattern.compile("(?i)" + texto).toString());
@@ -884,49 +847,30 @@ public class IUArticulos extends javax.swing.JInternalFrame
             andFilters.add(columnFilter);
             andFilters.add(wordFilter);
 
-            if (texto.isEmpty() && tipo.equals(TIPO[0].toString()))
-            {
+            if (texto.isEmpty() && tipo.equals(TIPO[0].toString())) {
                 sorter.setRowFilter(null);
-            }
-            else
-            {
-                if (texto.isEmpty() && !tipo.equals(TIPO[0].toString()))
-                {
-                    try
-                    {
+            } else {
+                if (texto.isEmpty() && !tipo.equals(TIPO[0].toString())) {
+                    try {
                         sorter.setRowFilter(columnFilter);
                         setColumnas();
-                    }
-                    catch (PatternSyntaxException ex)
-                    {
+                    } catch (PatternSyntaxException ex) {
                         JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                     }
-                }
-                else
-                {
-                    if (texto.length() != 0 && tipo.equals(TIPO[0].toString()))
-                    {
-                        try
-                        {
+                } else {
+                    if (texto.length() != 0 && tipo.equals(TIPO[0].toString())) {
+                        try {
                             sorter.setRowFilter(wordFilter);
                             setColumnas();
-                        }
-                        catch (PatternSyntaxException ex)
-                        {
+                        } catch (PatternSyntaxException ex) {
                             JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                         }
-                    }
-                    else
-                    {
-                        if (texto.length() != 0 && !tipo.equals(TIPO[0].toString()))
-                        {
-                            try
-                            {
+                    } else {
+                        if (texto.length() != 0 && !tipo.equals(TIPO[0].toString())) {
+                            try {
                                 sorter.setRowFilter(RowFilter.andFilter(andFilters));
                                 setColumnas();
-                            }
-                            catch (PatternSyntaxException ex)
-                            {
+                            } catch (PatternSyntaxException ex) {
                                 JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                             }
                         }
@@ -936,45 +880,34 @@ public class IUArticulos extends javax.swing.JInternalFrame
         }
     }
 
-    public void refresh()
-    {
-        try
-        {
+    public void refresh() {
+        try {
             tablabase.Consulta(Control.SELECTALLARTICULOS);
             tablabase.fireTableDataChanged();
             tablabase.fireTableStructureChanged();
             setColumnas();
-        }
-        catch (SQLException sqlex2)
-        {
+        } catch (SQLException sqlex2) {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void refreshData()
-    {
-        try
-        {
+    public void refreshData() {
+        try {
             tablabase.Consulta(Control.SELECTALLARTICULOS);
             tablabase.fireTableDataChanged();
             setColumnas();
-        }
-        catch (SQLException sqlex2)
-        {
+        } catch (SQLException sqlex2) {
             JOptionPane.showInternalMessageDialog(this, sqlex2.getMessage(), "Error en la Base de Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public Articulo getItem(int row)
-    {
-        if (row >= 0)
-        {
+    public Articulo getItem(int row) {
+        if (row >= 0) {
             Object[] values = new Object[tablabase.getColumnCount()];
 
             for (int i = 0;
-                 i < values.length;
-                 i++)
-            {
+                    i < values.length;
+                    i++) {
                 values[i] = jTable.getValueAt(row, i);
             }
 
@@ -984,8 +917,7 @@ public class IUArticulos extends javax.swing.JInternalFrame
             String tipo = (String) values[4];
             BigDecimal precio = BigDecimal.ZERO;
 
-            switch ((String) values[4])
-            {
+            switch ((String) values[4]) {
                 case "Monografia":
                 case "Biografia":
                 case "Mapa Carta":
@@ -1001,29 +933,23 @@ public class IUArticulos extends javax.swing.JInternalFrame
             }
 
             item = new Articulo(id, nombre, precio, info, tipo, 1, precio);
-        }
-        else
-        {
+        } else {
             item = new Articulo();
         }
 
         return item;
     }
 
-    public void deleteItem()
-    {
+    public void deleteItem() {
         item = getItem(filaSeleccionada);
         String info = "Eliminar \nID: " + item.getId() + "\nNombre: " + item.getNombre() + "\nInfo: " + item.getInfo() + "\n";
         String fila = "Fila: " + (filaSeleccionada + 1);
 
         int action = JOptionPane.showInternalConfirmDialog(this, info + fila, "Eliminar", JOptionPane.YES_NO_OPTION);
 
-        if (action == JOptionPane.YES_OPTION)
-        {
-            if (filaSeleccionada >= 0)
-            {
-                switch (item.getTipo())
-                {
+        if (action == JOptionPane.YES_OPTION) {
+            if (filaSeleccionada >= 0) {
+                switch (item.getTipo()) {
                     case "Biografia":
                         control.deleteBiografia(item);
                         break;
@@ -1054,14 +980,10 @@ public class IUArticulos extends javax.swing.JInternalFrame
 
                 filaSeleccionada = -1;
                 refreshData();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showInternalMessageDialog(this, "Seleccione un registro");
             }
-        }
-        else
-        {
+        } else {
             refreshData();
         }
     }

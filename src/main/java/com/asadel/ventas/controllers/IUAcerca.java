@@ -8,22 +8,18 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-public class IUAcerca extends javax.swing.JDialog
-{
+public class IUAcerca extends javax.swing.JDialog {
 
-    public IUAcerca(java.awt.Frame parent, boolean modal)
-    {
+    public IUAcerca(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
-        actionMap.put(cancelName, new AbstractAction()
-        {
+        actionMap.put(cancelName, new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 System.gc();
                 dispose();
             }
@@ -36,8 +32,7 @@ public class IUAcerca extends javax.swing.JDialog
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -56,14 +51,12 @@ public class IUAcerca extends javax.swing.JDialog
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ASADEL Logo.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel2.setText("Version: 0.9.5 (2018.01)");
+        jLabel2.setText("Version: 0.9.6 (2021.04)");
 
         jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -106,16 +99,13 @@ public class IUAcerca extends javax.swing.JDialog
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void invoke()
-    {
-        java.awt.EventQueue.invokeLater(() ->
-        {
+    public void invoke() {
+        java.awt.EventQueue.invokeLater(()
+                -> {
             IUAcerca dialog = new IUAcerca(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter()
-            {
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
-                public void windowClosing(java.awt.event.WindowEvent e)
-                {
+                public void windowClosing(java.awt.event.WindowEvent e) {
                     dispose();
                 }
             });

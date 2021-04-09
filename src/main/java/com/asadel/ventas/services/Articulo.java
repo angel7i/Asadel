@@ -2,8 +2,7 @@ package com.asadel.ventas.services;
 
 import java.math.BigDecimal;
 
-public class Articulo
-{
+public class Articulo {
 
     private String id;
     private String nombre;
@@ -14,22 +13,17 @@ public class Articulo
     private BigDecimal subtotal;
     private BigDecimal descuento;
 
-    public Articulo()
-    {
+    public Articulo() {
         this("", "", BigDecimal.ZERO.setScale(2), "", "");
     }
 
-    public Articulo(String ida, String nom, BigDecimal pre, String inf, String tip)
-    {
+    public Articulo(String ida, String nom, BigDecimal pre, String inf, String tip) {
         this.id = ida;
         this.nombre = nom;
 
-        if (pre.signum() >= 0)
-        {
+        if (pre.signum() >= 0) {
             this.precio = pre;
-        }
-        else
-        {
+        } else {
             this.precio = BigDecimal.ZERO.setScale(2);
         }
 
@@ -39,17 +33,13 @@ public class Articulo
         this.subtotal = null;
     }
 
-    public Articulo(String ida, String nom, BigDecimal pre, String inf, String tip, int cant, BigDecimal sub)
-    {
+    public Articulo(String ida, String nom, BigDecimal pre, String inf, String tip, int cant, BigDecimal sub) {
         this.id = ida;
         this.nombre = nom;
 
-        if (pre.signum() >= 0)
-        {
+        if (pre.signum() >= 0) {
             this.precio = pre;
-        }
-        else
-        {
+        } else {
             this.precio = BigDecimal.ZERO.setScale(2);
         }
 
@@ -59,8 +49,7 @@ public class Articulo
         this.subtotal = sub;
     }
 
-    public Articulo(String ida, String nom, String inf, String tip, BigDecimal pre, BigDecimal desc)
-    {
+    public Articulo(String ida, String nom, String inf, String tip, BigDecimal pre, BigDecimal desc) {
         this.id = ida;
         this.nombre = nom;
         this.info = inf;
@@ -69,101 +58,80 @@ public class Articulo
         descuento = desc;
     }
 
-    public void setId(String ida)
-    {
+    public void setId(String ida) {
         this.id = ida;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setNombre(String nom)
-    {
+    public void setNombre(String nom) {
         this.nombre = nom;
     }
 
-    public String getNombre()
-    {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setPrecio(BigDecimal pre)
-    {
-        if (pre.signum() >= 0)
-        {
+    public void setPrecio(BigDecimal pre) {
+        if (pre.signum() >= 0) {
             this.precio = pre;
-        }
-        else
-        {
+        } else {
             this.precio = BigDecimal.ZERO.setScale(2);
         }
     }
 
-    public BigDecimal getPrecio()
-    {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setInfo(String inf)
-    {
+    public void setInfo(String inf) {
         this.info = inf;
     }
 
-    public String getInfo()
-    {
+    public String getInfo() {
         return info;
     }
 
-    public void setTipo(String tip)
-    {
+    public void setTipo(String tip) {
         this.tipo = tip;
     }
 
-    public String getTipo()
-    {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setCantidad(int cant)
-    {
+    public void setCantidad(int cant) {
         this.cantidad = cant;
     }
 
-    public int getCantidad()
-    {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setSubtotal(BigDecimal subtotal)
-    {
+    public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
     }
 
-    public void setSubtotal(int cantidad)
-    {
+    public void setSubtotal(int cantidad) {
         this.subtotal = this.precio.multiply(new BigDecimal(String.valueOf(cantidad)));
     }
 
-    public BigDecimal getSubtotal()
-    {
+    public BigDecimal getSubtotal() {
         return subtotal;
     }
 
-    public BigDecimal getDescuento()
-    {
+    public BigDecimal getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(BigDecimal descuento)
-    {
+    public void setDescuento(BigDecimal descuento) {
         this.descuento = descuento;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "ID: " + id
                 + "\nNombre: " + nombre
                 + "\nInfo: " + info
