@@ -51,7 +51,7 @@ public class IUAcerca extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ASADEL Logo.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel2.setText("Version: 0.9.6 (2021.04)");
+        jLabel2.setText("Version: 0.9.7 (2021.04)");
 
         jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton1.setText("Cerrar");

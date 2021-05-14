@@ -173,15 +173,13 @@ public class IUConfiguracion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jList1);
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Precios");
-        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
-        jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Tema");
-        jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AutumnSkin", "BusinessBlackSteelSkin", "BusinessBlueSteelSkin", "BusinessSkin", "CeruleanSkin", "CremeCoffeeSkin", "CremeSkin", "DustCoffeeSkin", "DustSkin", "GeminiSkin", "GraphiteAquaSkin", "GraphiteGlassSkin", "GraphiteChalkSkin", "GraphiteElectricSkin", "GraphiteSkin", "MagellanSkin", "MarinerSkin", "MistAquaSkin", "MistSilverSkin", "ModerateSkin", "NebulaSkin", "NebulaAmethystSkin", "NebulaBrickWallSkin", "NightShadeSkin", "RavenSkin", "SaharaSkin", "SentinelSkin", "TwilightSkin" }));
 
@@ -194,16 +192,15 @@ public class IUConfiguracion extends javax.swing.JInternalFrame {
         });
 
         jButton15.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton15.setText("Respaldar");
+        jButton15.setText("Crear respaldo");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Crear respaldo");
-        jLabel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,9 +222,9 @@ public class IUConfiguracion extends javax.swing.JInternalFrame {
                             .addComponent(jTextField1))
                         .addGap(0, 164, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton12)
@@ -259,17 +256,16 @@ public class IUConfiguracion extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Preferencias", null, jPanel1, "Precios");
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Descuento aplicado a Lista Escolares");
-        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -320,9 +316,8 @@ public class IUConfiguracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Buscar");
-        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField3.setNextFocusableComponent(jTable1);

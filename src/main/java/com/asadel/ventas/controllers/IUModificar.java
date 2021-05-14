@@ -38,8 +38,7 @@ public class IUModificar extends javax.swing.JInternalFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -58,39 +57,29 @@ public class IUModificar extends javax.swing.JInternalFrame {
 
         setTitle("Modificar");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit2.png"))); // NOI18N
-        try
-        {
+        try {
             setSelected(true);
-        } catch (java.beans.PropertyVetoException e1)
-        {
+        } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
         setVisible(true);
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
-        {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
-            {
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
             }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameDeactivated(evt);
             }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
-            {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -99,46 +88,36 @@ public class IUModificar extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("ID");
-        jLabel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nombre");
-        jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Precio");
-        jLabel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Informacion");
-        jLabel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jTextField5.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
-        jTextField5.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField5KeyReleased(evt);
             }
         });
 
         jTextField6.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
-        jTextField6.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField6KeyReleased(evt);
             }
         });
 
         jTextField7.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
-        jTextField7.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField7KeyReleased(evt);
             }
         });
@@ -146,17 +125,13 @@ public class IUModificar extends javax.swing.JInternalFrame {
         jButton5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton5.setText("Actualizar");
         jButton5.setNextFocusableComponent(jButton6);
-        jButton5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jButton5.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jButton5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButton5KeyPressed(evt);
             }
         });
@@ -164,17 +139,13 @@ public class IUModificar extends javax.swing.JInternalFrame {
         jButton6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton6.setText("Cancelar");
         jButton6.setNextFocusableComponent(jComboBox2);
-        jButton6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jButton6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButton6KeyPressed(evt);
             }
         });
@@ -182,14 +153,11 @@ public class IUModificar extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Tipo");
-        jLabel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 204), 2, true));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(IUArticulos.TIPO));
         jComboBox2.setNextFocusableComponent(jTextField5);
-        jComboBox2.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox2ItemStateChanged(evt);
             }
         });
@@ -445,7 +413,7 @@ public class IUModificar extends javax.swing.JInternalFrame {
                 control.updateEsquema(oldArticulo, newArticulo);
                 break;
 
-            case "Mapa Cartulina":
+            case "Mapa Carta":
             case "Mapa MediaCartulina":
             case "Mapa Mural":
             case "MiniMapa":

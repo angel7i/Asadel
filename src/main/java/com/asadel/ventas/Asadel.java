@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
         })
 public class Asadel {
 
-    public static final Color ACTIVE_COLOR = new Color(0, 153, 255);
+    public static final Color ACTIVE_COLOR = new Color(97, 203, 234);
 
     private static Properties appProperties;
 
@@ -38,7 +38,6 @@ public class Asadel {
     }
 
     public static void main(String args[]) {
-
         appProperties = new Properties();
         Path home = Paths.get(System.getenv("ASADEL_HOME"));
         Path propertiesPath = home.resolve("asadel.properties").normalize();
@@ -55,7 +54,7 @@ public class Asadel {
 
         SwingUtilities.invokeLater(()
                 -> {
-            SubstanceCortex.GlobalScope.setSkin("org.pushingpixels.substance.api.skin.MistAquaSkin" );
+            SubstanceCortex.GlobalScope.setSkin("org.pushingpixels.substance.api.skin.MistAquaSkin");
             SpringApplicationBuilder builder = new SpringApplicationBuilder(Asadel.class);
             builder.headless(false);
             builder.bannerMode(Banner.Mode.OFF);

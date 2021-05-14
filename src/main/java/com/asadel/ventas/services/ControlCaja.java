@@ -83,7 +83,7 @@ public class ControlCaja {
         String user = propiedades.getDBUser();
         String pwd = propiedades.getDBSecret();
         Path exe = Paths.get(propiedades.getDBHome()).resolve("bin\\mysqldump");
-        Path directorio = Paths.get(propiedades.getBackupDirectory(), "AsadelBackup");
+        Path directorio = Paths.get(propiedades.getBackupDirectory());
         File directorioBackup = directorio.toFile();
 
         if (!directorioBackup.exists()) {
@@ -121,7 +121,6 @@ public class ControlCaja {
             } catch (IOException ex) {
 
             }
-
         }
     }
 }

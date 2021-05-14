@@ -38,9 +38,8 @@ public class Conexion {
     private Connection conn = null;
 
     private final String driver = "com.mysql.cj.jdbc.Driver";
-    private final String bd = "Papeleria";
-    private final String properties = "? useSSL=false & connectTimeout=0 & socketTimeout=0 & autoReconnect=true";
-    private final String url = "jdbc:mysql://localhost/" + bd + properties;
+    private final String properties = "?allowPublicKeyRetrieval=true&useSSL=false&connectTimeout=0&socketTimeout=0&autoReconnect=true";
+    private final String connectionPath = "jdbc:mysql://localhost/papeleria" + properties;
 
     private String user;
     private String secret;
@@ -60,9 +59,9 @@ public class Conexion {
         bdExe = Paths.get(propiedades.getDBHome());
 
         try {
-            conn = DriverManager.getConnection(url, user, secret);
+            conn = DriverManager.getConnection(connectionPath, user, secret);
         } catch (SQLException e) {
-            // e.printStackTrace();
+             e.printStackTrace();
 
             if (e instanceof SQLNonTransientConnectionException) {
                 var cause = e.getCause();
@@ -78,7 +77,7 @@ public class Conexion {
         }
 
         try {
-            conn = DriverManager.getConnection(url, user, secret);
+            conn = DriverManager.getConnection(connectionPath, user, secret);
         } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Error 2.2\n" + ex.getMessage(), "Error al conectarse a la BD", 2);
