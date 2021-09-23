@@ -91,7 +91,7 @@ public class IUReportes extends javax.swing.JInternalFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(230, 100));
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Caja actual ventas", "Caja actual articulos", "Reporte del mes", "Seleccionar reporte mensual", "Seleccionar caja ventas", "Seleccionar caja articulos", "Buscar factura" };
+            String[] strings = { "Ventas hoy", "Articulos vendidos hoy", "Ventas del mes", "Buscar ventas mensual", "Buscar ventas", "Buscar articulos", "Buscar factura" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -184,23 +184,19 @@ public class IUReportes extends javax.swing.JInternalFrame {
                 jPanel2.updateUI();
                 break;
             case 3:
-                if (fechaMes == null) {
-                    //fechaMes = new IUFechaMes((Frame) IUDesktop.jDesktopPane1.getParent().getParent().getParent().getParent(), true);
-                    //fechaMes.invoke();
-                    fechaMes.init(true);
+                fechaMes.init(true);
 
-                    java.awt.EventQueue.invokeLater(()
-                            -> {
-                        fechaMes.addWindowListener(new java.awt.event.WindowAdapter() {
-                            @Override
-                            public void windowClosing(java.awt.event.WindowEvent e) {
-                                //IUDesktop.reportes.fechaMes = null;
-                            }
-                        });
-
-                        fechaMes.setVisible(true);
+                java.awt.EventQueue.invokeLater(()
+                        -> {
+                    fechaMes.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            fechaMes.reset();
+                        }
                     });
-                }
+
+                    fechaMes.setVisible(true);
+                });
                 break;
             case 4:
                 if (fecha == null) {
@@ -240,7 +236,7 @@ public class IUReportes extends javax.swing.JInternalFrame {
                 }
                 break;
             case 6:
-                String id = JOptionPane.showInternalInputDialog(this, "ID de la Lista: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
+                String id = JOptionPane.showInternalInputDialog(this, "ID de la Factura: ", "Factura", JOptionPane.INFORMATION_MESSAGE);
 
                 if (id == null || id.isEmpty()) {
                     return;

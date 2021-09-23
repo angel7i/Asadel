@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.asadel</groupId>
     <artifactId>Asadel</artifactId>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <name>Asadel</name>
     <packaging>jar</packaging>
     
@@ -14,12 +14,12 @@
         <maven.jar.version>3.2.0</maven.jar.version>
         <version.mvn.compiler>3.8.1</version.mvn.compiler>
         
-        <spring.boot.version>2.4.4</spring.boot.version>
-        <radiance.version>3.5.1</radiance.version>
+        <spring.boot.version>2.5.4</spring.boot.version>
+        <radiance.version>4.0.0</radiance.version>
         <jcalendar.version>1.4</jcalendar.version>
-        <jasper.version>6.16.0</jasper.version>
+        <jasper.version>6.17.0</jasper.version>
         <itext.version>5.5.13.2</itext.version>
-        <groovy.version>3.0.7</groovy.version>
+        <groovy.version>3.0.9</groovy.version>
     </properties>
     
     <dependencyManagement>
@@ -72,7 +72,7 @@
             <version>${jcalendar.version}</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.pushing-pixels/radiance-substance -->
+        <!-- radiance-substance -->
         <dependency>
             <groupId>org.pushing-pixels</groupId>
             <artifactId>radiance-substance</artifactId>
