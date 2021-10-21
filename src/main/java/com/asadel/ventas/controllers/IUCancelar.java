@@ -220,7 +220,7 @@ public class IUCancelar extends javax.swing.JInternalFrame {
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameActivated
     {//GEN-HEADEREND:event_formInternalFrameActivated
         // Ventana activada
-        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+        //jPanel1.setBackground(Asadel.ACTIVE_COLOR);
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameDeactivated
@@ -387,7 +387,7 @@ public class IUCancelar extends javax.swing.JInternalFrame {
 
     public void refresh(int fila) {
         try {
-            lista.Consulta(select);
+            lista.doQuery(select);
             lista.fireTableDataChanged();
             lista.fireTableStructureChanged();
             showTotal();

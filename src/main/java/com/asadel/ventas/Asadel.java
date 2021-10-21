@@ -1,6 +1,5 @@
 package com.asadel.ventas;
 
-import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,9 +26,6 @@ import org.springframework.context.annotation.Bean;
             "com.asadel.ventas"
         })
 public class Asadel {
-
-    public static final Color ACTIVE_COLOR = new Color(97, 203, 234);
-
     private static Properties appProperties;
 
     @Bean
@@ -54,7 +50,7 @@ public class Asadel {
 
         SwingUtilities.invokeLater(()
                 -> {
-            SubstanceCortex.GlobalScope.setSkin("org.pushingpixels.substance.api.skin.MistAquaSkin");
+            SubstanceCortex.GlobalScope.setSkin("org.pushingpixels.substance.api.skin.GeminiSkin");
             SpringApplicationBuilder builder = new SpringApplicationBuilder(Asadel.class);
             builder.headless(false);
             builder.bannerMode(Banner.Mode.OFF);

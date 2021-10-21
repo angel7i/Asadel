@@ -1,12 +1,19 @@
 package com.asadel.ventas.services;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import lombok.Data;
 
+@Data
 public class Articulo {
-
     private String id;
     private String nombre;
-    private BigDecimal precio;
+    private BigDecimal precioVenta;
+    private BigDecimal precioCompra;
+    private String tiendaCompra;
+    private Date fechaCompra;
+    private int inventarioCompra;
+    private int inventarioVenta;
     private String info;
     private String tipo;
     private int cantidad;
@@ -22,9 +29,9 @@ public class Articulo {
         this.nombre = nom;
 
         if (pre.signum() >= 0) {
-            this.precio = pre;
+            this.precioVenta = pre;
         } else {
-            this.precio = BigDecimal.ZERO.setScale(2);
+            this.precioVenta = BigDecimal.ZERO.setScale(2);
         }
 
         this.info = inf;
@@ -38,9 +45,9 @@ public class Articulo {
         this.nombre = nom;
 
         if (pre.signum() >= 0) {
-            this.precio = pre;
+            this.precioVenta = pre;
         } else {
-            this.precio = BigDecimal.ZERO.setScale(2);
+            this.precioVenta = BigDecimal.ZERO.setScale(2);
         }
 
         this.info = inf;
@@ -54,89 +61,11 @@ public class Articulo {
         this.nombre = nom;
         this.info = inf;
         this.tipo = tip;
-        this.precio = pre;
+        this.precioVenta = pre;
         descuento = desc;
     }
 
-    public void setId(String ida) {
-        this.id = ida;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setNombre(String nom) {
-        this.nombre = nom;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setPrecio(BigDecimal pre) {
-        if (pre.signum() >= 0) {
-            this.precio = pre;
-        } else {
-            this.precio = BigDecimal.ZERO.setScale(2);
-        }
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setInfo(String inf) {
-        this.info = inf;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setTipo(String tip) {
-        this.tipo = tip;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setCantidad(int cant) {
-        this.cantidad = cant;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
-    }
-
     public void setSubtotal(int cantidad) {
-        this.subtotal = this.precio.multiply(new BigDecimal(String.valueOf(cantidad)));
-    }
-
-    public BigDecimal getSubtotal() {
-        return subtotal;
-    }
-
-    public BigDecimal getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(BigDecimal descuento) {
-        this.descuento = descuento;
-    }
-
-    @Override
-    public String toString() {
-        return "ID: " + id
-                + "\nNombre: " + nombre
-                + "\nInfo: " + info
-                + "\nTipo: " + tipo
-                + "\nPrecio: " + precio
-                + "\nDescuento: " + descuento;
+        this.subtotal = this.precioVenta.multiply(new BigDecimal(String.valueOf(cantidad)));
     }
 }

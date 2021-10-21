@@ -1,6 +1,5 @@
 package com.asadel.ventas.controllers;
 
-import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Articulo;
 import com.asadel.ventas.services.ArticulosTableModel;
 import com.asadel.ventas.services.Control;
@@ -23,9 +22,11 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class IUArticulos extends javax.swing.JInternalFrame {
 
@@ -43,7 +44,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
     private int filaSeleccionada;
     private Articulo item;
     private TableRowSorter<TableModel> sorter;
-    private String tipo;
+    private String productsType;
 
     public final static Object[] TIPO = new Object[]{
         "Todo",
@@ -65,13 +66,12 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         "Otros"
     };
 
-    private IUArticulos() {
-        filaSeleccionada = -1;
-        tipo = "";
-    }
-
     @PostConstruct
     public void init() {
+        log.trace("SELECT: {}", Control.SELECTALLARTICULOS);
+        filaSeleccionada = -1;
+        productsType = "";
+
         try {
             tablabase.init(Control.SELECTALLARTICULOS);
             sorter = new TableRowSorter<>(tablabase);
@@ -92,7 +92,6 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
@@ -115,6 +114,9 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+        jPopupMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem8.setText("Agregar");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +125,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(jMenuItem8);
 
+        jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem7.setText("Modificar");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +134,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(jMenuItem7);
 
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem5.setText("Eliminar");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,16 +142,9 @@ public class IUArticulos extends javax.swing.JInternalFrame {
             }
         });
         jPopupMenu1.add(jMenuItem5);
-
-        jMenuItem6.setText("Venta Personalizada");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(jMenuItem6);
         jPopupMenu1.add(jSeparator1);
 
+        jMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem9.setText("Agregar a la Lista");
         jMenuItem9.setToolTipText("");
         jMenuItem9.setActionCommand("");
@@ -338,9 +335,11 @@ public class IUArticulos extends javax.swing.JInternalFrame {
             }
         });
 
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Calibri", 0, 22)); // NOI18N
         jTextArea1.setRows(3);
         jScrollPane2.setViewportView(jTextArea1);
 
@@ -393,9 +392,9 @@ public class IUArticulos extends javax.swing.JInternalFrame {
                                 .addComponent(jToggleButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jToggleButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -420,7 +419,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         if (fila > -1) {
             filaSeleccionada = fila;
             item = getItem(filaSeleccionada);
-            String msg = "Precio: $" + item.getPrecio() + (item.getInfo() == null ? "" : "\n Info: " + item.getInfo());
+            String msg = "Precio: $" + item.getPrecioVenta() + (item.getInfo() == null ? "" : "\n Info: " + item.getInfo());
             this.jTextArea1.setText(msg);
 
             if (evt.getButton() == MouseEvent.BUTTON3) {
@@ -490,18 +489,13 @@ public class IUArticulos extends javax.swing.JInternalFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // PopupTabla - Update/Editar
         desktop.showModificar();
-        editar.setUpdatePane(item);
+        editar.loadArticle(item);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // PopupTabla - Eliminar
         deleteItem();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // PopupTabla - Venta Personalizada
-
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         //PopupTabla - Agregar a la Lista de Ventas
@@ -536,7 +530,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel3.setBackground(Asadel.ACTIVE_COLOR);//[0,153,255]
+        //jPanel3.setBackground(Asadel.ACTIVE_COLOR);//[0,153,255]
         refresh();
         jTextField2.requestFocus();
         jTextField2.getCaret().moveDot(0);
@@ -553,7 +547,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton1.setSelected(true);
 
         if (jToggleButton1.isSelected()) {
-            tipo = TIPO[0].toString();
+            productsType = TIPO[0].toString();
             jToggleButton1.setSelected(true);
             jToggleButton2.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -571,7 +565,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton2.setSelected(true);
 
         if (jToggleButton2.isSelected()) {
-            tipo = TIPO[1].toString();
+            productsType = TIPO[1].toString();
             jToggleButton1.setSelected(false);
             jToggleButton3.setSelected(false);
             jToggleButton4.setSelected(false);
@@ -588,7 +582,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton3.setSelected(true);
 
         if (jToggleButton3.isSelected()) {
-            tipo = TIPO[2].toString();
+            productsType = TIPO[2].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
             jToggleButton4.setSelected(false);
@@ -605,7 +599,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton4.setSelected(true);
 
         if (jToggleButton4.isSelected()) {
-            tipo = TIPO[3].toString();
+            productsType = TIPO[3].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -622,7 +616,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton5.setSelected(true);
 
         if (jToggleButton5.isSelected()) {
-            tipo = TIPO[4].toString();
+            productsType = TIPO[4].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -639,7 +633,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton6.setSelected(true);
 
         if (jToggleButton6.isSelected()) {
-            tipo = TIPO[5].toString();
+            productsType = TIPO[5].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -656,7 +650,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         jToggleButton7.setSelected(true);
 
         if (jToggleButton7.isSelected()) {
-            tipo = TIPO[6].toString();
+            productsType = TIPO[6].toString();
             jToggleButton1.setSelected(false);
             jToggleButton2.setSelected(false);
             jToggleButton3.setSelected(false);
@@ -673,7 +667,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         if (jTable.getSelectedRow() >= 0) {
             filaSeleccionada = jTable.getSelectedRow();
             item = getItem(filaSeleccionada);
-            String msg = "Precio: $" + item.getPrecio() + (item.getInfo() == null ? "" : "\n Info: " + item.getInfo());
+            String msg = "Precio: $" + item.getPrecioVenta() + (item.getInfo() == null ? "" : "\n Info: " + item.getInfo());
             this.jTextArea1.setText(msg);
         }
     }//GEN-LAST:event_jTableKeyReleased
@@ -691,7 +685,6 @@ public class IUArticulos extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem SeleccionarTodo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -724,32 +717,32 @@ public class IUArticulos extends javax.swing.JInternalFrame {
             columnaTabla = modeloColumna.getColumn(i);
 
             switch (i) {
-                case 0:
+                case 0 -> {
                     anchoColumna = 120;
                     columnaTabla.setMaxWidth(130);
                     columnaTabla.setMinWidth(anchoColumna);
-                    break;
-                case 1:
+                }
+                case 1 -> {
                     anchoColumna = 290;
                     columnaTabla.setMinWidth(200);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     anchoColumna = 100;
                     columnaTabla.setMaxWidth(anchoColumna);
                     columnaTabla.setMinWidth(90);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     columnaTabla.setMaxWidth(0);
                     columnaTabla.setMinWidth(0);
                     jTable.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
                     jTable.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     columnaTabla.setMaxWidth(0);
                     columnaTabla.setMinWidth(0);
                     jTable.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
                     jTable.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-                    break;
+                }
             }
 
             columnaTabla.setPreferredWidth(anchoColumna);
@@ -773,16 +766,16 @@ public class IUArticulos extends javax.swing.JInternalFrame {
             jTextField2.setText(null);
         } else {
             ArrayList<RowFilter<Object, Object>> andFilters = new ArrayList<>();
-            RowFilter<Object, Object> columnFilter = RowFilter.regexFilter(tipo, 4);
+            RowFilter<Object, Object> columnFilter = RowFilter.regexFilter(productsType, 4);
             RowFilter<Object, Object> wordFilter = RowFilter.regexFilter(Pattern.compile("(?i)" + texto).toString());
 
             andFilters.add(columnFilter);
             andFilters.add(wordFilter);
 
-            if (texto.isEmpty() && tipo.equals(TIPO[0].toString())) {
+            if (texto.isEmpty() && productsType.equals(TIPO[0].toString())) {
                 sorter.setRowFilter(null);
             } else {
-                if (texto.isEmpty() && !tipo.equals(TIPO[0].toString())) {
+                if (texto.isEmpty() && !productsType.equals(TIPO[0].toString())) {
                     try {
                         sorter.setRowFilter(columnFilter);
                         setColumnas();
@@ -790,7 +783,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
                         JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                     }
                 } else {
-                    if (texto.length() != 0 && tipo.equals(TIPO[0].toString())) {
+                    if (texto.length() != 0 && productsType.equals(TIPO[0].toString())) {
                         try {
                             sorter.setRowFilter(wordFilter);
                             setColumnas();
@@ -798,7 +791,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
                             JOptionPane.showInternalMessageDialog(this, "Patron de exp incorrecto");
                         }
                     } else {
-                        if (texto.length() != 0 && !tipo.equals(TIPO[0].toString())) {
+                        if (texto.length() != 0 && !productsType.equals(TIPO[0].toString())) {
                             try {
                                 sorter.setRowFilter(RowFilter.andFilter(andFilters));
                                 setColumnas();
@@ -814,7 +807,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
 
     public void refresh() {
         try {
-            tablabase.Consulta(Control.SELECTALLARTICULOS);
+            tablabase.doQuery(Control.SELECTALLARTICULOS);
             tablabase.fireTableDataChanged();
             tablabase.fireTableStructureChanged();
             setColumnas();
@@ -825,7 +818,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
 
     public void refreshData() {
         try {
-            tablabase.Consulta(Control.SELECTALLARTICULOS);
+            tablabase.doQuery(Control.SELECTALLARTICULOS);
             tablabase.fireTableDataChanged();
             setColumnas();
         } catch (SQLException sqlex2) {
@@ -833,7 +826,7 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         }
     }
 
-    public Articulo getItem(int row) {
+    public Articulo getItem(final int row) {
         if (row >= 0) {
             Object[] values = new Object[tablabase.getColumnCount()];
 
@@ -843,26 +836,16 @@ public class IUArticulos extends javax.swing.JInternalFrame {
                 values[i] = jTable.getValueAt(row, i);
             }
 
-            String id = (String) values[0];
+            String id = String.valueOf(values[0]);
             String nombre = (String) values[1];
             String info = (String) values[3];
             String tipo = (String) values[4];
-            BigDecimal precio = BigDecimal.ZERO;
-
-            switch ((String) values[4]) {
-                case "Monografia":
-                case "Biografia":
-                case "Mapa Carta":
-                case "MiniMapa":
-                case "Relieve":
-                case "Mapa Mural":
-                case "Mapa MediaCartulina":
-                    precio = control.getPreciosVar(tipo);
-                    break;
-
-                default:
-                    precio = (BigDecimal) values[2];
-            }
+            BigDecimal precio = (BigDecimal) (switch ((String) values[4]) {
+                case "Monografia", "Biografia", "Mapa Carta", "MiniMapa", "Relieve", "Mapa Mural", "Mapa MediaCartulina" ->
+                    control.getPreciosVar(tipo);
+                default ->
+                    values[2];
+            });
 
             item = new Articulo(id, nombre, precio, info, tipo, 1, precio);
         } else {
@@ -882,32 +865,22 @@ public class IUArticulos extends javax.swing.JInternalFrame {
         if (action == JOptionPane.YES_OPTION) {
             if (filaSeleccionada >= 0) {
                 switch (item.getTipo()) {
-                    case "Biografia":
+                    case "Biografia" ->
                         control.deleteBiografia(item);
-                        break;
 
-                    case "Esquema":
+                    case "Esquema" ->
                         control.deleteEsquema(item);
-                        break;
 
-                    case "Mapa Carta":
-                    case "Mapa MediaCartulina":
-                    case "Mapa Mural":
-                    case "MiniMapa":
+                    case "Mapa Carta", "Mapa MediaCartulina", "Mapa Mural", "MiniMapa" ->
                         control.deleteMapa(item);
-                        break;
-
-                    case "Monografia":
+                    case "Monografia" ->
                         control.deleteMonografia(item);
-                        break;
-
-                    case "Relieve":
+                    case "Relieve" ->
                         control.deleteRelieve(item);
-                        break;
-
-                    default:
+                    default -> {
                         control.deleteArticulo(item);
                         control.deletePrecioArt(item);
+                    }
                 }
 
                 filaSeleccionada = -1;

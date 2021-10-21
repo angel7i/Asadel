@@ -27,9 +27,10 @@ public class Control {
     //*
     //                      CONSTANTES PARA LAS CONSULTAS
 
-    public final static String SELECTARTICULOS = "SELECT idArticulo, Nombre, preciosArt.Precio, Info, Tipo from Articulos "
-            + "JOIN preciosArt ON "
-            + "Articulos.idArticulo = preciosArt.idPreciosArt ";
+    public final static String SELECTARTICULOS = """ 
+                                                SELECT idArticulo, Nombre, preciosArt.Precio, Info, Tipo from Articulos 
+                                                JOIN preciosArt ON 
+                                                Articulos.idArticulo = preciosArt.idPreciosArt """;
     public final static String SELECTBIOGRAFIAS = "SELECT idBiografia, Nombre, preciosVar.Precio, Info, Tipo from Biografias "
             + "JOIN preciosVar ON "
             + "Biografias.Tipo = preciosVar.idPreciosVar ";
@@ -39,39 +40,35 @@ public class Control {
     public final static String SELECTMAPAS = "SELECT idMapa, Nombre, preciosVar.Precio, Info, Tipo from Mapas "
             + "JOIN preciosVar ON "
             + "Mapas.Tipo = preciosVar.idPreciosVar ";
-    public final static String SELECTMONOGRAFIAS = "SELECT idMonografia, Nombre, preciosVar.Precio, Info, Tipo from Monografias "
-            + "JOIN preciosVar ON "
-            + "Monografias.Tipo = preciosVar.idPreciosVar ";
+    public final static String SELECTMONOGRAFIAS = """
+                                                SELECT idMonografia, Nombre, preciosVar.Precio, Info, Tipo from Monografias 
+                                                JOIN preciosVar ON 
+                                                Monografias.Tipo = preciosVar.idPreciosVar """;
     public final static String SELECTRELIEVES = "SELECT idRelieve, Nombre, preciosVar.Precio, Info, Tipo from Relieves "
             + "JOIN preciosVar ON "
             + "Relieves.Tipo = preciosVar.idPreciosVar ";
-    public final static String SELECTLISTA = "SELECT idArticuloLista AS ID, Nombre, Cantidad, Precio, Subtotal "
-            + "FROM articuloLista JOIN Lista ON "
-            + "articuloLista.Lista_idLista = Lista.idLista "
-            + "WHERE Lista.Estado = 1 "
-            + "ORDER BY articuloLista.idVenta ";
-    public final static String SELECTDESCUENTO = "SELECT idArticulo AS Id, Nombre, p.Precio, p.Descuento, "
-            + "ROUND(100 - (100 * (p.Descuento/p.Precio))) AS Porcentaje, "
-            + "(p.Precio != p.Descuento) as Activar "
-            + "FROM Articulos a INNER JOIN PreciosArt p ON "
-            + "a.idArticulo = p.idPreciosArt ";
+    public final static String SELECTLISTA = """
+                                            SELECT idArticuloLista AS ID, Nombre, Cantidad, Precio, Subtotal from articuloLista JOIN Lista ON 
+                                            articuloLista.Lista_idLista = Lista.idLista 
+                                            WHERE Lista.Estado = 1 
+                                            ORDER BY articuloLista.idVenta """;
 
     public final static String SELECTALLARTICULOS = SELECTARTICULOS
-            + "UNION "
+            + " UNION "
             + SELECTMONOGRAFIAS
-            + "UNION "
+            + " UNION "
             + SELECTBIOGRAFIAS
-            + "UNION "
+            + " UNION "
             + SELECTRELIEVES
-            + "UNION "
+            + " UNION "
             + SELECTMAPAS
-            + "UNION "
+            + " UNION "
             + SELECTESQUEMAS;
+
     //*
     //*
     //*
     //**************************************************************************
-
     private Connection conexion;
     private PreparedStatement ps;
     private Statement statement;
@@ -84,7 +81,6 @@ public class Control {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error 3\n" + e.getMessage(), "Error de Conexion", 2);
         }
-        
 
         log.info("Base de datos iniciada: {}", conexion != null);
     }
@@ -101,127 +97,117 @@ public class Control {
         }
     }
 
-    public void insertPrecioArt(Articulo a) {
-        String insert = null;
+    public Articulo getInfo(final Articulo article) {
+        ResultSet result = findArticle(article.getId());
 
         try {
-            if (!a.getId().isEmpty()) {
-                insert = "INSERT INTO preciosArt VALUES(?,?,?)";
-                ps = conexion.prepareStatement(insert);
-                ps.setString(1, a.getId());
-                ps.setBigDecimal(2, a.getPrecio());
-                ps.setBigDecimal(3, a.getDescuento());
-            } else {
-                insert = "INSERT INTO preciosArt (Precio, Descuento) VALUES(?,?)";
-                ps = conexion.prepareStatement(insert);
-                ps.setBigDecimal(1, a.getPrecio());
-                ps.setBigDecimal(2, a.getDescuento());
+            if (result.next()) {
+                article.setPrecioCompra(result.getBigDecimal("PrecioCompra"));
+                article.setTiendaCompra(result.getString("TiendaCompra"));
+                article.setFechaCompra(result.getDate("FechaCompra"));
+                article.setInventarioCompra(result.getInt("CantidadCompra"));
+                article.setInventarioVenta(result.getInt("CantidadVenta"));
             }
-
-            ps.executeUpdate();
-            ps.close();
-            insertArticulo(a);
-        } catch (SQLException e) {
-            changeID(a.getId());
-            updateID(a);
-        }
-//        catch (SQLException ex)
-//        {
-//            JOptionPane.showMessageDialog(null, "No se agrego el precioArt \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-    }
-
-    public void insertArticulo(Articulo a) {
-        try {
-            String insert = "INSERT INTO Articulos VALUES(?,?,?,?)";
-            String select = "SELECT idPreciosArt FROM PreciosArt ORDER BY idPreciosArt DESC LIMIT 1 ";
-            statement = conexion.createStatement();
-            rs = statement.executeQuery(select);
-
-            if (rs.next()) {
-                int id = rs.getInt("idPreciosArt");
-
-                if (!a.getId().isEmpty()) {
-                    id = Integer.parseInt(a.getId());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Información adicional no disponible \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException ex) {
+                    log.warn("", ex);
                 }
+            }
+        }
 
-                ps = conexion.prepareStatement(insert);
-                ps.setInt(1, id);
-                ps.setString(2, a.getNombre());
-                ps.setString(3, a.getInfo());
-                ps.setString(4, a.getTipo());
-                ps.executeUpdate();
-                statement.close();
-                ps.close();
+        return article;
+    }
+
+    public ResultSet findArticle(final String id) {
+        String select = """
+                            SELECT preciosArt.PrecioCompra AS PrecioCompra, TiendaCompra, FechaCompra, CantidadCompra, CantidadVenta FROM Articulos 
+                            JOIN preciosArt ON 
+                            Articulos.idArticulo = preciosArt.idPreciosArt 
+                            WHERE idArticulo = ? """;
+        ResultSet result = null;
+
+        try {
+            ps = conexion.prepareStatement(select);
+            ps.setLong(1, Long.parseLong(id));
+            result = ps.executeQuery();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Información adicional no disponible \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return result;
+    }
+
+    public void insertPrecioArticulo(final Articulo newArticle) {
+        String query = "INSERT INTO preciosArt (Precio, PrecioCompra) VALUES(?,?)";
+
+        if (!newArticle.getId().isEmpty()) {
+            query = "INSERT INTO preciosArt (idPreciosArt, Precio, PrecioCompra) VALUES(?,?,?)";
+        }
+
+        try (var operation = conexion.prepareStatement(query)) {
+            if (newArticle.getId().isEmpty()) {
+                operation.setBigDecimal(1, newArticle.getPrecioVenta());
+                operation.setBigDecimal(2, newArticle.getPrecioCompra());
+            } else {
+                operation.setString(1, newArticle.getId());
+                operation.setBigDecimal(2, newArticle.getPrecioVenta());
+                operation.setBigDecimal(3, newArticle.getPrecioCompra());
             }
 
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se agrego el Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            operation.executeUpdate();
+            insertArticulo(newArticle);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo agregar producto \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void changeID(String id) {
-        try {
-            String select = "SELECT * FROM articulos a "
-                    + "JOIN preciosArt p "
-                    + "ON a.idArticulo = p.idPreciosArt "
-                    + "WHERE idArticulo = ?";
+    public void insertArticulo(final Articulo newArticle) {
+        String selectQuery = "SELECT idPreciosArt FROM PreciosArt ORDER BY idPreciosArt DESC LIMIT 1 ";
 
-            ps = conexion.prepareStatement(select);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            rs.next();
+        try (var result = conexion.createStatement()) {
+            var queryResult = result.executeQuery(selectQuery);
 
-            Articulo a = new Articulo("", rs.getString("Nombre"),
-                    rs.getString("Info"), rs.getString("Tipo"), rs.getBigDecimal("Precio"),
-                    rs.getBigDecimal("Descuento"));
-            insertPrecioArt(a);
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se realizo el cambio de ID\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (queryResult.next()) {
+                int id = queryResult.getInt("idPreciosArt");
+                newArticle.setId(String.valueOf(id));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se agrego el Articulo \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
 
-    private void updateID(Articulo a) {
-        try {
-            String update = "UPDATE preciosArt SET Precio=?, Descuento=? "
-                    + "WHERE idPreciosArt = ?";
+        String insertQuery = "INSERT INTO Articulos VALUES(?,?,?,?,?,?,?,?)";
 
-            ps = conexion.prepareStatement(update);
-            ps.setBigDecimal(1, a.getPrecio());
-            ps.setBigDecimal(2, a.getDescuento());
-            ps.setString(3, a.getId());
-            ps.executeUpdate();
-
-            update = "UPDATE articulos SET Nombre=?, Info=?, Tipo=? "
-                    + "WHERE idArticulo = ? ";
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, a.getNombre());
-            ps.setString(2, a.getInfo());
-            ps.setString(3, a.getTipo());
-            ps.setString(4, a.getId());
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se realizo la actualización de ID\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        try (var operation = conexion.prepareStatement(insertQuery)) {
+            operation.setString(1, newArticle.getId());
+            operation.setString(2, newArticle.getNombre());
+            operation.setString(3, newArticle.getInfo());
+            operation.setString(4, newArticle.getTipo());
+            operation.setString(5, newArticle.getTiendaCompra());
+            operation.setDate(6, newArticle.getFechaCompra());
+            operation.setInt(7, newArticle.getInventarioCompra());
+            operation.setInt(8, newArticle.getInventarioVenta());
+            operation.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se agrego el Articulo \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void insertMonografia(Articulo articulo) {
-        try {
-            String insert = "INSERT INTO Monografias VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO Monografias VALUES(?,?,?,?,?)";
 
-            ps = conexion.prepareStatement(insert);
-            ps.setString(1, articulo.getId());
-            ps.setString(2, articulo.getNombre());
-            ps.setString(3, articulo.getInfo());
-            ps.setString(4, articulo.getTipo());
-            ps.setString(5, articulo.getTipo());
-            ps.executeUpdate();
-            ps.close();
-
+        try (var operation = conexion.prepareStatement(query)) {
+            operation.setString(1, articulo.getId() + "-MON");
+            operation.setString(2, articulo.getNombre());
+            operation.setString(3, articulo.getInfo());
+            operation.setString(4, articulo.getTipo());
+            operation.setString(5, articulo.getTipo());
+            operation.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se agregro la Monografia \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -296,47 +282,39 @@ public class Control {
         }
     }
 
-    public void updatePrecioArt(Articulo oldArticulo, Articulo newArticulo) {
-        try {
-            String update = "UPDATE preciosArt SET idPreciosArt=?, Precio=?, Descuento=? "
-                    + "WHERE idPreciosArt = ?";
+    public void updatePrecioArticulo(Articulo oldArticulo, Articulo newArticulo) {
+        String query = """
+                        UPDATE preciosArt SET PrecioCompra=?, Precio=?  
+                        WHERE idPreciosArt =? """;
 
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, newArticulo.getId());
-            ps.setBigDecimal(2, newArticulo.getPrecio());
-            ps.setBigDecimal(3, newArticulo.getDescuento());
-            ps.setString(4, oldArticulo.getId());
-            ps.executeUpdate();
-            ps.close();
+        try (var operation = conexion.prepareStatement(query)) {
+            operation.setBigDecimal(1, newArticulo.getPrecioCompra());
+            operation.setBigDecimal(2, newArticulo.getPrecioVenta());
+            operation.setString(3, oldArticulo.getId());
+            operation.executeUpdate();
             updateArticulo(newArticulo);
         } catch (SQLException e) {
-            changeID(newArticulo.getId());
-            deletePrecioArt(oldArticulo);
-            deleteArticulo(newArticulo);
-            deletePrecioArt(newArticulo);
-            insertPrecioArt(newArticulo);
+            JOptionPane.showMessageDialog(null, "No se pudo modificar el producto \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-//        catch (SQLException ex)
-//        {
-//            ex.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "No se actualizo el precioArt \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
     }
 
-    public void updateArticulo(Articulo newArticulo) {
-        try {
-            String insert = "INSERT INTO Articulos VALUES(?, ?, ?, ?)";
+    public void updateArticulo(final Articulo newArticulo) {
+        String query = """
+                        UPDATE Articulos SET Nombre=?, Info=?, Tipo=?, TiendaCompra=?, FechaCompra=?, CantidadCompra=?, CantidadVenta=? 
+                        WHERE idArticulo =? """;
 
-            ps = conexion.prepareStatement(insert);
-            ps.setString(1, newArticulo.getId());
-            ps.setString(2, newArticulo.getNombre());
-            ps.setString(3, newArticulo.getInfo());
-            ps.setString(4, newArticulo.getTipo());
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se actualizo el Articulo \n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        try (var operation = conexion.prepareStatement(query)) {
+            operation.setString(1, newArticulo.getNombre());
+            operation.setString(2, newArticulo.getInfo());
+            operation.setString(3, newArticulo.getTipo());
+            operation.setString(4, newArticulo.getTiendaCompra());
+            operation.setDate(5, newArticulo.getFechaCompra());
+            operation.setInt(6, newArticulo.getInventarioCompra());
+            operation.setInt(7, newArticulo.getInventarioVenta());
+            operation.setString(8, newArticulo.getId());
+            operation.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se modifico el producto \n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -567,7 +545,7 @@ public class Control {
                 return;
             }
 
-            select = "SELECT MONTH(fecInicio) from CajaMes AS Mes "
+            select = "SELECT MONTH(fecInicio) FROM CajaMes AS Mes "
                     + "WHERE idCajaMes = '" + id + "'";
             rs = statement.executeQuery(select);
             int mes = 0;
@@ -952,7 +930,7 @@ public class Control {
             ps.setString(1, articulo.getId());
             ps.setString(2, articulo.getNombre());
             ps.setInt(3, articulo.getCantidad());
-            ps.setBigDecimal(4, articulo.getPrecio());
+            ps.setBigDecimal(4, articulo.getPrecioVenta());
             ps.setBigDecimal(5, articulo.getSubtotal());
             ps.setInt(6, id);
             ps.executeUpdate();
@@ -966,7 +944,7 @@ public class Control {
             ps.setString(3, articulo.getNombre());
             ps.setString(4, articulo.getInfo());
             ps.setInt(5, articulo.getCantidad());
-            ps.setBigDecimal(6, articulo.getPrecio());
+            ps.setBigDecimal(6, articulo.getPrecioVenta());
             ps.setBigDecimal(7, articulo.getSubtotal());
             ps.setInt(8, getIdLista());
             ps.executeUpdate();
@@ -1472,45 +1450,6 @@ public class Control {
         return total;
     }
 
-    public String getNameSystem(String id) {
-        String name = "";
-
-        try {
-            String select = "SELECT Nombre FROM Info "
-                    + "WHERE idInfo = '" + id + "' ";
-
-            statement = conexion.createStatement();
-            rs = statement.executeQuery(select);
-
-            if (rs.next()) {
-                name = rs.getString("Nombre");
-            } else {
-                return name;
-            }
-
-            statement.close();
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede obtener el Nombre del Sistema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return name;
-    }
-
-    public void setNameSystem(String name) {
-        String update = "UPDATE Info SET Nombre = ? "
-                + "WHERE idInfo = 'Nombre'";
-
-        try {
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, name);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se actualizo el Nombre del Sistema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     public void cancelarLista(String id) {
         try {
             BigDecimal totalLista = getTotalFactura(id);
@@ -1636,15 +1575,15 @@ public class Control {
 
                 if (opc == 1) {
                     cantidad = rs.getInt("Cantidad") + 1;
-                    subtotal = getRecaudadoCajaDia().add(item.getPrecio());
+                    subtotal = getRecaudadoCajaDia().add(item.getPrecioVenta());
                 } else if (opc == 2) {
                     cantidad = rs.getInt("Cantidad");
-                    subtotal = item.getPrecio().multiply(new BigDecimal(item.getCantidad() - cantidad));
+                    subtotal = item.getPrecioVenta().multiply(new BigDecimal(item.getCantidad() - cantidad));
                     subtotal = getRecaudadoCajaDia().add(subtotal);
                     cantidad = item.getCantidad();
                 } else {
                     cantidad = rs.getInt("Cantidad") - 1;
-                    subtotal = getRecaudadoCajaDia().subtract(item.getPrecio());
+                    subtotal = getRecaudadoCajaDia().subtract(item.getPrecioVenta());
 
                     if (cantidad == 0) {
                         deleteItemCancelacion(item, id);
@@ -1697,131 +1636,5 @@ public class Control {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede modificar el item \n" + ex.getMessage(), "Error cancelacion", 2);
         }
-    }
-
-    public boolean setDirBackup(String dir) {
-        String update = "UPDATE Info SET Nombre = ? "
-                + "WHERE idInfo = 'Backup'";
-
-        try {
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, dir);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se actualizo la ruta de respaldo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
-    }
-
-    public String getDirBackup() {
-        String dir = "";
-
-        try {
-            String select = "SELECT Nombre FROM Info "
-                    + "WHERE idInfo = 'Backup'";
-
-            ps = conexion.prepareStatement(select);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                dir = rs.getString("Nombre");
-            } else {
-                return dir;
-            }
-
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede obtener la ruta de respaldo\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return dir;
-    }
-
-    public boolean setTheme(String theme) {
-        String update = "UPDATE Info SET Nombre = ? "
-                + "WHERE idInfo = 'Theme'";
-
-        try {
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, theme);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se actualizo el tema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
-    }
-
-    public String getTheme() {
-        String theme = "";
-
-        try {
-            String select = "SELECT Nombre FROM Info "
-                    + "WHERE idInfo = 'Theme'";
-
-            ps = conexion.prepareStatement(select);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                theme = rs.getString("Nombre");
-            } else {
-                return theme;
-            }
-
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede obtener el tema\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return theme;
-    }
-
-    public boolean setDirectorioReportes(String directorio) {
-        String update = "UPDATE Info SET Nombre = ? "
-                + "WHERE idInfo = 'DirectorioReportes'";
-
-        try {
-            ps = conexion.prepareStatement(update);
-            ps.setString(1, directorio);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se actualizo el directorio de reportes\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
-    }
-
-    public String getDirectorioReportes() {
-        String directorio = "";
-
-        try {
-            String select = "SELECT Nombre FROM Info "
-                    + "WHERE idInfo = 'DirectorioReportes'";
-
-            ps = conexion.prepareStatement(select);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                directorio = rs.getString("Nombre");
-            } else {
-                return directorio;
-            }
-
-            ps.close();
-            rs.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede obtener el directorio de reportes\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return directorio;
     }
 }

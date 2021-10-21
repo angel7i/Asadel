@@ -1,16 +1,18 @@
 package com.asadel.ventas.controllers;
 
-import com.asadel.ventas.Asadel;
 import com.asadel.ventas.services.Articulo;
 import com.asadel.ventas.services.Control;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Date;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class IUAgregar extends JInternalFrame {
 
@@ -19,19 +21,9 @@ public class IUAgregar extends JInternalFrame {
     @Autowired
     private Control control;
 
-    private static IUAgregar ventana;
-    private Articulo articulo;
-
-    private IUAgregar() {
+    public IUAgregar() {
         initComponents();
-    }
-
-    public static IUAgregar getInstance() {
-        if (ventana == null) {
-            return ventana = new IUAgregar();
-        } else {
-            return ventana;
-        }
+        this.purchaseDateInput.setDate(new Date());
     }
 
     @SuppressWarnings("unchecked")
@@ -39,29 +31,39 @@ public class IUAgregar extends JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        nameInput = new javax.swing.JTextField();
+        idInput = new javax.swing.JTextField();
+        createButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        typeInput = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descriptionInput = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        purchasePriceInput = new javax.swing.JSpinner();
+        salePriceInput = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        purchaseStoreInput = new javax.swing.JTextField();
+        purchaseDateInput = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        saleItemsInput = new javax.swing.JSpinner();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        packagePriceInput = new javax.swing.JSpinner();
+        packageQuantityInput = new javax.swing.JSpinner();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Agregar articulo");
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Agregar producto");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addarticulo2.png"))); // NOI18N
-        setPreferredSize(new java.awt.Dimension(459, 500));
+        setMinimumSize(new java.awt.Dimension(700, 760));
+        setPreferredSize(new java.awt.Dimension(700, 760));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -90,80 +92,33 @@ public class IUAgregar extends JInternalFrame {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jTextArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(jTextArea2);
-
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ID");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre del producto");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Precio");
+        jLabel3.setText("Precio de venta");
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Informacion");
+        jLabel4.setText("Descripción");
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.setNextFocusableComponent(jButton2);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        createButton.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        createButton.setForeground(new java.awt.Color(0, 153, 51));
+        createButton.setText("Agregar producto");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                createButtonActionPerformed(evt);
             }
         });
-        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        createButton.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton1KeyPressed(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.setNextFocusableComponent(jButton3);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton2KeyPressed(evt);
-            }
-        });
-
-        jButton3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton3.setText("Confirmar");
-        jButton3.setNextFocusableComponent(jButton4);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton3KeyPressed(evt);
-            }
-        });
-
-        jButton4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton4.setText("Cancelar");
-        jButton4.setNextFocusableComponent(jComboBox1);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton4KeyPressed(evt);
+                createButtonKeyPressed(evt);
             }
         });
 
@@ -171,92 +126,164 @@ public class IUAgregar extends JInternalFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Tipo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(IUArticulos.TIPO));
-        jComboBox1.setNextFocusableComponent(jTextField1);
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        typeInput.setModel(new javax.swing.DefaultComboBoxModel(IUArticulos.TIPO));
+        typeInput.setNextFocusableComponent(idInput);
+        typeInput.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                typeInputItemStateChanged(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descriptionInput.setColumns(20);
+        descriptionInput.setRows(5);
+        descriptionInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane1.setViewportView(descriptionInput);
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Precio de compra");
+
+        purchasePriceInput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        purchasePriceInput.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.5d, null, 0.5d));
+        purchasePriceInput.setMinimumSize(new java.awt.Dimension(300, 20));
+
+        salePriceInput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        salePriceInput.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.5d, null, 0.5d));
+        salePriceInput.setMinimumSize(new java.awt.Dimension(300, 20));
+
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Tienda de compra");
+
+        jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Fecha de compra");
+
+        purchaseStoreInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseStoreInputActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Cantidad en inventario");
+
+        saleItemsInput.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
+        saleItemsInput.setMinimumSize(new java.awt.Dimension(300, 20));
+
+        jLabel11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Precio paquete ");
+
+        jLabel12.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Piezas paquete ");
+
+        packagePriceInput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        packagePriceInput.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.5d));
+        packagePriceInput.setPreferredSize(new java.awt.Dimension(300, 20));
+        packagePriceInput.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                packagePriceInputStateChanged(evt);
+            }
+        });
+
+        packageQuantityInput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        packageQuantityInput.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        packageQuantityInput.setMinimumSize(new java.awt.Dimension(300, 20));
+        packageQuantityInput.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                packageQuantityInputStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(47, 47, 47))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addGap(47, 47, 47))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
+                    .addComponent(nameInput)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(typeInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(idInput)
+                    .addComponent(createButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(packagePriceInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(purchaseStoreInput)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(purchasePriceInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(saleItemsInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                            .addComponent(purchaseDateInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(salePriceInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(packageQuantityInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(typeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 103, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                    .addComponent(packagePriceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(packageQuantityInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(16, 16, 16))
+                    .addComponent(purchasePriceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salePriceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(purchaseStoreInput)
+                    .addComponent(purchaseDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saleItemsInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,284 +306,215 @@ public class IUAgregar extends JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activada
-        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
-
-        if (jComboBox1.getSelectedIndex() == 0) {
-            jTextField1.setEnabled(false);
-            jTextField2.setEnabled(false);
-            jTextField3.setEnabled(false);
-            jTextArea1.setEnabled(false);
+        if (typeInput.getSelectedIndex() == 0) {
+            idInput.setEnabled(false);
+            nameInput.setEnabled(false);
+            packagePriceInput.setEnabled(false);
+            packageQuantityInput.setEnabled(false);
+            packagePriceInput.setEnabled(false);
+            packageQuantityInput.setEnabled(false);
+            purchasePriceInput.setEnabled(false);
+            salePriceInput.setEnabled(false);
+            purchaseStoreInput.setEnabled(false);
+            purchaseDateInput.setEnabled(false);
+            saleItemsInput.setEnabled(false);
+            descriptionInput.setEnabled(false);
+            createButton.setEnabled(false);
         }
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
         // Ventana Desactivada
-        jPanel1.setBackground(Color.getColor(System.getProperty("Panel.background")));
     }//GEN-LAST:event_formInternalFrameDeactivated
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_jComboBox1ItemStateChanged
-    {//GEN-HEADEREND:event_jComboBox1ItemStateChanged
+    private void typeInputItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_typeInputItemStateChanged
+    {//GEN-HEADEREND:event_typeInputItemStateChanged
         // Seleccion de Articulo
-        if (jComboBox1.getSelectedIndex() == 0) {
-            jTextField1.setEnabled(false);
-            jTextField2.setEnabled(false);
-            jTextField3.setEnabled(false);
-            jTextArea1.setEnabled(false);
-        } else if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
-                || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
-                || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
-                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema") {
-            jTextField1.setEnabled(true);
-            jTextField2.setEnabled(true);
-            jTextField3.setEnabled(false);
-            jTextArea1.setEnabled(true);
+        if (typeInput.getSelectedIndex() == 0) {
+            idInput.setEnabled(false);
+            nameInput.setEnabled(false);
+            packagePriceInput.setEnabled(false);
+            packageQuantityInput.setEnabled(false);
+            purchasePriceInput.setEnabled(false);
+            salePriceInput.setEnabled(false);
+            purchaseStoreInput.setEnabled(false);
+            purchaseDateInput.setEnabled(false);
+            saleItemsInput.setEnabled(false);
+            descriptionInput.setEnabled(false);
+            createButton.setEnabled(false);
+        } else if (typeInput.getSelectedItem() == "Monografia" || typeInput.getSelectedItem() == "Biografia"
+                || typeInput.getSelectedItem() == "Mapa Carta" || typeInput.getSelectedItem() == "Mapa Mural"
+                || typeInput.getSelectedItem() == "Mapa MediaCartulina" || typeInput.getSelectedItem() == "MiniMapa"
+                || typeInput.getSelectedItem() == "Relieve" || typeInput.getSelectedItem() == "Esquema") {
+            idInput.setEnabled(true);
+            nameInput.setEnabled(true);
+            packagePriceInput.setEnabled(false);
+            packageQuantityInput.setEnabled(false);
+            purchasePriceInput.setEnabled(false);
+            salePriceInput.setEnabled(false);
+            purchaseStoreInput.setEnabled(false);
+            purchaseDateInput.setEnabled(false);
+            saleItemsInput.setEnabled(false);
+            descriptionInput.setEnabled(true);
+            createButton.setEnabled(true);
         } else {
-            jTextField1.setEnabled(true);
-            jTextField2.setEnabled(true);
-            jTextField3.setEnabled(true);
-            jTextArea1.setEnabled(true);
+            idInput.setEnabled(false);
+            nameInput.setEnabled(true);
+            packagePriceInput.setEnabled(true);
+            packageQuantityInput.setEnabled(true);
+            packagePriceInput.setEnabled(true);
+            packageQuantityInput.setEnabled(true);
+            purchasePriceInput.setEnabled(true);
+            salePriceInput.setEnabled(true);
+            purchaseStoreInput.setEnabled(true);
+            purchaseDateInput.setEnabled(true);
+            saleItemsInput.setEnabled(true);
+            descriptionInput.setEnabled(true);
+            createButton.setEnabled(true);
         }
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_typeInputItemStateChanged
 
-    private void jButton4KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton4KeyPressed
-    {//GEN-HEADEREND:event_jButton4KeyPressed
-        // Cancelar Insertar a la BD
+    private void createButtonKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_createButtonKeyPressed
+    {//GEN-HEADEREND:event_createButtonKeyPressed
+        // Agregar a la BD
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            if (articulo == null) {
+            if (createItem()) {
+                idInput.setText(null);
+                nameInput.setText(null);
+                purchaseStoreInput.setText(null);
+                descriptionInput.setText(null);
+                typeInput.setSelectedIndex(0);
                 this.doDefaultCloseAction();
             }
-
-            jTextArea2.setText(null);
-            articulo = null;
-            System.gc();
         }
-    }//GEN-LAST:event_jButton4KeyPressed
+    }//GEN-LAST:event_createButtonKeyPressed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
-    {//GEN-HEADEREND:event_jButton4ActionPerformed
-        // Cancelar Insertar a la BD
-        if (articulo == null) {
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_createButtonActionPerformed
+    {//GEN-HEADEREND:event_createButtonActionPerformed
+        // Agregar a la BD
+        if (createItem()) {
+            idInput.setText(null);
+            nameInput.setText(null);
+            purchaseStoreInput.setText(null);
+            descriptionInput.setText(null);
+            typeInput.setSelectedIndex(0);
             this.doDefaultCloseAction();
         }
+    }//GEN-LAST:event_createButtonActionPerformed
 
-        jTextArea2.setText(null);
-        articulo = null;
-        System.gc();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void purchaseStoreInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseStoreInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_purchaseStoreInputActionPerformed
 
-    private void jButton3KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton3KeyPressed
-    {//GEN-HEADEREND:event_jButton3KeyPressed
-        // Agregar a la BD
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            addItem();
+    private void packagePriceInputStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_packagePriceInputStateChanged
+        // TODO add your handling code here:
+        updatePrices();
+    }//GEN-LAST:event_packagePriceInputStateChanged
 
-            jTextField1.setText(null);
-            jTextField2.setText(null);
-            jTextField3.setText(null);
-            jTextArea1.setText(null);
-            jTextArea2.setText(null);
-            jComboBox1.setSelectedIndex(0);
-            articulo = null;
-            System.gc();
-        }
-    }//GEN-LAST:event_jButton3KeyPressed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
-    {//GEN-HEADEREND:event_jButton3ActionPerformed
-        // Agregar a la BD
-        if (addItem()) {
-            jTextField1.setText(null);
-            jTextField2.setText(null);
-            jTextField3.setText(null);
-            jTextArea1.setText(null);
-            jTextArea2.setText(null);
-            jComboBox1.setSelectedIndex(0);
-            articulo = null;
-            System.gc();
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton2KeyPressed
-    {//GEN-HEADEREND:event_jButton2KeyPressed
-        // Cancelar Crear Articulo
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            jTextField1.setText(null);
-            jTextField2.setText(null);
-            jTextField3.setText(null);
-            jTextArea1.setText(null);
-            jTextArea2.setText(null);
-        }
-    }//GEN-LAST:event_jButton2KeyPressed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
-        // Cancerlar Creacion Articulo
-        jTextField1.setText(null);
-        jTextField2.setText(null);
-        jTextField3.setText(null);
-        jTextArea1.setText(null);
-        jTextArea2.setText(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButton1KeyPressed
-    {//GEN-HEADEREND:event_jButton1KeyPressed
-        // Crear item
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            createItem();
-        }
-    }//GEN-LAST:event_jButton1KeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        // Crear Item
-        jTextArea2.setText("");
-        createItem();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void packageQuantityInputStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_packageQuantityInputStateChanged
+        // TODO add your handling code here:
+        updatePrices();
+    }//GEN-LAST:event_packageQuantityInputStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton createButton;
+    private javax.swing.JTextArea descriptionInput;
+    private javax.swing.JTextField idInput;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nameInput;
+    private javax.swing.JSpinner packagePriceInput;
+    private javax.swing.JSpinner packageQuantityInput;
+    private com.toedter.calendar.JDateChooser purchaseDateInput;
+    private javax.swing.JSpinner purchasePriceInput;
+    private javax.swing.JTextField purchaseStoreInput;
+    private javax.swing.JSpinner saleItemsInput;
+    private javax.swing.JSpinner salePriceInput;
+    private javax.swing.JComboBox typeInput;
     // End of variables declaration//GEN-END:variables
 
-    public boolean addItem() {
-        if (articulo == null) {
-            JOptionPane.showInternalMessageDialog(this, "No se ha introducido ningun articulo", "Error", 2);
-            return false;
+    public boolean createItem() {
+        var success = false;
+        var article = new Articulo();
+
+        if (typeInput.getSelectedItem() == "Monografia" || typeInput.getSelectedItem() == "Biografia"
+                || typeInput.getSelectedItem() == "Mapa Carta" || typeInput.getSelectedItem() == "Mapa Mural"
+                || typeInput.getSelectedItem() == "Mapa MediaCartulina" || typeInput.getSelectedItem() == "MiniMapa"
+                || typeInput.getSelectedItem() == "Relieve" || typeInput.getSelectedItem() == "Esquema") {
+            if (!(idInput.getText().isEmpty() || nameInput.getText().isEmpty())) {
+                article.setId(idInput.getText());
+                article.setTipo(typeInput.getSelectedItem().toString());
+                article.setNombre(nameInput.getText());
+                article.setInfo(descriptionInput.getText());
+
+                success = true;
+            } else {
+                JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
+            }
         } else {
-            switch ((String) jComboBox1.getSelectedItem()) {
-                case "Biografia":
-                    control.insertBiografia(articulo);
-                    break;
+            if (!nameInput.getText().isEmpty()) {
+                article.setId(idInput.getText());
+                article.setTipo(typeInput.getSelectedItem().toString());
+                article.setNombre(nameInput.getText());
 
-                case "Esquema":
-                    control.insertEsquema(articulo);
-                    break;
+                article.setPrecioCompra(BigDecimal.valueOf(Double.parseDouble(purchasePriceInput.getValue().toString())));
+                article.setPrecioVenta(BigDecimal.valueOf(Double.parseDouble(salePriceInput.getValue().toString())));
+                article.setInfo(descriptionInput.getText());
+                article.setTiendaCompra(purchaseStoreInput.getText());
 
-                case "Mapa Carta":
-                case "Mapa MediaCartulina":
-                case "Mapa Mural":
-                case "MiniMapa":
-                    control.insertMapa(articulo);
-                    break;
+                article.setInventarioCompra(Integer.parseInt(packageQuantityInput.getValue().toString()));
+                article.setInventarioVenta(Integer.parseInt(saleItemsInput.getValue().toString()));
 
-                case "Monografia":
-                    control.insertMonografia(articulo);
-                    break;
+                if (purchaseDateInput.getDate() != null) {
+                    article.setFechaCompra(new java.sql.Date(purchaseDateInput.getDate().getTime()));
+                }
 
-                case "Relieve":
-                    control.insertRelieve(articulo);
-                    break;
-
-                default:
-                    control.insertPrecioArt(articulo);
+                success = true;
+            } else {
+                JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
             }
         }
 
-        return true;
+        if (success) {
+            switch (typeInput.getSelectedItem().toString()) {
+                case "Biografia" ->
+                    control.insertBiografia(article);
+                case "Esquema" ->
+                    control.insertEsquema(article);
+                case "Mapa Carta", "Mapa MediaCartulina", "Mapa Mural", "MiniMapa" ->
+                    control.insertMapa(article);
+                case "Monografia" ->
+                    control.insertMonografia(article);
+                case "Relieve" ->
+                    control.insertRelieve(article);
+
+                default ->
+                    control.insertPrecioArticulo(article);
+            }
+        }
+
+        return success;
     }
 
-    public void createItem() {
-        if (jComboBox1.getSelectedItem() == "Monografia" || jComboBox1.getSelectedItem() == "Biografia"
-                || jComboBox1.getSelectedItem() == "Mapa Carta" || jComboBox1.getSelectedItem() == "Mapa Mural"
-                || jComboBox1.getSelectedItem() == "Mapa MediaCartulina" || jComboBox1.getSelectedItem() == "MiniMapa"
-                || jComboBox1.getSelectedItem() == "Relieve" || jComboBox1.getSelectedItem() == "Esquema") {
-            if (!(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty())) {
-                String id = jTextField1.getText();
-                String nombre = jTextField2.getText();
-                BigDecimal precio = null;
+    private void updatePrices() {
+        var packagePrice = new BigDecimal(packagePriceInput.getValue().toString());
+        var packageItems = new BigDecimal(packageQuantityInput.getValue().toString());
 
-                String info = jTextField2.getText();
-                if (!jTextArea1.getText().isEmpty()) {
-                    info = jTextArea1.getText();
-                }
+        var priceItem = packagePrice.divide(packageItems, RoundingMode.CEILING);
+        var salePriceItem = priceItem.multiply(BigDecimal.valueOf(1.5));
 
-                String tipo = (String) jComboBox1.getSelectedItem();
-
-                switch (tipo) {
-                    case "Monografia":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Biografia":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Mapa Carta":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "MiniMapa":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Relieve":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Esquema":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Mapa Mural":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-
-                    case "Mapa MediaCartulina":
-                        precio = control.getPreciosVar(tipo);
-                        break;
-                }
-
-                articulo = new Articulo(id, nombre, precio, info, tipo);
-                jTextArea2.append("Articulo\nID: " + articulo.getId());
-                jTextArea2.append("\nNombre: " + articulo.getNombre());
-                jTextArea2.append("\nPrecio: " + articulo.getPrecio());
-                jTextArea2.append("\nInformacion: " + articulo.getInfo());
-                jTextArea2.append("\nTipo: " + articulo.getTipo());
-            } else {
-                JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
-            }
-        } else {
-            if (!(jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextArea1.getText().isEmpty())) {
-                String id = jTextField1.getText();
-                String nombre = jTextField2.getText();
-                BigDecimal precio = BigDecimal.valueOf(Double.parseDouble(jTextField3.getText()));
-                String info = jTextArea1.getText();
-                String tipo = (String) jComboBox1.getSelectedItem();
-                BigDecimal descuento = precio.multiply(control.getDescuentoGlobal().divide(new BigDecimal("100.00"))).setScale(2);
-
-                if (precio.signum() == -1) {
-                    JOptionPane.showInternalMessageDialog(this, "Solo Dinero Real");
-                    jTextField3.setText(null);
-                } else {
-                    articulo = new Articulo(id, nombre, precio, info, tipo);
-                    articulo.setDescuento(descuento);
-                    jTextArea2.append("Articulo\n");
-                    jTextArea2.append("ID: " + (!id.isEmpty() ? articulo.getId() : "Default"));
-                    jTextArea2.append("\nNombre: " + articulo.getNombre());
-                    jTextArea2.append("\nPrecio: " + articulo.getPrecio());
-                    jTextArea2.append("\nDescuento: " + articulo.getDescuento());
-                    jTextArea2.append("\nInformacion: " + articulo.getInfo());
-                    jTextArea2.append("\nTipo: " + articulo.getTipo());
-                }
-            } else {
-                JOptionPane.showInternalMessageDialog(this, "Campos sin llenar", "Error", 2);
-            }
-        }
+        purchasePriceInput.setValue(priceItem.doubleValue());
+        salePriceInput.setValue(salePriceItem.doubleValue());
     }
 }

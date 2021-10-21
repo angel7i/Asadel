@@ -2,20 +2,15 @@ package com.asadel.ventas.services;
 
 import com.mysql.cj.exceptions.CJException;
 import java.awt.HeadlessException;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 import javax.annotation.PostConstruct;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -47,13 +42,6 @@ public class Conexion {
 
     @PostConstruct
     public void setConfiguracion() {
-//        try {
-//            Class.forName(driver).getDeclaredConstructor().newInstance();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Error 1\n" + e.getMessage(), "No se Encontro Driver", 2);
-//            System.exit(0);
-//        }
-
         user = propiedades.getDBUser();
         secret = propiedades.getDBSecret();
         bdExe = Paths.get(propiedades.getDBHome());
@@ -61,7 +49,7 @@ public class Conexion {
         try {
             conn = DriverManager.getConnection(connectionPath, user, secret);
         } catch (SQLException e) {
-             e.printStackTrace();
+            e.printStackTrace();
 
             if (e instanceof SQLNonTransientConnectionException) {
                 var cause = e.getCause();
@@ -248,7 +236,7 @@ public class Conexion {
 
             Path exe = bdExe.resolve("bin\\mysql.exe");
 
-            String createSchema ="\"" + exe.toString() + "\"" + " -u " + user + " -p" + secret + " -e \"CREATE SCHEMA Papeleria\"";
+            String createSchema = "\"" + exe.toString() + "\"" + " -u " + user + " -p" + secret + " -e \"CREATE SCHEMA Papeleria\"";
             String[] restore = new String[]{
                 exe.toString(), "--user=" + user, "--password=" + secret, "-e", "source " + archivo.getAbsolutePath()
             };
@@ -279,23 +267,6 @@ public class Conexion {
                 SpringApplication.exit(ctx, () -> 0);
                 System.exit(0);
             }
-        }
-    }
-
-    private static class StreamGobbler implements Runnable {
-
-        private InputStream inputStream;
-        private Consumer<String> consumer;
-
-        public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
-            this.inputStream = inputStream;
-            this.consumer = consumer;
-        }
-
-        @Override
-        public void run() {
-            new BufferedReader(new InputStreamReader(inputStream)).lines()
-                    .forEach(consumer);
         }
     }
 }

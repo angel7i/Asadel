@@ -255,8 +255,8 @@ public class IUReportes extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activa
-        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
-        jPanel2.setBackground(Asadel.ACTIVE_COLOR);
+        //jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+        //jPanel2.setBackground(Asadel.ACTIVE_COLOR);
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated

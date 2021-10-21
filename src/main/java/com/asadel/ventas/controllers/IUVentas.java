@@ -45,12 +45,14 @@ public class IUVentas extends javax.swing.JInternalFrame {
     private Articulo item;
     private int filaSeleccionada;
 
-    private IUVentas() {
-        filaSeleccionada = -1;
+    public IUVentas() {
+        super();
     }
 
     @PostConstruct
     public void init() {
+        filaSeleccionada = -1;
+        
         try {
             ventas.init(Control.SELECTLISTA);
             initComponents();
@@ -140,11 +142,11 @@ public class IUVentas extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Lista de Ventas");
+        setTitle("Productos en venta");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cart2.png"))); // NOI18N
-        setMaximumSize(new java.awt.Dimension(640, 640));
-        setMinimumSize(new java.awt.Dimension(540, 550));
-        setPreferredSize(new java.awt.Dimension(640, 690));
+        setMaximumSize(new java.awt.Dimension(700, 760));
+        setMinimumSize(new java.awt.Dimension(700, 760));
+        setPreferredSize(new java.awt.Dimension(700, 760));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -220,8 +222,8 @@ public class IUVentas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancellist1.png"))); // NOI18N
+        jButton3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(204, 0, 0));
         jButton3.setText("Cancelar venta");
         jButton3.setToolTipText("Cancelar Venta");
         jButton3.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -243,7 +245,8 @@ public class IUVentas extends javax.swing.JInternalFrame {
         jLabel2.setMinimumSize(new java.awt.Dimension(0, 0));
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButton6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 153, 102));
         jButton6.setText("Realizar Venta");
         jButton6.setToolTipText("Realizar Venta");
         jButton6.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -322,6 +325,8 @@ public class IUVentas extends javax.swing.JInternalFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Descripcion");
 
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setNextFocusableComponent(jButton4);
@@ -338,7 +343,7 @@ public class IUVentas extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -407,7 +412,7 @@ public class IUVentas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -537,7 +542,7 @@ public class IUVentas extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // Ventana Activada
-        jPanel1.setBackground(Asadel.ACTIVE_COLOR);
+        //jPanel1.setBackground(Asadel.ACTIVE_COLOR);
         jButton6.requestFocus();
         refresh(filaSeleccionada);
     }//GEN-LAST:event_formInternalFrameActivated
@@ -845,7 +850,7 @@ public class IUVentas extends javax.swing.JInternalFrame {
 
     public void refresh(int fila) {
         try {
-            ventas.Consulta(Control.SELECTLISTA);
+            ventas.doQuery(Control.SELECTLISTA);
             ventas.fireTableDataChanged();
             ventas.fireTableStructureChanged();
             showTotal();
@@ -885,7 +890,6 @@ public class IUVentas extends javax.swing.JInternalFrame {
                 case 1:
                     anchoColumna = 240;
                     columnaTabla.setMinWidth(100);
-                    columnaTabla.setMaxWidth(300);
                     break;
                 case 2:
                     anchoColumna = 60;
@@ -902,7 +906,7 @@ public class IUVentas extends javax.swing.JInternalFrame {
                 case 4:
                     anchoColumna = 60;
                     columnaTabla.setMinWidth(55);
-                    columnaTabla.setMaxWidth(70);
+                    columnaTabla.setMaxWidth(80);
                     columnaTabla.setCellRenderer(render);
                     break;
             }

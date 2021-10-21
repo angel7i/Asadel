@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.annotation.PostConstruct;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class ArticulosTableModel extends AbstractTableModel {
         conexion = control.getConnectionControl();
         instruccion = conexion.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         estado = true;
-        Consulta(consulta);
+        doQuery(consulta);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class ArticulosTableModel extends AbstractTableModel {
         } catch (SQLException sqlex) {
         }
 
-        return "";
+        return "Unknown";
     }
 
     @Override
@@ -131,7 +130,7 @@ public class ArticulosTableModel extends AbstractTableModel {
         }
     }
 
-    public void Consulta(String consulta) throws SQLException, IllegalStateException {
+    public void doQuery(final String consulta) throws SQLException, IllegalStateException {
         if (!estado) {
             throw new IllegalStateException("No hay conexion a la Base de Datos");
         }

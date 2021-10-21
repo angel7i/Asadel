@@ -73,10 +73,10 @@ public class IUDesktop extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Papeleria");
+        setTitle("ASADEL");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/Asadel.png")).getImage());
         setMinimumSize(new java.awt.Dimension(710, 730));
-        setPreferredSize(new java.awt.Dimension(1350, 870));
+        setPreferredSize(new java.awt.Dimension(1400, 870));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -304,7 +304,7 @@ public class IUDesktop extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Main - Cargar Ventana de showArticulos
         showArticulos();
-        setTitle(control.getNameSystem("Nombre"));
+        setTitle("ASADEL");
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -462,7 +462,7 @@ public class IUDesktop extends javax.swing.JFrame {
     public void showAgregar() {
         if (!(agregar.isShowing() || agregar.isIcon())) {
             jDesktopPane1.add(agregar);
-            agregar.setBounds(690, jDesktopPane1.getHeight() / 16, 459, 521);
+            agregar.setBounds(690, 0, 700, 760);
             agregar.show();
             agregar.toFront();
             try {
@@ -483,7 +483,7 @@ public class IUDesktop extends javax.swing.JFrame {
     public void showModificar() {
         if (!editar.isShowing()) {
             jDesktopPane1.add(editar);
-            editar.setBounds(690, jDesktopPane1.getHeight() / 4, 413, 420);//[411, 392]
+            editar.setBounds(690, 0, 700, 760);
             editar.show();
             editar.toFront();
             try {
@@ -503,7 +503,7 @@ public class IUDesktop extends javax.swing.JFrame {
     public void showVentas(boolean selected) {
         if (!(ventas.isShowing() || ventas.isIcon())) {
             jDesktopPane1.add(ventas);
-            ventas.setBounds(691, 0, 640, 760);
+            ventas.setBounds(690, 0, 700, 760);
             ventas.show();
             ventas.toFront();
         } else {
@@ -525,7 +525,6 @@ public class IUDesktop extends javax.swing.JFrame {
         if (!configuracion.isShowing()) {
             configuracion.setVisible(true);
             jDesktopPane1.add(configuracion);
-            configuracion.setBounds(650, 0, 679, 481);
             configuracion.show();
             try {
                 configuracion.setSelected(true);
@@ -547,7 +546,6 @@ public class IUDesktop extends javax.swing.JFrame {
         if (!reportes.isShowing()) {
             reportes.setVisible(true);
             jDesktopPane1.add(reportes);
-            reportes.setBounds(0, 0, 860, 610);
             reportes.show();
             try {
                 reportes.setSelected(true);
