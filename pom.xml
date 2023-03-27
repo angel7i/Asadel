@@ -18,7 +18,7 @@
         <radiance.version>4.5.0</radiance.version>
         <jcalendar.version>1.4</jcalendar.version>
         <jasper.version>6.17.0</jasper.version>
-        <itext.version>5.5.13.2</itext.version>
+        <itext.version>5.5.13.3</itext.version>
         <groovy.version>3.0.9</groovy.version>
     </properties>
     
